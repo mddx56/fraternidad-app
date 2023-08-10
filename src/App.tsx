@@ -1,6 +1,6 @@
 import { lazy, useEffect } from 'react'
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { HashRouter as Router, Route, Routes } from 'react-router-dom'
 import { themeChange } from 'theme-change'
 
 //import checkAuth from './app/auth';
