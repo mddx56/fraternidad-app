@@ -1,6 +1,6 @@
 import { lazy, useEffect } from 'react'
 import './App.css';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom'
+import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { themeChange } from 'theme-change'
 
 //import checkAuth from './app/auth';
@@ -10,7 +10,7 @@ import { themeChange } from 'theme-change'
 const Login = lazy(() => import('./pages/Login'))
 const Layout = lazy(() => import('./containers/Layout'))
 
-
+const token = "dsadas";
 // Initializing different libraries
 //initializeApp()
 
@@ -33,6 +33,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/app/*" element={<Layout />} />
+          <Route path="*" element={<Navigate to={token ? "/app/welcome" : "/login"} replace />} />
         </Routes>
       </Router>
     </>
