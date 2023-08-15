@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import LandingIntro from './LandingIntro';
 import ErrorText from '../../components/Typography/ErrorText';
+import { login } from '../../services/userService';
 
 function Register() {
 
@@ -14,11 +15,7 @@ function Register() {
         watch
     } = useForm();
 
-    const INITIAL_REGISTER_OBJ = {
-        name: "",
-        password: "",
-        emailId: ""
-    }
+
 
     const [loading, setLoading] = useState(false)
 
@@ -34,7 +31,7 @@ function Register() {
     async function onhandleSubmit(data) {
         console.log(data)
         try {
-            await login({});
+            //await login({ });
             //history.push("/");
             alert("User Created Successfully");
         } catch (error) {
