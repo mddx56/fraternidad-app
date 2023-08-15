@@ -23,15 +23,14 @@ function Header() {
     useEffect(() => {
         themeChange(false)
         if (currentTheme === null) {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                setCurrentTheme("dark")
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: night)').matches) {
+                setCurrentTheme("night")
             } else {
                 setCurrentTheme("light")
             }
         }
         // 👆 false parameter is required for react project
     }, [currentTheme]); //ojito aqui 
-
 
     /* Opening right sidebar for notification
     const openNotification = () => {
@@ -41,13 +40,12 @@ function Header() {
 
     function logoutUser() {
         localStorage.clear();
-        window.location.href = '/login'
+        window.location.href = '/#/login'
     }
 
     return (
         <>
             <div className="navbar flex justify-between bg-base-100 z-20 shadow-md ">
-
 
                 {/* Menu toogle for mobile view or small screen */}
                 <div >
@@ -56,17 +54,14 @@ function Header() {
                     <h1 className="text-2xl font-semibold ml-2">{header.pageTitle}</h1>
                 </div>
 
-
-
                 <div className="order-last">
 
                     {/* Light and dark theme selection toogle **/}
                     <label className="swap ">
                         <input type="checkbox" />
-                        <SunIcon data-set-theme="light" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 " + (currentTheme === "dark" ? "swap-on" : "swap-off")} />
-                        <MoonIcon data-set-theme="dark" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 " + (currentTheme === "light" ? "swap-on" : "swap-off")} />
+                        <SunIcon data-set-theme="light" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 " + (currentTheme === "night" ? "swap-on" : "swap-off")} />
+                        <MoonIcon data-set-theme="night" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 " + (currentTheme === "light" ? "swap-on" : "swap-off")} />
                     </label>
-
 
                     {/* Notification icon */}
                     <button className="btn btn-ghost ml-4  btn-circle" onClick={() => { }}>
@@ -75,7 +70,6 @@ function Header() {
                             {/*noOfNotifications > 0 ? <span className="indicator-item badge badge-secondary badge-sm">{noOfNotifications}</span> : null*/}
                         </div>
                     </button>
-
 
                     {/* Profile icon, opening menu on click */}
                     <div className="dropdown dropdown-end ml-4">
@@ -97,7 +91,6 @@ function Header() {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

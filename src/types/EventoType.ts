@@ -4,6 +4,14 @@ export type EventoState = {
     error: string | undefined;
 }
 
+export type EventoCalendarType = {
+    title: string;
+    start: string;
+    end: string;
+    descripcion: string;
+    estado_reserva: number;
+}
+
 export type EventoType = {
     id: number;
     fecha: string;
@@ -14,6 +22,12 @@ export type EventoType = {
     tipo_evento: number;
     estado_reserva: number;
     user: number;
+}
+
+export type TipoEventoType = {
+    id: number;
+    nombre: string;
+    descripcion: string;
 }
 
 export type EventoInput = Omit<EventoType, "id">;

@@ -1,5 +1,5 @@
 import { api } from './api';
-import { EventoType, EventoInput } from '../types/EventoType';
+import { EventoType, EventoInput, TipoEventoType } from '../types/EventoType';
 
 export const getAllEventos = async () => {
     const response = await api.get<EventoType[]>(`agenda/agendas/`);
@@ -11,6 +11,10 @@ export const getEvento = async (id: string) => {
     return response.data;
 };
 
+export const getTipoEvento = async (id: number) => {
+    const response = await api.get<TipoEventoType>(`agenda/tiposevent/${id}`);
+    return response.data;
+};
 
 export const createEvento = async (formData: EventoInput) => {
     const response = await api.post<EventoType>(`agenda/agendas/`, formData, {

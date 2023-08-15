@@ -11,4 +11,11 @@ export type UserType = {
     email: string;
 }
 
+export type UserLoginType = Omit<UserType, "id" | "email">
+
+export type UserResponseType = {
+    refresh: string;
+    access: string;
+}
+
 export type UserInput = Omit<UserType, "id">;

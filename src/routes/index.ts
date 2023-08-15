@@ -21,6 +21,10 @@ const routes = [
         component: Evento, // view rendered
     },
     {
+        path: '/eventos/:id', // the url
+        component: Evento, // view rendered
+    },
+    {
         path: '/deudas', // the url
         component: Deuda, // view rendered
     },

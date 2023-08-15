@@ -4,7 +4,7 @@ import TitleCard from "../common/components/Cards/TitleCard";
 import { getAllDeudas } from "../../services/deudaService";
 import { useQuery } from "@tanstack/react-query";
 import EstadoDeuda from "./EstadoDeuda";
-import Month from "../../components/Month";
+import { formattedMonth } from "../../utils/dateFormat";
 
 
 
@@ -57,7 +57,7 @@ function Evento() {
                                                     <div className="font-bold">{deuda.user}</div>
                                                 </div>
                                             </td>
-                                            <td><Month monthNumber={deuda.mes} /></td>
+                                            <td>{formattedMonth(deuda.mes)}</td>
                                             <td><EstadoDeuda Id={deuda.estado_reserva} /></td>
                                             <td><button className="btn btn-square btn-ghost" onClick={() => { }}><TrashIcon className="w-5" /></button></td>
                                         </tr>

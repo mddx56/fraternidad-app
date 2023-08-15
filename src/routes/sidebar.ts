@@ -29,15 +29,15 @@ const routes: {
     name: string;
 }[] = [
 
-        {
+        /*{
             path: '/app/',
             //icon: <Squares2X2Icon className={ iconClasses } />,
             name: 'Dashboard',
-        },
+        },*/
         {
             path: '/app/welcome', // url
             //icon: <InboxArrowDownIcon className={ iconClasses } />, / / icon component
-            name: 'Welcome', // name that appear in Sidebar
+            name: 'Inicio', // name that appear in Sidebar
         },
         {
             path: '/app/eventos', // url

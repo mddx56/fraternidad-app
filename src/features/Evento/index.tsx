@@ -5,6 +5,8 @@ import { getAllEventos } from "../../services/eventoService";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { EventoType } from "../../types/EventoType";
+import { formattedDate, formattedTime } from "../../utils/dateFormat";
+import TipoEvento from "./TipoEvento";
 
 
 const TopSideButtons = () => {
@@ -15,11 +17,9 @@ const TopSideButtons = () => {
     //dispatch(openModal({title : "Add New Lead", bodyType : MODAL_BODY_TYPES.LEAD_ADD_NEW}))
     //  }
 
-
-
     return (
         <div className="inline-block float-right">
-            <button className="btn px-6 btn-sm normal-case btn-primary" onClick={() => { }}>Add New</button>
+            <button className="btn px-6 btn-sm normal-case btn-primary" onClick={() => { }}>Agregar</button>
         </div>
     )
 }
@@ -37,22 +37,20 @@ function Evento() {
         return <span>Error: {error.message}</span>
     }
 
-
     return (
         <>
-
             <TitleCard title="Eventos" topMargin="mt-2" TopSideButtons={<TopSideButtons />}>
                 <div className="overflow-x-auto w-full">
                     <table className="table table-zebra w-full">
                         <thead>
-                            <tr className="bg-base-200 borde">
-                                <th>Fecha</th>
-                                <th>Hora Inicio</th>
-                                <th>Hora Fin</th>
-                                <th>descripcion</th>
-                                <th>tipo evento</th>
-                                <th></th>
-                                <th></th>
+                            <tr className="bg-base-200">
+                                <th  className="w-2/12">Fecha</th>
+                                <th  className="w-1/12">Hora Inicio</th>
+                                <th  className="w-1/12">Hora Fin</th>
+                                <th  className="w-2/12">Descripcion</th>
+                                <th className="w-4/12">Tipo evento</th>
+                                <th className="w-1/12"></th>
+                                <th className="w-1/12"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,14 +60,14 @@ function Evento() {
                                         <tr key={k}>
                                             <td>
                                                 <div className="flex items-center space-x-3">
-                                                    <div className="font-bold">{evento.fecha}</div>
+                                                    <div className="font-bold">{formattedDate(evento.fecha)}</div>
                                                 </div>
                                             </td>
-                                            <td>{evento.hora_inicio}</td>
-                                            <td>{evento.hora_fin}</td>
+                                            <td>{formattedTime(evento.hora_inicio)}</td>
+                                            <td>{formattedTime(evento.hora_fin)}</td>
                                             <td>{evento.descripcion}</td>
-                                            <td>{evento.tipo_evento}</td>
-                                            <td><Link to="/app/" className="btn btn-ghost btn-xs" onClick={() => { }}><EyeIcon className="w-5" /></Link></td>
+                                            <td><TipoEvento Id={evento.tipo_evento}/></td>
+                                            <td><Link to={`/moto/${evento.id}`} className="btn btn-ghost btn-xs" onClick={() => { }}><EyeIcon className="w-5" /></Link></td>
                                             <td><Link to="/app/" className="btn btn-ghost btn-xs" onClick={() => { }}><TrashIcon className="w-5" /></Link></td>
                                         </tr>
                                     )

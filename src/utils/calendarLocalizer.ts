@@ -21,8 +21,8 @@ export const localizer = dateFnsLocalizer({
 export const getMessages = () => {
     return {
         allDay: 'Todo el día',
-        previous: '<',
-        next: '>',
+        previous: 'Sig',
+        next: 'Ant',
         today: 'Hoy',
         month: 'Mes',
         week: 'Semana',
@@ -31,7 +31,7 @@ export const getMessages = () => {
         date: 'Fecha',
         time: 'Hora',
         event: 'Evento',
-        noEventsInRange: 'No hay eventos en Agenda',
+        noEventsInRange: 'No hay eventos en la Agenda',
         showMore: total => `+ Ver más (${total})`
     }
 };
