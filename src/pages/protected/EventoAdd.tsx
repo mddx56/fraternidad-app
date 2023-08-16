@@ -6,15 +6,12 @@ import EventoAdd from '../../features/Evento/EventoAdd'
 function InternalPage(){
   const dispatch = useAppDispatch()
 
-  const onSubmit = async (data: any) =>{
-
-  } //createUser.mutate(data);
-
+  
   useEffect(() => {
         dispatch(setPageTitle({ title : "Evento"}))
   })
     return(
-        <EventoAdd submitText='Create' submitAction={onSubmit}/>
+        <EventoAdd/>
     )
 }
 

@@ -4,46 +4,33 @@ import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LandingIntro from './LandingIntro'
-import { UserInput } from '../../types/UserType';
-
+import { LoginType } from '../../types/UserType';
 
 
 function Login() {
 
-    const defaultValues: UserInput = {
+    const defaultValues: LoginType = {
         username: "",
-        password: "",
-        email: "",
-        first_name: "",
-        last_name: ""
+        password: ""
     };
 
     const validationSchema = yup.object({
         username: yup
             .string()
             .required("Nombre de usuario es requerido")
+            .min(5, "minimo 5")
             .max(10, "el nomnre es muy largo"),
         password: yup.string()
             .required("Contraseña es requerida")
             .min(8, "minimo 8 ")
-            .max(32, "Maximo de longitud 32"),
-        email: yup
-            .string()
-            .email("Ingrese con un Correo Electronico valido")
-            .required("Email es requerido"),
-        first_name: yup
-            .string()
-            .required("Nombres es requerido"),
-        last_name: yup
-            .string()
-            .required("Apellidos es requerido"),
+            .max(32, "Maximo de longitud 32")
     });
 
     const {
         register,
         handleSubmit,
         formState: { errors }, // get errors of the form
-    } = useForm<UserInput>({
+    } = useForm<LoginType>({
         defaultValues,
         resolver: yupResolver(validationSchema),
         // mode: "onTouched", // default is "onSubmit"
@@ -51,7 +38,7 @@ function Login() {
 
     const [loading, setLoading] = useState(false);
 
-    const onSubmitHandler = (values: UserInput) => {
+    const onSubmitHandler = (values: LoginType) => {
         console.log(values)
         try {
             //await login({ });
