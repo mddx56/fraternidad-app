@@ -23,9 +23,11 @@ function Register() {
             .max(10, "el nomnre es muy largo"),
         password: yup.string()
             .required("Contraseña es requerida")
-            .min(8, "minimo 8 "),
+            .min(8, "minimo 8 ")
+            .max(32,"Maximo de longitud 32"),
         email: yup
             .string()
+            .email("Ingrese con un Correo Electronico valido")
             .required("Email es requerido"),
         first_name: yup
             .string()
@@ -46,7 +48,7 @@ function Register() {
         // mode: "onTouched", // default is "onSubmit"
     });
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     /*  const submitForm = (e) => {
           e.preventDefault()
@@ -129,7 +131,7 @@ function Register() {
 
                             <button type="submit" className={"btn mt-2 w-full btn-primary" + (loading ? " loading" : "")}>Register</button>
 
-                            <div className='text-center mt-4'>Already have an account? <Link to="/login"><span className="  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Login</span></Link></div>
+                            <div className='text-center mt-4'>¿Ya tienes cuenta?<Link to="/login"><span className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Inicia sesion</span></Link></div>
                         </form>
                     </div>
                 </div>

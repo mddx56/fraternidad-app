@@ -1,5 +1,5 @@
 import { api } from './api';
-import { UserType, UserInput, UserLoginType, UserResponseType } from '../types/UserType';
+import { UserType, UserInput, LoginType, UserResponseType } from '../types/UserType';
 
 export const getAllUsers = async () => {
     const response = await api.get<UserType[]>(`agenda/users/`);
@@ -41,7 +41,7 @@ export const deleteUser = async (id: number) => {
 };
 
 
-export const login = async (data: UserLoginType) => {
+export const login = async (data: LoginType) => {
     const response = await api.post<UserResponseType>(`auth/login`, data);
     return response.data;
 };

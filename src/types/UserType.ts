@@ -9,11 +9,11 @@ export type UserType = {
     username: string;
     password: string;
     email: string;
-    first_name:string;
-    last_name:string;
+    first_name: string;
+    last_name: string;
 }
 
-export type UserLoginType = Omit<UserType, "id" | "email">
+export type LoginType = Omit<UserType, "id" | "email" | "first_name" | "last_name">
 
 export type UserResponseType = {
     refresh: string;
