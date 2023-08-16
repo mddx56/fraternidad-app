@@ -2,19 +2,15 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { EventoType } from '../../types/EventoType';
 
-interface Props {
-    evento?: EventoType;
-    submitText: string;
-    submitAction:(data) => Promise<void>;
-}
 
-function EventoAdd({ evento, submitText, submitAction }: Props) {
+function EventoAdd() {
+
     const {
         register,
         formState: { errors },
         handleSubmit,
     } = useForm({
-        defaultValues: evento || {},
+        //defaultValues: evento || {},
     });
 
     const navigate = useNavigate();
@@ -22,13 +18,13 @@ function EventoAdd({ evento, submitText, submitAction }: Props) {
 
     return (
         <div>
-            <form className="mt-4 max-w-md" onSubmit={handleSubmit}>
-                {evento && (
+            <form className="mt-4 max-w-md" >
+                {/*evento && (
                     <div className="field">
                         <label htmlFor="id">User Id</label>
                         <input type="text" name="id" value={evento.id} disabled />
                     </div>
-                )}
+                )*/}
 
                 <div className="flex flex-col md:flex-row field">
                     <div>
@@ -87,7 +83,7 @@ function EventoAdd({ evento, submitText, submitAction }: Props) {
                         className="text-white bg-teal-800 border-teal-800 shadow-md hover:text-teal-900 hover:bg-gray-100 hover:border-2 btn"
                         type="submit"
                     >
-                        {submitText}
+                        {/*submitText*/}
                     </button>
                     <button
                         className="text-white text-gray-600 border-2 border-gray-600 shadow-md hover:text-gray-100 hover:bg-gray-600 btn"
