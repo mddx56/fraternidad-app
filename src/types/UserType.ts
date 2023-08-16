@@ -9,6 +9,8 @@ export type UserType = {
     username: string;
     password: string;
     email: string;
+    first_name:string;
+    last_name:string;
 }
 
 export type UserLoginType = Omit<UserType, "id" | "email">
