@@ -1,13 +1,16 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LandingIntro from './LandingIntro'
 import { LoginType } from '../../types/UserType';
+import { login } from '../../services/userService';
+import { useMutation } from '@tanstack/react-query';
 
 
 function Login() {
+
+    const navigate = useNavigate();
 
     const defaultValues: LoginType = {
         username: "",
@@ -30,28 +33,34 @@ function Login() {
         register,
         handleSubmit,
         formState: { errors }, // get errors of the form
+        reset
     } = useForm<LoginType>({
         defaultValues,
         resolver: yupResolver(validationSchema),
-        // mode: "onTouched", // default is "onSubmit"
     });
 
-    const [loading, setLoading] = useState(false);
+    const mutation = useMutation(login, {
+        onSuccess: (data) => {
+            console.log(data.access);
+            localStorage.setItem("token", data.access);
+            reset();
+            navigate("/app/welcome");
+        },
+        onError: (data) => {
+            console.log(data);
+        }
+    });
 
     const onSubmitHandler = (values: LoginType) => {
         console.log(values)
         try {
-            //await login({ });
-            //history.push("/");
-            setLoading(false);
-            alert("User Created Successfully");
+            mutation.mutate(values);
         } catch (error) {
             console.log(error);
             alert("User created failed");
             alert(error);
         }
     }
-
 
     /*const submitForm = (e) => {
         e.preventDefault()
@@ -98,8 +107,7 @@ function Login() {
                             <div className='text-right text-primary'><a href="/forgot-password"><span className="text-sm  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">¿Olvidaste tu contraseña?</span></a>
                             </div>
 
-
-                            <button type="submit" className={"btn mt-2 w-full btn-primary" + (loading ? " loading" : "")}>Inicia sesión</button>
+                            <button type="submit" className={"btn mt-2 w-full btn-primary"}>{mutation.isLoading && <span className="loading loading-spinner"></span>}Inicia Sesión</button>
 
                             <div className='text-center mt-4'>¿No tienes una cuenta? <Link to="/signup"><span className="  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Regístrate</span></Link></div>
                         </form>

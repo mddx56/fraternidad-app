@@ -8,7 +8,7 @@ function EventoAdd() {
     const {
         register,
         formState: { errors },
-        handleSubmit,
+        //handleSubmit,
     } = useForm({
         //defaultValues: evento || {},
     });

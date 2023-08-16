@@ -1,12 +1,16 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import toast, { Toaster } from 'react-hot-toast';
 import LandingIntro from './LandingIntro';
 import { UserInput } from '../../types/UserType';
+import { useMutation } from '@tanstack/react-query';
+import { signUp } from '../../services/userService';
 
 function Register() {
+
+    //const navigate = useNavigate();
 
     const defaultValues: UserInput = {
         username: "",
@@ -24,7 +28,7 @@ function Register() {
         password: yup.string()
             .required("Contraseña es requerida")
             .min(8, "minimo 8 ")
-            .max(32,"Maximo de longitud 32"),
+            .max(32, "Maximo de longitud 32"),
         email: yup
             .string()
             .email("Ingrese con un Correo Electronico valido")
@@ -35,48 +39,39 @@ function Register() {
         last_name: yup
             .string()
             .required("Apellidos es requerido"),
-
     });
 
     const {
         register,
         handleSubmit,
         formState: { errors }, // get errors of the form
+        reset,
     } = useForm<UserInput>({
         defaultValues,
         resolver: yupResolver(validationSchema),
-        // mode: "onTouched", // default is "onSubmit"
     });
 
-    const [loading, setLoading] = useState(false);
-
-    /*  const submitForm = (e) => {
-          e.preventDefault()
-          setLoading(true)
-          // Call API to check user credentials and save token in localstorage
-          localStorage.setItem("token", "DumyTokenHere")
-          setLoading(false)
-          window.location.href = '/app/welcome'
-      }*/
+    const mutation = useMutation(signUp, {
+        onSuccess: (data) => {
+            console.log(data.message);
+            reset();
+            //navigate("/login");
+            toast.success(data.message, { duration: 5000 });
+        },
+        onError: (data) => {
+            console.log(data);
+            toast.error("No registrado..", { duration: 5000 });
+        }
+    });
 
     const onSubmitHandler = (values: UserInput) => {
         console.log(values)
         try {
-            //await login({ });
-            //history.push("/");
-            setLoading(false);
-            alert("User Created Successfully");
+            mutation.mutate(values);
         } catch (error) {
             console.log(error);
-            alert("User created failed");
-            alert(error);
         }
     }
-
-    /*const updateFormValue = ({ updateType, value }) => {
-        setErrorMessage("")
-        setRegisterObj({ ...registerObj, [updateType]: value })
-    }*/
 
     return (
         <div className="min-h-screen bg-base-200 flex items-center">
@@ -125,17 +120,14 @@ function Register() {
                                         <p className="error-message">{errors.last_name.message}</p>
                                     )}
                                 </div>
-
                             </div>
-
-
-                            <button type="submit" className={"btn mt-2 w-full btn-primary" + (loading ? " loading" : "")}>Register</button>
-
+                            <button type="submit" className={"btn mt-2 w-full btn-primary"}>{mutation.isLoading && <span className="loading loading-spinner"></span>}Registrar</button>
                             <div className='text-center mt-4'>¿Ya tienes cuenta?<Link to="/login"><span className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Inicia sesion</span></Link></div>
                         </form>
                     </div>
                 </div>
             </div>
+            <Toaster />
         </div>
     )
 }

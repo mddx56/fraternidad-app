@@ -42,11 +42,11 @@ export const deleteUser = async (id: number) => {
 
 
 export const login = async (data: LoginType) => {
-    const response = await api.post<UserResponseType>(`auth/login`, data);
+    const response = await api.post<UserResponseType>(`login`, data);
     return response.data;
 };
 
-export const signUp = async (data: UserType) => {
-    const response = await api.post(`auth/signup`, data);
+export const signUp = async (data: UserInput) => {
+    const response = await api.post(`signup`, data);
     return response.data;
 };

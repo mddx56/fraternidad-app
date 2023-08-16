@@ -7,7 +7,6 @@ import SunIcon from '@heroicons/react/24/outline/SunIcon';
 import UserCircleIcon from '@heroicons/react/24/outline/UserCircleIcon';
 //import { openRightDrawer } from '../features/common/rightDrawerSlice';
 //import { RIGHT_DRAWER_TYPES } from '../utils/globalConstantUtil';
-import { Link } from 'react-router-dom';
 import { headerSelector } from '../features/common/headerSlice';
 import { useAppSelector } from '../app/hook';
 //import { rightDrawerType } from '../types/rightDrawer';
@@ -40,6 +39,7 @@ function Header() {
 
     function logoutUser() {
         localStorage.clear();
+
         window.location.href = '/#/login'
     }
 
@@ -80,13 +80,13 @@ function Header() {
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li className="justify-between">
-                                <a href='/login'>
+                                <a href='/#'>
                                     Perfil Usuario
                                 </a>
                             </li>
-                            <li className=''><Link to={'/app/welcome'}>Inicio</Link></li>
+                            {/*<li className=''><Link to={'/app/welcome'}>Inicio</Link></li>*/}
                             <div className="divider mt-0 mb-0"></div>
-                            <li><a onClick={logoutUser}>Logout</a></li>
+                            <li><a onClick={logoutUser}>Salir</a></li>
                         </ul>
                     </div>
                 </div>

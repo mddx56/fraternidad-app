@@ -1,29 +1,21 @@
-import { lazy, useEffect } from 'react'
+import { lazy, useEffect } from 'react';
 import './App.css';
-import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
-import { themeChange } from 'theme-change'
+import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { themeChange } from 'theme-change';
+import checkAuth from './app/auth';
 
-//import checkAuth from './app/auth';
-//import initializeApp from './app/init';
-
-// Importing pages
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const Layout = lazy(() => import('./containers/Layout'))
 
-const token = "dsadas";
-// Initializing different libraries
-//initializeApp()
-
-// Check for login and initialize axios
-//const token = checkAuth()
+const token = checkAuth();
+console.log(token);
 
 function App() {
   useEffect(() => {
     // 👆 daisy UI themes initialization
     themeChange(false)
   }, [])
-
 
   return (
     <>
