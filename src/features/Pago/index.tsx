@@ -9,14 +9,6 @@ import { PagoType } from "../../types/PagoType";
 
 const TopSideButtons = () => {
 
-    // const dispatch = useDispatch()
-
-    //    const openAddNewLeadModal = () => {
-    //dispatch(openModal({title : "Add New Lead", bodyType : MODAL_BODY_TYPES.LEAD_ADD_NEW}))
-    //  }
-
-
-
     return (
         <div className="inline-block float-right">
             <button className="btn px-6 btn-sm normal-case btn-primary" onClick={() => { }}>Add New</button>

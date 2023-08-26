@@ -6,6 +6,7 @@ import LandingIntro from './LandingIntro'
 import { LoginType } from '../../types/UserType';
 import { login } from '../../services/userService';
 import { useMutation } from '@tanstack/react-query';
+import { getUserInfo, setAccessToken, setRefreshToken } from '../../utils/localStorage';
 
 
 function Login() {
@@ -42,9 +43,12 @@ function Login() {
     const mutation = useMutation(login, {
         onSuccess: (data) => {
             console.log(data.access);
+            setAccessToken(data.access);
+            setRefreshToken(data.refresh);
             localStorage.setItem("token", data.access);
+            localStorage.setItem("User", JSON.stringify(getUserInfo()));
             reset();
-            navigate("/app/welcome");
+            navigate("/app");
         },
         onError: (data) => {
             console.log(data);

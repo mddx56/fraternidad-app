@@ -5,10 +5,9 @@ import EventoAdd from '../../features/Evento/EventoAdd'
 
 function InternalPage(){
   const dispatch = useAppDispatch()
-
   
   useEffect(() => {
-        dispatch(setPageTitle({ title : "Evento"}))
+        dispatch(setPageTitle({ title : "Agregar Evento"}))
   })
     return(
         <EventoAdd/>

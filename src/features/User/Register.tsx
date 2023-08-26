@@ -87,7 +87,7 @@ function Register() {
                             <div className="mb-4">
                                 <div className="form-control w-full mb-4">
                                     <label className='label' htmlFor="username">Nombre de Usuario</label>
-                                    <input className="input  input-bordered w-full" {...register("username")} id="username" type="text" />
+                                    <input className="input input-bordered w-full" {...register("username")} id="username" type="text" />
                                     {errors.username && (
                                         <p className="error-message">{errors.username.message}</p>
                                     )}

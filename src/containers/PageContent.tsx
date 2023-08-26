@@ -3,10 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import routes from '../routes'
 import { Suspense, lazy } from 'react'
 import SuspenseContent from "./SuspenseContent"
-//import { useSelector } from 'react-redux'
 import { useRef } from "react"
-//import { HeaderType } from "../types/Header"
-//import { useSelector } from "react-redux"
 
 const Page404 = lazy(() => import('../pages/protected/404'))
 

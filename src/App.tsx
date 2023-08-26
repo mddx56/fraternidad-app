@@ -9,7 +9,6 @@ const Register = lazy(() => import('./pages/Register'))
 const Layout = lazy(() => import('./containers/Layout'))
 
 const token = checkAuth();
-console.log(token);
 
 function App() {
   useEffect(() => {
@@ -24,7 +23,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/app/*" element={<Layout />} />
-          <Route path="*" element={<Navigate to={token ? "/app/welcome" : "/login"} replace />} />
+          <Route path="*" element={<Navigate to={token ? "/app/calendar" : "/login"} replace />} />
         </Routes>
       </Router>
     </>

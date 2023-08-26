@@ -8,18 +8,17 @@ import { useAppDispatch } from '../../app/hook';
 import { useQuery } from '@tanstack/react-query';
 import { getAllEventos } from '../../services/eventoService';
 import { EventoType } from '../../types/EventoType';
+import { useNavigate } from 'react-router-dom';
 
-const TopSideButtons = () => {
+interface PropsSideButton {
+  onClickBtn: () => void;
+}
 
-  // const dispatch = useDispatch()
-
-  //    const openAddNewLeadModal = () => {
-  //dispatch(openModal({title : "Add New Lead", bodyType : MODAL_BODY_TYPES.LEAD_ADD_NEW}))
-  //  }
+const TopSideButtons = ({ onClickBtn }: PropsSideButton) => {
 
   return (
     <div className="inline-block float-right">
-      <button className="btn px-6 btn-sm normal-case btn-primary" onClick={() => { }}>Add New</button>
+      <button className="btn px-6 btn-sm normal-case btn-primary" onClick={() => { onClickBtn() }}>Add New</button>
     </div>
   )
 }
@@ -31,6 +30,7 @@ function convertDT(hora: string, fecha: string): Date {
 }
 
 function InternalPage() {
+  const navigate = useNavigate();
   const [events, setEvents] = useState<Event[]>([]);
   const { isLoading, data, error } = useQuery<EventoType[], Error>(['eventos'], getAllEventos)
   console.log(data);
@@ -38,7 +38,7 @@ function InternalPage() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setPageTitle({ title: "Bienvenido" }))
+    dispatch(setPageTitle({ title: "Calendario" }))
     if (data) {
       const transformedEvents = data.map((evento: EventoType) => ({
         title: evento.tipo_evento,
@@ -60,9 +60,14 @@ function InternalPage() {
     return <p>Cargando...</p>;
   }
 
+  const onClickEvent = () => {
+    navigate("/app/addevento");
+    console.log("go add..");
+  }
+
   return (
     <>
-      <TitleCard title="Calendario" topMargin="mt-2" TopSideButtons={<TopSideButtons />}>
+      <TitleCard title="Calendario de eventos" topMargin="mt-2" TopSideButtons={<TopSideButtons onClickBtn={onClickEvent} />}>
         <div className="overflow-x-auto w-full">
           <Calendar
             culture='es'
