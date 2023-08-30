@@ -8,8 +8,6 @@ import Subtitle from "../Typography/Subtitle"
             {/* Title for Card */}
               <Subtitle styleClass={TopSideButtons ? "inline-block" : ""}>
                 {title}
-
-                {/* Top side button, show only if present */}
                 {
                     TopSideButtons && <div className="inline-block float-right">{TopSideButtons}</div>
                 }

@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllEventos } from '../../services/eventoService';
 import { EventoType } from '../../types/EventoType';
 import { useNavigate } from 'react-router-dom';
+import { LoadingInfinity } from '../../features/common/components/LoadingInfinity';
 
 interface PropsSideButton {
   onClickBtn: () => void;
@@ -47,7 +48,7 @@ function InternalPage() {
         evento: evento,
       }));
       setEvents(transformedEvents);
-      console.log('Datos obtenidos:', transformedEvents);
+      //console.log('Datos obtenidos:', transformedEvents);
     }
 
     if (error) {
@@ -57,13 +58,50 @@ function InternalPage() {
   }, [data, error, dispatch]);
 
   if (isLoading) {
-    return <p>Cargando...</p>;
+    return <LoadingInfinity />;
   }
 
   const onClickEvent = () => {
     navigate("/app/addevento");
     console.log("go add..");
   }
+
+  const onSelectEvent = (e) => {
+    //dispatch(eventSetActive(e));
+    console.log("select event", e);
+
+  };
+
+  const onDoubleClick = (e) => {
+    //dispatch(uiOpenModal());
+    console.log("double click", e);
+  };
+
+  const onSelectSlot = (e) => {
+    //dispatch(eventClearActiveEvent())
+    console.log("select slot", e);
+  }
+
+
+  const eventStyleGetter = (event: Event, start: Date, end: Date, isSelected: boolean) => {
+    console.log("/*******************");
+    console.log(event.title);
+    console.log(start);
+    console.log(end);
+    console.log(isSelected);
+    console.log("*******************/");
+    const style = {
+      //backgroundColor: '#37a455F7',
+      background: 'None',
+      borderRadius: '1px',
+      opacity: 0.8,
+      display: 'block',
+      color: 'white',
+    };
+    return {
+      style,
+    };
+  };
 
   return (
     <>
@@ -78,6 +116,11 @@ function InternalPage() {
             endAccessor="end"
             style={{ height: '100vh' }}
             messages={getMessages()}
+            onSelectEvent={onSelectEvent}
+            onDoubleClickEvent={onDoubleClick}
+            eventPropGetter={eventStyleGetter}
+            onSelectSlot={onSelectSlot}
+            selectable={true}
             components={{
               event: CalendarEvent
             }}
