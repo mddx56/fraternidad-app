@@ -7,17 +7,23 @@ import SunIcon from '@heroicons/react/24/outline/SunIcon';
 import UserCircleIcon from '@heroicons/react/24/outline/UserCircleIcon';
 import { headerSelector } from '../features/common/headerSlice';
 import { useAppSelector } from '../app/hook';
-import { clearTokens } from '../utils/localStorage';
+import { clearTokens, getUserInfo } from '../utils/localStorage';
 import { Link } from 'react-router-dom';
+import Avvvatars from 'avvvatars-react'
+import { UserProfile } from '../types/UserType';
 
 
 
 function Header() {
 
-    //const dispatch = useAppDispatch();
+    const [profileUser, setProfileUser] = useState<UserProfile>(getUserInfo());
     const header = useAppSelector(headerSelector);
     //const header = "frater";
     const [currentTheme, setCurrentTheme] = useState(localStorage.getItem("theme"))
+
+    useEffect(() => {
+        setProfileUser(getUserInfo());
+    }, []);
 
     useEffect(() => {
         themeChange(false)
@@ -63,7 +69,12 @@ function Header() {
                     <div className="dropdown dropdown-end ml-4">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-9 rounded-full">
-                                <UserCircleIcon className="h-9 w-9" />
+                                {
+                                    profileUser ?
+                                        <Avvvatars value={profileUser.name} size={36} />
+                                        : <UserCircleIcon className="h-9 w-9" />
+                                }
+
                             </div>
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
