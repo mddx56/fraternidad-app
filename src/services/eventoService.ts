@@ -35,14 +35,8 @@ export const createEvento = async (formData: EventoInput) => {
     return response.data;
 };
 
-export const updateEvento = async ({
-    id,
-    formData,
-}: {
-    id: number;
-    formData: FormData;
-}) => {
-    const response = await api.put<EventoType>(`agenda/agendas/${id}`, formData, {
+export const updateEvento = async (id: number, formData: EventoInput) => {
+    const response = await api.patch<EventoType>(`agenda/agendas/${id}`, formData, {
         headers: {
             'Content-Type': 'application/json',
         },

@@ -19,7 +19,7 @@ export type EventoType = {
     hora_fin: string;
     descripcion: string;
     tipo_evento: number;
-    estado_reserva: number;
+    estado_reserva?: string;
     user?: string;
 }
 
@@ -33,7 +33,8 @@ export type TipoEventoType = {
     id: number;
     nombre: string;
     descripcion: string;
-    precio: number;
+    costo_entresemana: number;
+    costo_finsemana:number;
 }
 
-export type EventoInput = Omit<EventoType, "id">;
+export type EventoInput = Omit<EventoType, "id" >;

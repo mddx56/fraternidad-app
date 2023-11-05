@@ -11,7 +11,7 @@ const TopSideButtons = () => {
 
     return (
         <div className="inline-block float-right">
-            <button className="btn px-6 btn-sm normal-case btn-primary" onClick={() => { }}>Add New</button>
+            <button className="btn px-6 btn-sm normal-case btn-primary" onClick={() => { }}>Agregar</button>
         </div>
     )
 }
@@ -22,7 +22,7 @@ function Pago() {
     const { isLoading, isError, data, error } = useQuery<PagoType[], Error>(['pagos'], getAllPagos)
 
     if (isLoading) {
-        return <span>Loading...</span>
+        return <span>Cargando...</span>
     }
 
     if (isError) {

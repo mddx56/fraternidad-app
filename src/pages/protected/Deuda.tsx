@@ -1,19 +1,19 @@
 import { useEffect } from 'react'
 
 import { setPageTitle } from '../../features/common/headerSlice'
-import Deuda from '../../features/Deuda'
+//import Deuda from '../../features/Deuda'
 import { useAppDispatch } from '../../app/hook'
 
 
 function InternalPage() {
-     const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-          dispatch(setPageTitle({ title : "Deuda"}))
+        dispatch(setPageTitle({ title: "Deuda" }))
     })
 
     return (
-        <Deuda />
+        <h1>dss</h1>
     )
 }
 

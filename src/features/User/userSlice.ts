@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
 import { getAllUsers } from '../../services/userService';
-import { UserState, UserType } from '../../types/UserType';
+import { UserAdminType, UserState } from '../../types/UserType';
 
 export const getUserAll = createAsyncThunk('/users/all', async () => {
     return getAllUsers();
@@ -10,7 +10,7 @@ export const getUserAll = createAsyncThunk('/users/all', async () => {
 
 const initialState: UserState = {
     loading: false,
-    eventos: [],
+    users: [],
     error: undefined,
 }
 
@@ -23,14 +23,14 @@ export const eventoSlice = createSlice({
             state.loading = true;
         });
 
-        builder.addCase(getUserAll.fulfilled, (state, action: PayloadAction<Array<UserType>>) => {
+        builder.addCase(getUserAll.fulfilled, (state, action: PayloadAction<Array<UserAdminType>>) => {
             state.loading = false;
-            state.eventos = action.payload;
+            state.users = action.payload;
         });
 
         builder.addCase(getUserAll.rejected, (state, action) => {
             state.loading = false;
-            state.eventos = [];
+            state.users = [];
             state.error = action.error.message;
         });
     }

@@ -21,41 +21,82 @@ import DocumentDuplicateIcon from '@heroicons/react/24/outline/DocumentDuplicate
 const iconClasses = `h-6 w-6`
 const submenuIconClasses = `h-5 w-5`
 */
+//import InboxArrowDownIcon from '@heroicons/react/24/outline/InboxArrowDownIcon'
+import { ReactNode } from "react";
+//import Squares2X2Icon from "@heroicons/react/24/outline/Squares2X2Icon";
 
+//import KeyIcon from '@heroicons/react/24/outline/KeyIcon'
 
-const routes: {
+//const iconClasses = `h-6 w-6`
+//const submenuIconClasses = `h-5 w-5`
+
+type NavItem = {
     path: string;
-    icon?: JSX.Element;
+    icon?: ReactNode;
     name: string;
-}[] = [
+};
 
-        {
-            path: '/app/',
-            //icon: <Squares2X2Icon className={ iconClasses } />,
-            name: 'Inicio',
-        },
-        {
-            path: '/app/calendar', // url
-            //icon: {<InboxArrowDownIcon className={ iconClasses } />},
-            name: 'Calendario', // name that appear in Sidebar
-        },
-     /*   {
-            path: '/app/eventos', // url
-            //icon: <InboxArrowDownIcon className={ iconClasses } />, / / icon component
-            name: 'Eventos', // name that appear in Sidebar
-        },
-        {
-            path: '/app/deudas', // url
-            //icon: <InboxArrowDownIcon className={ iconClasses } />, / / icon component
-            name: 'Deudas', // name that appear in Sidebar
-        },
-        {
-            path: '/app/pagos', // url
-            //icon: <InboxArrowDownIcon className={ iconClasses } />, / / icon component
-            name: 'Pagos', // name that appear in Sidebar
-        },*/
-    ]
+export const routes: NavItem[] = [
+    {
+        path: "/app/",
+        //icon: <KeyIcon className={iconClasses} />,
+        name: "Inicio",
+    },
+    {
+        path: '/app/calendar', // url
+        //icon: {<InboxArrowDownIcon className={ iconClasses } />},
+        name: 'Ver Calendario', // name that appear in Sidebar
+    },
+    {
+        path: '/app/elegirevento', // url
+        //icon: {<InboxArrowDownIcon className={ iconClasses } />},
+        name: 'Ver Info. de Eventos',
+    },
+    {
+        path: '/app/deudafraterno', // url
+        //icon: {<InboxArrowDownIcon className={ iconClasses } />},
+        name: 'Ver Deudas',
+    },
+]
 
-export default routes
+export const routesTS: NavItem[] = [
+    {
+        path: '/app/userfsdfadmin', // url
+        //icon: {<InboxArrowDownIcon className={ iconClasses } />},
+        name: 'Inicio',
+    },
+    {
+        path: '/app/events', // url
+        //icon: {<InboxArrowDownIcon className={ iconClasses } />},
+        name: 'Eventos',
+    },
+    {
+        path: '/app/useradmin', // url
+        //icon: {<InboxArrowDownIcon className={ iconClasses } />},
+        name: 'Administrar Usuarios',
+    },
+    {
+        path: '/app/elegirpago', // url
+        //icon: {<InboxArrowDownIcon className={ iconClasses } />},
+        name: 'Cobros en General',
+    },
+    {
+        path: '/app/usersadmin', // url
+        //icon: <InboxArrowDownIcon />,
+        name: 'Administrar Turnos',
+    },
+    {
+        path: '/app/usersaadsamin', // url
+        //icon: {<InboxArrowDownIcon className={ iconClasses } />},
+        name: 'Administrar Pagos Extraordinarios',
+    },
+    {
+        path: '/app/userdssaadsamin', // url
+        //icon: {<InboxArrowDownIcon className={ iconClasses } />},
+        name: 'Administrar Multimedios',
+    },
+]
+
+//export default routes
 
 

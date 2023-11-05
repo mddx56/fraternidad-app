@@ -7,17 +7,26 @@ type Props = {
 }
 
 function TipoEvento({ Id }: Props) {
-    const { isLoading, data } = useQuery<TipoEventoType>({ queryKey: ['tipoEvento', Id], queryFn: () => getTipoEvento(Id) });
+    const { isLoading, data, isError, error } = useQuery<TipoEventoType, Error>({ queryKey: ['tipoEvento', Id], queryFn: () => getTipoEvento(Id) });
     if (isLoading) {
-        return <><div className="badge badge-primary badge-md" /></>
+        return <><div className="badge badge-primary badge-md px-5" /></>
     }
+
+    if (isError) {
+        return (<div className="badge badge-error badge-md" ><span>{error.message}</span></div>)
+    }
+
+    const longitudMaxima = 29;
 
     return (
         <>
             <div className="flex items-center">
-                <div className="badge badge-primary"> <span>{data.nombre}</span>  </div>
-            </div>
-
+                {data.nombre.length <= longitudMaxima ?
+                    (<div className="rounded-full px-2 bg-primary text-base-100 p-1  leading-none flex items-center "><span>{data.nombre}</span></div>)
+                    :
+                    (<div className="tooltip rounded-full px-2 bg-primary text-base-100 p-1 leading-none flex items-center " data-tip={data.nombre}><span> {data.nombre.slice(0, longitudMaxima) + '..'}</span></div>)
+                }
+            </div >
         </>
     );
 }

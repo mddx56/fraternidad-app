@@ -1,4 +1,4 @@
-import { DeudaType } from "../../types/DeudaType";
+/*import { DeudaType } from "../../types/PagosType";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import TitleCard from "../common/components/Cards/TitleCard";
 import { getAllDeudas } from "../../services/deudaService";
@@ -71,4 +71,4 @@ function Evento() {
         </>
     );
 }
-export default Evento;
+export default Evento;*/

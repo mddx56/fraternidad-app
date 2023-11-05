@@ -1,5 +1,5 @@
-import { api } from './api';
-import { DeudaType, DeudaInput, EstadoDeudaType } from '../types/DeudaType';
+/*import { api } from './api';
+
 
 export const getAllDeudas = async () => {
     const response = await api.get<DeudaType[]>(`agenda/deudas/`);
@@ -40,14 +40,15 @@ export const deleteDeuda = async (id: number) => {
     return response.data;
 };
 
+export const getDeudaTotal = async (id: string) => {
+    const url = `agenda/fraterno/${id}/deudas/`;
+    console.log("url => ", url);
+    const response = await api.get<DeudaType[]>(url);
+    return response.data;
+};
+
 export const getEstadoDeuda = async (id: number) => {
     const response = await api.get<EstadoDeudaType>(`agenda/estadosdeuda/${id}`);
     return response.data;
 };
-
-export const getDeudaTotal = async (id: string) => {
-    const url = `agenda/fraterno/${id}/deudas/`;
-    console.log("url => ",url);
-    const response = await api.get<DeudaType[]>(url);
-    return response.data;
-};
+*/

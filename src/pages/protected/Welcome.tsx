@@ -10,6 +10,8 @@ import { getAllEventos } from '../../services/eventoService';
 import { EventoType } from '../../types/EventoType';
 import { useNavigate } from 'react-router-dom';
 import { LoadingInfinity } from '../../features/common/components/LoadingInfinity';
+import { toast } from 'react-toastify';
+import { QUERY_KEY } from '../../utils/constant';
 
 interface PropsSideButton {
   onClickBtn: () => void;
@@ -19,7 +21,7 @@ const TopSideButtons = ({ onClickBtn }: PropsSideButton) => {
 
   return (
     <div className="inline-block float-right">
-      <button className="btn px-6 btn-sm normal-case btn-primary" onClick={() => { onClickBtn() }}>Add New</button>
+      <button className="btn px-6 btn-sm normal-case btn-primary" onClick={() => { onClickBtn() }}>Agregar Evento</button>
     </div>
   )
 }
@@ -33,7 +35,7 @@ function convertDT(hora: string, fecha: string): Date {
 function InternalPage() {
   const navigate = useNavigate();
   const [events, setEvents] = useState<Event[]>([]);
-  const { isLoading, data, error } = useQuery<EventoType[], Error>(['eventos'], getAllEventos)
+  const { isLoading, data, error } = useQuery<EventoType[], Error>([QUERY_KEY.EVENTOS], getAllEventos)
   console.log(data);
 
   const dispatch = useAppDispatch()
@@ -68,18 +70,23 @@ function InternalPage() {
 
   const onSelectEvent = (e) => {
     //dispatch(eventSetActive(e));
+    toast.success(`Event has been created ${e}`);
     console.log("select event", e);
 
   };
 
   const onDoubleClick = (e) => {
     //dispatch(uiOpenModal());
+    toast.success(`Event has been created ${e}`);
     console.log("double click", e);
   };
 
   const onSelectSlot = (e) => {
     //dispatch(eventClearActiveEvent())
-    console.log("select slot", e);
+    const dateSelect = new Date(e["slots"][0]);
+    toast.success(`Event ${dateSelect.getFullYear()}`);
+
+    console.log(dateSelect.getDay());
   }
 
 
@@ -106,7 +113,8 @@ function InternalPage() {
   return (
     <>
       <TitleCard title="Calendario de eventos" topMargin="mt-2" TopSideButtons={<TopSideButtons onClickBtn={onClickEvent} />}>
-        <div className="overflow-x-auto w-full">
+        <div className="overflow-x-auto z-0">
+
           <Calendar
             culture='es'
             localizer={localizer}
@@ -125,6 +133,7 @@ function InternalPage() {
               event: CalendarEvent
             }}
           />
+          
 
         </div>
       </TitleCard>

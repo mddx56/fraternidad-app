@@ -1,6 +1,7 @@
 import es from 'date-fns/locale/es';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
+import { isWeekend, isMonday, isTuesday, isWednesday, isThursday } from 'date-fns';
 
 export function formattedDate(fecha: string): string {
     const newFormatDate = new Date(fecha);
@@ -21,4 +22,15 @@ export function formattedMonth(mes: number): string {
     const formatoDeseado = "MMMM";
     const formattedDate = format(newFormatDate, formatoDeseado, { locale: es });
     return formattedDate;
+}
+
+export function esFinDeSemana(): boolean {
+    const fecha = new Date();
+    if (isWeekend(fecha)) {
+        return true;
+    } else if (isMonday(fecha) || isTuesday(fecha) || isWednesday(fecha) || isThursday(fecha)) {
+        return false;
+    } else {
+        return false;
+    }
 }

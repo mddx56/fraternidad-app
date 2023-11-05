@@ -1,7 +1,14 @@
 import Subtitle from "../Typography/Subtitle"
 
 
-function TitleCard({ title, children, topMargin, TopSideButtons }) {
+interface TitleCardProps {
+  title: string;
+  children: React.ReactNode;
+  topMargin?: string;
+  TopSideButtons?: React.ReactNode;
+}
+
+function TitleCard({ title, children, topMargin, TopSideButtons }: TitleCardProps) {
   return (
     <div className={"card w-full p-6 bg-base-100 shadow-xl " + (topMargin || "mt-6")}>
 

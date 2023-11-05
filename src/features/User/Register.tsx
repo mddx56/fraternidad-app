@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import toast, { Toaster } from 'react-hot-toast';
 import LandingIntro from './LandingIntro';
 import { UserInput } from '../../types/UserType';
 import { useMutation } from '@tanstack/react-query';
 import { signUp } from '../../services/userService';
+import { AlertWarnig } from '../../components/AlertWarning';
+import {  toast } from 'react-toastify';
 
 function Register() {
 
@@ -16,29 +17,26 @@ function Register() {
         username: "",
         password: "",
         email: "",
-        first_name: "",
-        last_name: ""
+        full_name: ""
     };
 
     const validationSchema = yup.object({
         username: yup
             .string()
             .required("Nombre de usuario es requerido")
-            .max(10, "el nomnre es muy largo"),
+            .min(7, "el nombre de usuari o CI es muy corto")
+            .max(35, "el nombre de usuari o CI es muy largo"),
         password: yup.string()
             .required("Contraseña es requerida")
-            .min(8, "minimo 8 ")
-            .max(32, "Maximo de longitud 32"),
+            .min(8, "la contraseña deve ser minimo de 8 letras")
+            .max(32, "la contraseña deve ser maximo de 32 letras"),
         email: yup
             .string()
             .email("Ingrese con un Correo Electronico valido")
             .required("Email es requerido"),
-        first_name: yup
+        full_name: yup
             .string()
-            .required("Nombres es requerido"),
-        last_name: yup
-            .string()
-            .required("Apellidos es requerido"),
+            .required("Nombres Completo es requerido"),
     });
 
     const {
@@ -56,11 +54,11 @@ function Register() {
             console.log(data.message);
             reset();
             //navigate("/login");
-            toast.success(data.message, { duration: 5000 });
+            toast.success(data.message);
         },
-        onError: (data) => {
-            console.log(data);
-            toast.error("No registrado..", { duration: 5000 });
+        onError: (error) => {
+            console.log(error);
+            toast.error("No registrado..");
         }
     });
 
@@ -86,48 +84,42 @@ function Register() {
 
                             <div className="mb-4">
                                 <div className="form-control w-full mb-4">
-                                    <label className='label' htmlFor="username">Nombre de Usuario</label>
-                                    <input className="input input-bordered w-full" {...register("username")} id="username" type="text" />
+                                    <label className='label' htmlFor="username">Nombre de Usuario o CI</label>
+                                    <input className="input input-bordered w-full" {...register("username")} id="username" placeholder="Ingrese nombre de usuario o CI" type="text" />
                                     {errors.username && (
-                                        <p className="error-message">{errors.username.message}</p>
+                                        <AlertWarnig titleAlert={errors.username.message} />
                                     )}
                                 </div>
                                 <div className="form-control w-full mb-4">
                                     <label htmlFor="password">Contraseña</label>
-                                    <input className="input  input-bordered w-full" {...register("password")} id="password" type="password" />
+                                    <input className="input  input-bordered w-full" {...register("password")} id="password" placeholder='Ingrese Contraseña' type="password" />
                                     {errors.password && (
-                                        <p className="error-message">{errors.password.message}</p>
+                                        <AlertWarnig titleAlert={errors.password.message} />
                                     )}
                                 </div>
                                 <div className="form-control w-full mb-4">
                                     <label htmlFor="email">Correo Electronico</label>
-                                    <input className="input  input-bordered w-full" {...register("email")} id="email" type="email" />
+                                    <input className="input  input-bordered w-full" {...register("email")} id="email" placeholder="Ingrese correo electronico" type="email" />
                                     {errors.email && (
-                                        <p className="error-message">{errors.email.message}</p>
+                                        <AlertWarnig titleAlert={errors.email.message} />
                                     )}
                                 </div>
                                 <div className="form-control w-full mb-4">
-                                    <label htmlFor="first_name">Nombres</label>
-                                    <input className="input  input-bordered w-full" {...register("first_name")} id="first_name" type="text" />
-                                    {errors.first_name && (
-                                        <p className="error-message">{errors.first_name.message}</p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label htmlFor="last_name">Apellidos</label>
-                                    <input className="input  input-bordered w-full" {...register("last_name")} id="last_name" type="text" />
-                                    {errors.last_name && (
-                                        <p className="error-message">{errors.last_name.message}</p>
+                                    <label htmlFor="full_name">Nombre Completo</label>
+                                    <input className="input  input-bordered w-full" {...register("full_name")} id="full_name" placeholder="Ingrese nombre completo" type="text" />
+                                    {errors.full_name && (
+                                        <AlertWarnig titleAlert={errors.full_name.message} />
                                     )}
                                 </div>
                             </div>
-                            <button type="submit" className={"btn mt-2 w-full btn-primary"}>{mutation.isLoading && <span className="loading loading-spinner"></span>}Registrar</button>
+
+                            <button type="submit" disabled={mutation.isLoading} className={"btn mt-2 w-full btn-primary"}>{mutation.isLoading && <span className="loading loading-spinner"></span>}Registrar</button>
                             <div className='text-center mt-4'>¿Ya tienes cuenta?<Link to="/login"><span className="inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Inicia sesion</span></Link></div>
                         </form>
                     </div>
                 </div>
             </div>
-            <Toaster />
+            
         </div>
     )
 }

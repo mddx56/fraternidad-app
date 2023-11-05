@@ -1,4 +1,4 @@
-import { EstadoDeudaType } from "../../types/DeudaType";
+/*import { EstadoDeudaType } from "../../types/PagosType";
 import { getEstadoDeuda } from "../../services/deudaService";
 import { useQuery } from "@tanstack/react-query";
 
@@ -21,4 +21,4 @@ function EstadoDeuda({ Id }: Props) {
         </>
     );
 }
-export default EstadoDeuda;
+export default EstadoDeuda;*/

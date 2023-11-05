@@ -58,7 +58,6 @@ function Header() {
                         <MoonIcon data-set-theme="night" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 " + (currentTheme === "light" ? "swap-on" : "swap-off")} />
                     </label>
 
-
                     <button className="btn btn-ghost ml-4  btn-circle" onClick={() => { }}>
                         <div className="indicator">
                             <BellIcon className="h-6 w-6" />
@@ -67,15 +66,21 @@ function Header() {
                     </button>
 
                     <div className="dropdown dropdown-end ml-4">
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-9 rounded-full">
+                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar online">
+                            <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                {
+                                    profileUser ?
+                                        <Avvvatars value={profileUser.name} size={34} />
+                                        : <UserCircleIcon className="h-8 w-8" />
+                                }
+                            </div>
+                            {/*                            <div className="w-9 rounded-full">
                                 {
                                     profileUser ?
                                         <Avvvatars value={profileUser.name} size={36} />
                                         : <UserCircleIcon className="h-9 w-9" />
                                 }
-
-                            </div>
+                            </div>*/}
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li className="justify-between">
@@ -83,8 +88,22 @@ function Header() {
                                     Perfil Usuario
                                 </Link>
                             </li>
+                            <li className="justify-between">
+                                <Link to='/app/password'>
+                                    Cambiar Contraseña
+                                </Link>
+                            </li>
 
                             <div className="divider mt-0 mb-0"></div>
+
+                            <li className="justify-between">
+                                <Link to='/app/fraternidad'>
+                                    Fraternidad
+                                </Link>
+                            </li>
+
+                            <div className="divider mt-0 mb-0"></div>
+
                             <li><a onClick={logoutUser}>Salir</a></li>
                         </ul>
                     </div>
