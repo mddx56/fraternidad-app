@@ -1,15 +1,12 @@
- import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
-import EyeIcon from "@heroicons/react/24/outline/EyeIcon";
+import { Eye, Trash, X } from "lucide-react";
 import TitleCard from "../common/components/Cards/TitleCard";
 //import { getAllUsers } from "../../services/userService";
 //import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate } from "react-router-dom";
-import { UserAdminType, UserType } from "../../types/UserType";
-import { XMarkIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../../components/SearchBar";
 import { useGetUsers } from "../../hooks/UseUser";
-  
+
 
 interface PropsSideButton {
     //removeFilter: () => void;
@@ -55,7 +52,7 @@ const TopSideButtons = ({ applySearch, onClickBtn }: PropsSideButton) => {
     return (
         <div className="inline-block float-right">
             <SearchBar placeholderText={"Buscar"} searchText={searchText} styleClass="mr-4" setSearchText={setSearchText} />
-            {filterParam != "" && <button onClick={() => removeAppliedFilter()} className="btn btn-xs mr-2 btn-active btn-ghost normal-case">{filterParam}<XMarkIcon className="w-4 ml-2" /></button>}
+            {filterParam != "" && <button onClick={() => removeAppliedFilter()} className="btn btn-xs mr-2 btn-active btn-ghost normal-case">{filterParam}<X className="w-4 ml-2" /></button>}
             {/*<div className="dropdown dropdown-bottom dropdown-end">
                 <label tabIndex={0} className="btn btn-sm btn-outline"><FunnelIcon className="w-5 mr-2" />Filter</label>
                 <ul tabIndex={0} className="dropdown-content menu p-2 text-sm shadow bg-base-100 rounded-box w-52">
@@ -78,13 +75,18 @@ const TopSideButtons = ({ applySearch, onClickBtn }: PropsSideButton) => {
 
 function UserAdmin() {
 
-    const [trans, setTrans] = useState(null)
-    // Search according to name
+    /*
+    const [trans, setTrans] = useState<UserAdminType[]>([])
+    
     const applySearch = (value: string) => {
         const filteredTransactions = data && data.filter((t: UserAdminType) => { return t.username.toLowerCase().includes(value.toLowerCase()) || t.username.toLowerCase().includes(value.toLowerCase()) })
-        setTrans(filteredTransactions)
+        setTrans(filteredTransactions | undefined)
     }
+*/
 
+    const applySearch = () => {
+
+    }
 
     const navigate = useNavigate();
     //const [eventos, setEventos] = useState<Array<EventoType>>([]);
@@ -132,8 +134,8 @@ function UserAdmin() {
                                             <td>{user.full_name}</td>
                                             <td>{user.role}</td>
                                             <td>{user.suspend ? "Suspendido" : "Activo"}</td>
-                                            <td><Link to={`/user/${user.id}`} className="btn btn-ghost btn-xs" onClick={() => { }}><EyeIcon className="w-5" /></Link></td>
-                                            <td><Link to="/app/" className="btn btn-ghost btn-xs" onClick={() => { }}><TrashIcon className="w-5" /></Link></td>
+                                            <td><Link to={`/user/${user.id}`} className="btn btn-ghost btn-xs" onClick={() => { }}><Eye className="w-5" /></Link></td>
+                                            <td><Link to="/app/" className="btn btn-ghost btn-xs" onClick={() => { }}><Trash className="w-5" /></Link></td>
                                         </tr>
                                     )
                                 })

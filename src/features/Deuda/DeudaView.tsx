@@ -7,13 +7,13 @@ import { getUserInfo } from "../../utils/localStorage";
 
 function DeudaView() {
 
-    const [profileUser, setProfileUser] = useState<UserProfile>(getUserInfo());
+    const [profileUser, setProfileUser] = useState<UserProfile | null>(getUserInfo());
 
     const [idUser, setIdUser] = useState<string>("");
 
     useEffect(() => {
         setProfileUser(getUserInfo());
-        setIdUser(profileUser.user_id);
+        setIdUser(profileUser?.user_id ?? "");
     }, []);
 
     useEffect(() => {

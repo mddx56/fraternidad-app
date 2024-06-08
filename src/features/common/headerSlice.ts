@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { RootState } from '../../app/store';
+import { RootState } from '../../stores/store';
 import { HeaderInputType, HeaderType } from '../../types/Header'
 
 const initialState: HeaderType = {
@@ -22,10 +22,10 @@ export const headerSlice = createSlice({
             state.newNotificationMessage = ""
         },
 
-        showNotification: (state: HeaderType, action: PayloadAction<HeaderInputType>) => {
-            state.newNotificationMessage = action.payload.message
+        /*showNotification: (state: HeaderType, action: PayloadAction<HeaderInputType>) => {
+            state.newNotificationMessage = action.payload.message | "";
             state.newNotificationStatus = action.payload.status
-        },
+        },*/
     }
 })
 

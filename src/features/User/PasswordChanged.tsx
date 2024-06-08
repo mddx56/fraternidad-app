@@ -1,18 +1,18 @@
-import * as yup from "yup";
-import TitleCard from "../common/components/Cards/TitleCard";
-import { UserPasswordType, UserProfile } from '../../types/UserType';
-import { useForm } from "react-hook-form";
-import { toast } from 'react-toastify';
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@tanstack/react-query";
-import { AlertWarnig } from "../../components/AlertWarning";
-import { getUserInfo } from "../../utils/localStorage";
 import { useEffect, useState } from "react";
-import { changePassword } from "../../services/userService";
+import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { toast } from 'react-toastify';
+import * as yup from "yup";
+import { AlertWarnig } from "../../components/AlertWarning";
+import { changePassword } from "../../services/user-service";
+import { UserPasswordType, UserProfile } from '../../types/UserType';
+import { getUserInfo } from "../../utils/localStorage";
+import TitleCard from "../common/components/Cards/TitleCard";
 
 function PasswordChanged() {
 
-    const [profileUser, setProfileUser] = useState<UserProfile>(getUserInfo());
+    const [profileUser, setProfileUser] = useState<UserProfile | null>(getUserInfo());
 
     useEffect(() => {
         setProfileUser(getUserInfo());
@@ -45,7 +45,7 @@ function PasswordChanged() {
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm<UserPasswordType>({
+    } = useForm({
         defaultValues,
         resolver: yupResolver(validationSchema),
     });
@@ -64,7 +64,7 @@ function PasswordChanged() {
 
     const onSubmitHandler = (values: UserPasswordType) => {
         try {
-            values.user_id = profileUser.user_id;
+            values.user_id = profileUser?.user_id;
             mutation.mutate(values);
         } catch (error) {
             console.log(error);
@@ -84,12 +84,12 @@ function PasswordChanged() {
                                 className="input input-bordered w-full max-w-xs"
                                 placeholder="Ingrese su contraseña actual"
                                 id="old_password"
-                                name="old_password"
+
                                 type="password"
                                 autoComplete="current-password"
                                 {...register("old_password", { required: true })}
                             />
-                            {errors.old_password && <AlertWarnig titleAlert={errors.old_password.message} />}
+                            {errors.old_password && <AlertWarnig titleAlert={errors.old_password.message ?? ""} />}
                         </div>
                         <div className="form-control w-full mb-4">
                             <label className="label" htmlFor="password">
@@ -100,11 +100,11 @@ function PasswordChanged() {
                                 type="password"
                                 placeholder="Ingrese su nueva contraseña"
                                 id="password"
-                                name="password"
+
                                 autoComplete="new-password"
                                 {...register("password", { required: true })}
                             />
-                            {errors.password && <AlertWarnig titleAlert={errors.password.message} />}
+                            {errors.password && <AlertWarnig titleAlert={errors.password.message ?? "s"} />}
                         </div>
 
                         <div className="form-control w-full mb-4">
@@ -115,16 +115,16 @@ function PasswordChanged() {
                                 className="input input-bordered w-full max-w-xs"
                                 placeholder="Repita la nueva contraseña"
                                 id="password2"
-                                name="password2"
+
                                 type="password"
                                 autoComplete="new-password"
                                 {...register("password2", { required: true })}
                             />
-                            {errors.password2 && <AlertWarnig titleAlert={errors.password2.message} />}
+                            {errors.password2 && <AlertWarnig titleAlert={errors.password2?.message ?? ""} />}
                         </div>
                         <div className="form-control mb-4">
                             <div className='text-center mt-4 max-w-xs'>
-                                {mutation.isError ? <AlertWarnig titleAlert={mutation.error.message} /> : ""}
+                                {mutation.isError ? "mutation.error" : ""}
                             </div>
                             <button
                                 type="submit"

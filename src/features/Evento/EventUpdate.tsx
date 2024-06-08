@@ -1,17 +1,16 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { FC, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AlertWarnig } from '../../components/AlertWarning';
-import { EventoInput, EventoType, TipoEventoType } from '../../types/EventoType';
-import { updateEvento } from "../../services/eventoService";
+import * as yup from "yup";
+import { updateEvento } from "../../services/evento-service";
+import { EventoInput, EventoType } from '../../types/EventoType';
 import { QUERY_KEY } from "../../utils/constant";
 
 
-type IUpdateNoteProps = {
+type UpdateEventoProps = {
     evento: EventoType;
     setOpenNoteModal: (open: boolean) => void;
 };
@@ -38,8 +37,8 @@ const updateEventSchema = yup.object({
 
 //export type UpdateNoteInput = TypeOf<typeof updateNoteSchema>;
 
-const EventUpdate: FC<IUpdateNoteProps> = ({ evento, setOpenNoteModal }) => {
-    const methods = useForm<EventoInput>({
+const EventUpdate: FC<UpdateEventoProps> = ({ evento, setOpenNoteModal }) => {
+    const methods = useForm({
         resolver: yupResolver(updateEventSchema),
     });
 
@@ -86,7 +85,7 @@ const EventUpdate: FC<IUpdateNoteProps> = ({ evento, setOpenNoteModal }) => {
     const onSubmitHandler: SubmitHandler<EventoInput> = async (data) => {
         mutate({ id: evento.id, evento: data });
     };
-    
+
 
     return (
         <section>
@@ -102,7 +101,7 @@ const EventUpdate: FC<IUpdateNoteProps> = ({ evento, setOpenNoteModal }) => {
             <form className="w-full" onSubmit={handleSubmit(onSubmitHandler)}>
                 <div className="mb-2">
                     <label className="block text-gray-700 text-lg mb-2" htmlFor="title">
-                    Fecha
+                        Fecha
                     </label>
                     <input
                         className={twMerge(
@@ -122,7 +121,7 @@ const EventUpdate: FC<IUpdateNoteProps> = ({ evento, setOpenNoteModal }) => {
                 </div>
                 <div className="mb-2">
                     <label className="block text-gray-700 text-lg mb-2" htmlFor="title">
-                    Fecha
+                        Fecha
                     </label>
                     <input
                         className={twMerge(
@@ -140,49 +139,10 @@ const EventUpdate: FC<IUpdateNoteProps> = ({ evento, setOpenNoteModal }) => {
                         {errors["hora_inicio"]?.message as string}
                     </p>
                 </div>
+
                 <div className="mb-2">
                     <label className="block text-gray-700 text-lg mb-2" htmlFor="title">
-                    Fecha
-                    </label>
-                    <input
-                        className={twMerge(
-                            `appearance-none border border-gray-400 rounded w-full py-3 px-3 text-gray-700 mb-2 leading-tight focus:outline-none`,
-                            `${errors["title"] && "border-red-500"}`
-                        )}
-                        {...methods.register("fecha")}
-                    />
-                    <p
-                        className={twMerge(
-                            `text-red-500 text-xs italic mb-2 invisible`,
-                            `${errors["title"] && "visible"}`
-                        )}
-                    >
-                        {errors["fecha"]?.message as string}
-                    </p>
-                </div>
-                <div className="mb-2">
-                    <label className="block text-gray-700 text-lg mb-2" htmlFor="title">
-                    Fecha
-                    </label>
-                    <input
-                        className={twMerge(
-                            `appearance-none border border-gray-400 rounded w-full py-3 px-3 text-gray-700 mb-2 leading-tight focus:outline-none`,
-                            `${errors["title"] && "border-red-500"}`
-                        )}
-                        {...methods.register("fecha")}
-                    />
-                    <p
-                        className={twMerge(
-                            `text-red-500 text-xs italic mb-2 invisible`,
-                            `${errors["title"] && "visible"}`
-                        )}
-                    >
-                        {errors["fecha"]?.message as string}
-                    </p>
-                </div>
-                <div className="mb-2">
-                    <label className="block text-gray-700 text-lg mb-2" htmlFor="title">
-                    descripcion
+                        descripcion
                     </label>
                     <textarea
                         className={twMerge(

@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Calendar, Event } from "react-big-calendar";
-import { setPageTitle } from '../../features/common/headerSlice';
-import { localizer, getMessages } from '../../utils/calendarLocalizer';
+import { Calendar, Event, SlotInfo } from "react-big-calendar";
+import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useAppDispatch } from '../../stores/hook';
 import { CalendarEvent } from '../../features/Calendar/CalendarEvent';
 import TitleCard from '../../features/common/components/Cards/TitleCard';
-import { useAppDispatch } from '../../app/hook';
-import { useQuery } from '@tanstack/react-query';
-import { getAllEventos } from '../../services/eventoService';
-import { EventoType } from '../../types/EventoType';
-import { useNavigate } from 'react-router-dom';
 import { LoadingInfinity } from '../../features/common/components/LoadingInfinity';
-import { toast } from 'react-toastify';
+import { setPageTitle } from '../../features/common/headerSlice';
+import { getAllEventos } from '../../services/evento-service';
+import { EventoType } from '../../types/EventoType';
+import { getMessages, localizer } from '../../utils/calendarLocalizer';
 import { QUERY_KEY } from '../../utils/constant';
 
 interface PropsSideButton {
@@ -68,20 +68,20 @@ function InternalPage() {
     console.log("go add..");
   }
 
-  const onSelectEvent = (e) => {
+  const onSelectEvent = (e: React.SyntheticEvent<HTMLElement>) => {
     //dispatch(eventSetActive(e));
     toast.success(`Event has been created ${e}`);
     console.log("select event", e);
 
   };
 
-  const onDoubleClick = (e) => {
+  const onDoubleClick = (e: React.SyntheticEvent<HTMLElement>) => {
     //dispatch(uiOpenModal());
     toast.success(`Event has been created ${e}`);
     console.log("double click", e);
   };
 
-  const onSelectSlot = (e) => {
+  const onSelectSlot = (e: SlotInfo) => {
     //dispatch(eventClearActiveEvent())
     const dateSelect = new Date(e["slots"][0]);
     toast.success(`Event ${dateSelect.getFullYear()}`);
@@ -133,7 +133,7 @@ function InternalPage() {
               event: CalendarEvent
             }}
           />
-          
+
 
         </div>
       </TitleCard>

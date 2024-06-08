@@ -1,6 +1,6 @@
+import { useQuery } from "react-query";
+import { getTipoEvento } from "../../services/evento-service";
 import { TipoEventoType } from "../../types/EventoType";
-import { getTipoEvento } from "../../services/eventoService";
-import { useQuery } from "@tanstack/react-query";
 
 type Props = {
     Id: number;
@@ -21,7 +21,7 @@ function TipoEvento({ Id }: Props) {
     return (
         <>
             <div className="flex items-center">
-                {data.nombre.length <= longitudMaxima ?
+                {data?.nombre.length <= longitudMaxima ?
                     (<div className="rounded-full px-2 bg-primary text-base-100 p-1  leading-none flex items-center "><span>{data.nombre}</span></div>)
                     :
                     (<div className="tooltip rounded-full px-2 bg-primary text-base-100 p-1 leading-none flex items-center " data-tip={data.nombre}><span> {data.nombre.slice(0, longitudMaxima) + '..'}</span></div>)

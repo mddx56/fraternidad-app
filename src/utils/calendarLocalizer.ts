@@ -1,13 +1,13 @@
 import { dateFnsLocalizer } from 'react-big-calendar';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-import startOfWeek from 'date-fns/startOfWeek';
-import getDay from 'date-fns/getDay';
-import esES from 'date-fns/locale/es';
+import { format } from 'date-fns/format';
+import { parse } from 'date-fns/parse';
+import { startOfWeek } from 'date-fns/startOfWeek';
+import { getDay } from 'date-fns/getDay';
+import { es } from 'date-fns/locale/es';
 
 
 const locales = {
-    'es': esES,
+    'es': es,
 }
 
 export const localizer = dateFnsLocalizer({
@@ -32,6 +32,6 @@ export const getMessages = () => {
         time: 'Hora',
         event: 'Evento',
         noEventsInRange: 'No hay eventos en la Agenda',
-        showMore: total => `+ Ver más (${total})`
+        showMore: (total: string) => `+ Ver más (${total})`
     }
 };

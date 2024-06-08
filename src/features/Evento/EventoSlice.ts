@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import { RootState } from '../../app/store';
-import { getAllEventos } from '../../services/eventoService';
+import { RootState } from '../../stores/store';
+import { getAllEventos } from '../../services/evento-service';
 import { EventoState, EventoType } from '../../types/EventoType';
 
 
@@ -27,7 +27,7 @@ export const eventoSlice = createSlice({
             state.loading = false;
             state.eventos = action.payload;
         });
-        
+
         builder.addCase(getEventosAll.rejected, (state, action) => {
             state.loading = false;
             state.eventos = [];

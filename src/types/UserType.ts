@@ -25,7 +25,8 @@ export interface UserAdminType {
     verified?: boolean;
 }
 
-export type UserAdminInput = Omit<UserAdminType, "id" | "last_login" | "ci" | "avatar" | "suspend" | "is_staff" | "is_active" | "is_admin" | "is_superuser" | "verified">;
+export type UserAdminInput = Omit<UserAdminType, "id" | "last_login"| "avatar" |"suspend"|"is_active" |"is_staff"|"is_admin"|"is_superuser" | "verified">;
+//export type UserAdminInput = Omit<UserAdminType, "id" | "last_login" | "ci" | "avatar" | "suspend" | "is_staff" | "is_active" | "is_admin" | "is_superuser" | "verified">;
 
 export type UserType = {
     id: string;

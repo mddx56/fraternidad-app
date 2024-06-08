@@ -1,22 +1,17 @@
-import { themeChange } from 'theme-change';
+import Avvvatars from 'avvvatars-react';
+import { Bell, Menu, Moon, Sun, UserCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import BellIcon from '@heroicons/react/24/outline/BellIcon';
-import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon';
-import MoonIcon from '@heroicons/react/24/outline/MoonIcon';
-import SunIcon from '@heroicons/react/24/outline/SunIcon';
-import UserCircleIcon from '@heroicons/react/24/outline/UserCircleIcon';
-import { headerSelector } from '../features/common/headerSlice';
-import { useAppSelector } from '../app/hook';
-import { clearTokens, getUserInfo } from '../utils/localStorage';
 import { Link } from 'react-router-dom';
-import Avvvatars from 'avvvatars-react'
+import { themeChange } from 'theme-change';
+import { useAppSelector } from '../stores/hook';
+import { headerSelector } from '../features/common/headerSlice';
 import { UserProfile } from '../types/UserType';
-
+import { clearTokens, getUserInfo } from '../utils/localStorage';
 
 
 function Header() {
 
-    const [profileUser, setProfileUser] = useState<UserProfile>(getUserInfo());
+    const [profileUser, setProfileUser] = useState<UserProfile | null>(getUserInfo());
     const header = useAppSelector(headerSelector);
     //const header = "frater";
     const [currentTheme, setCurrentTheme] = useState(localStorage.getItem("theme"))
@@ -47,20 +42,20 @@ function Header() {
             <div className="navbar flex justify-between bg-base-100 z-20 shadow-md ">
                 <div >
                     <label htmlFor="left-sidebar-drawer" className="btn btn-primary drawer-button lg:hidden">
-                        <Bars3Icon className="h-5 inline-block w-5" /></label>
+                        <Menu className="h-5 inline-block w-5" /></label>
                     <h1 className="text-2xl font-semibold ml-2">{header.pageTitle}</h1>
                 </div>
 
                 <div className="order-last">
-                    <label className="swap ">
+                    <label className="swap swap-rotate">
                         <input type="checkbox" />
-                        <SunIcon data-set-theme="light" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 " + (currentTheme === "night" ? "swap-on" : "swap-off")} />
-                        <MoonIcon data-set-theme="night" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 " + (currentTheme === "light" ? "swap-on" : "swap-off")} />
+                        <Sun data-set-theme="light" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 " + (currentTheme === "forest" ? "swap-on" : "swap-off")} />
+                        <Moon data-set-theme="forest" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 " + (currentTheme === "light" ? "swap-on" : "swap-off")} />
                     </label>
 
                     <button className="btn btn-ghost ml-4  btn-circle" onClick={() => { }}>
                         <div className="indicator">
-                            <BellIcon className="h-6 w-6" />
+                            <Bell className="h-6 w-6" />
                             {/*noOfNotifications > 0 ? <span className="indicator-item badge badge-secondary badge-sm">{noOfNotifications}</span> : null*/}
                         </div>
                     </button>
@@ -71,7 +66,7 @@ function Header() {
                                 {
                                     profileUser ?
                                         <Avvvatars value={profileUser.name} size={34} />
-                                        : <UserCircleIcon className="h-8 w-8" />
+                                        : <UserCircle className="h-8 w-8" />
                                 }
                             </div>
                             {/*                            <div className="w-9 rounded-full">

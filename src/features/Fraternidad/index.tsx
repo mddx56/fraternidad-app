@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { LoadingInfinity } from "../common/components/LoadingInfinity";
+import { useQuery } from "react-query";
 import { AlertWarnig } from "../../components/AlertWarning";
+import { getFraternidad } from "../../services/frater-service";
 import { FraternidadType } from "../../types/FraternidadType";
-import { getFraternidad } from "../../services/fraterService";
 import TitleCard from "../common/components/Cards/TitleCard";
+import { LoadingInfinity } from "../common/components/LoadingInfinity";
 
 function Fraternidad() {
 

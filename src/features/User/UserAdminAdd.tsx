@@ -1,14 +1,14 @@
-import { useForm } from 'react-hook-form';
-import {  toast } from 'react-toastify';
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { UserAdminInput } from "../../types/UserType";
-import TitleCard from "../common/components/Cards/TitleCard";
-import { FINANCIAL, ROLE } from '../../utils/constant';
-import { AlertWarnig } from '../../components/AlertWarning';
-import { signUp } from '../../services/userService';
-import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as yup from "yup";
+import { AlertWarnig } from '../../components/AlertWarning';
+import { signUp } from '../../services/user-service';
+import { UserAdminInput } from "../../types/UserType";
+import { FINANCIAL, ROLE } from '../../utils/constant';
+import TitleCard from "../common/components/Cards/TitleCard";
 
 export function UserAdminAdd() {
 
@@ -16,7 +16,7 @@ export function UserAdminAdd() {
     const defaultValues: UserAdminInput = {
         username: "",
         password: "",
-        //ci: false,
+        ci: false,
         full_name: "",
         email: "",
         phone: "",
@@ -46,8 +46,8 @@ export function UserAdminAdd() {
         phone: yup
             .string(),
         //.required("Nombres Completo es requerido"),
-        //ci: yup
-        //   .boolean(),
+        ci: yup
+            .boolean().required(),
         financial_condition: yup
             .string()
             .required("Por favor, selecciona un Modo de pago."),
@@ -64,9 +64,9 @@ export function UserAdminAdd() {
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm<UserAdminInput>({
-        defaultValues,
+    } = useForm({
         resolver: yupResolver(validationSchema),
+        defaultValues,
     });
 
     const mutation = useMutation(signUp, {
@@ -106,7 +106,6 @@ export function UserAdminAdd() {
                                         </label>
                                         <input
                                             type="text"
-                                            name="username"
                                             id="username"
                                             placeholder="Ingrese su CI"
                                             className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -122,7 +121,6 @@ export function UserAdminAdd() {
                                         </label>
                                         <input
                                             type="checkbox"
-                                            name="copy_ci"
                                             id="copy_ci"
                                             className="checkbox checkbox-success outline-none"
                                             {...register("copy_ci")}
@@ -137,7 +135,7 @@ export function UserAdminAdd() {
                                 </label>
                                 <input
                                     type="email"
-                                    name="email"
+
                                     id="email"
                                     placeholder="Ingrese su correo electrónico"
                                     className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -154,7 +152,7 @@ export function UserAdminAdd() {
                                 </label>
                                 <input
                                     type="password"
-                                    name="password"
+
                                     id="password"
                                     placeholder="Ingrese su contraseña"
                                     className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -171,7 +169,7 @@ export function UserAdminAdd() {
                                 </label>
                                 <input
                                     type="text"
-                                    name="phone"
+
                                     id="phone"
                                     placeholder="Ingrese su número de teléfono"
                                     className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -187,7 +185,7 @@ export function UserAdminAdd() {
                                     Nombre Completo
                                 </label>
                                 <input type="text"
-                                    name="full_name"
+
                                     id="full_name"
                                     placeholder="Ingrese su nombre completo"
                                     className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -205,7 +203,7 @@ export function UserAdminAdd() {
                                             Modo de Pago
                                         </label>
                                         <select
-                                            name="financial_condition"
+
                                             id="financial_condition"
                                             className="select w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                             {...register("financial_condition")}
@@ -225,7 +223,7 @@ export function UserAdminAdd() {
                                             Rol de Usuario
                                         </label>
                                         <select
-                                            name="time"
+
                                             id="time"
                                             className="select w-full rounded-md border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                             {...register("role")}
@@ -251,7 +249,7 @@ export function UserAdminAdd() {
                                     Agregar Usuario
                                 </button>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>

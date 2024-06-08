@@ -5,5 +5,5 @@ interface UserProps {
 }
 
 export function UserAdminView({ User }: UserProps) {
-    return (<div>{User.username}</div>)
+    return (<div>{User?.username ?? "..."}</div>)
 }

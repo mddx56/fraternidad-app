@@ -1,8 +1,8 @@
-import { QueryObserver, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useEffect, useState } from "react"
-import { QUERY_KEY } from "../utils/constant"
+import { QueryObserver, useQuery, useQueryClient } from "react-query"
+import { getAllUsers } from "../services/user-service"
 import { UserAdminType } from "../types/UserType"
-import { getAllUsers } from "../services/userService"
+import { QUERY_KEY } from "../utils/constant"
 
 export const useGetUsers = () => {
     return useQuery<UserAdminType[], Error>([QUERY_KEY.USERS], getAllUsers);

@@ -1,6 +1,6 @@
-import es from 'date-fns/locale/es';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
+import { es } from 'date-fns/locale/es';
+import { format } from 'date-fns/format';
+import { parse } from 'date-fns/parse';
 import { isWeekend, isMonday, isTuesday, isWednesday, isThursday } from 'date-fns';
 
 export function formattedDate(fecha: string): string {

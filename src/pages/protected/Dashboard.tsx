@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useAppDispatch } from '../../app/hook'
+import { useAppDispatch } from '../../stores/hook'
 import { setPageTitle } from '../../features/common/headerSlice'
 import Dashboard from '../../features/dashboard/Dashboard'
 

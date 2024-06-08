@@ -1,8 +1,13 @@
-function SearchBar({ searchText, styleClass, placeholderText, setSearchText }) {
+type Props = {
+    searchText: string;
+    styleClass: string;
+    placeholderText: string;
+    setSearchText: (value: string) => void;
+}
 
 
-
-    const updateSearchInput = (value) => {
+function SearchBar({ searchText, styleClass, placeholderText, setSearchText }: Props) {
+    const updateSearchInput = (value: string) => {
         setSearchText(value)
     }
 

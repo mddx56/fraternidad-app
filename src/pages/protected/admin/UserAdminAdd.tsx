@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { setPageTitle } from '../../../features/common/headerSlice'
-import { useAppDispatch } from '../../../app/hook'
+import { useAppDispatch } from '../../../stores/hook'
 import { UserAdminAdd } from '../../../features/User/UserAdminAdd'
 
 

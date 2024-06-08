@@ -1,8 +1,13 @@
+import { LoginType, UserAdminType, UserInput, UserPasswordType, UserResponseType, UserType } from '../types/UserType';
 import { api } from './api';
-import { UserType, UserInput, LoginType, UserResponseType, UserPasswordType, UserAdminType } from '../types/UserType';
 
 export const getAllUsers = async () => {
     const response = await api.get<UserAdminType[]>(`auth/users/`);
+    return response.data;
+};
+
+export const getAllFraters = async () => {
+    const response = await api.get<UserType[]>(`auth/fraternos/`);
     return response.data;
 };
 

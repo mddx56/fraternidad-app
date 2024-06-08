@@ -2,17 +2,15 @@ import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 //import { LoadingButton } from "../LoadingButton";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import NProgress from "nprogress";
-import { createEvento, getAllTipoEvento } from '../../services/eventoService';
+import { createEvento, getAllTipoEvento } from '../../services/evento-service';
 //import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { esFinDeSemana } from '../../utils/dateFormat';
-import { Estados_Evento, QUERY_KEY } from '../../utils/constant';
 import { yupResolver } from "@hookform/resolvers/yup";
-import { EventoInput, TipoEventoType } from '../../types/EventoType';
 import { AlertWarnig } from "../../components/AlertWarning";
+import { EventoInput, TipoEventoType } from '../../types/EventoType';
+import { QUERY_KEY } from '../../utils/constant';
+import { esFinDeSemana } from '../../utils/dateFormat';
 
 type ICreateNoteProps = {
     setOpenNoteModal: (open: boolean) => void;
@@ -37,9 +35,9 @@ const createNoteSchema = yup.object({
 
 const EventoCreate: FC<ICreateNoteProps> = ({ setOpenNoteModal }) => {
 
-    const { data, error } = useQuery<TipoEventoType[], Error>([QUERY_KEY.TIPOEVENTO], getAllTipoEvento)
+    const { data } = useQuery<TipoEventoType[], Error>([QUERY_KEY.TIPOEVENTO], getAllTipoEvento)
 
-    const methods = useForm<EventoInput>({
+    const methods = useForm({
         resolver: yupResolver(createNoteSchema),
     });
 
@@ -54,13 +52,12 @@ const EventoCreate: FC<ICreateNoteProps> = ({ setOpenNoteModal }) => {
     const { mutate: createNote, isLoading, isError } = useMutation({
         mutationFn: (note: EventoInput) => createEvento(note),
         onMutate() {
-            NProgress.start();
+            console.log("sus")
         },
         onSuccess(data) {
             console.log(data);
             queryClient.invalidateQueries([QUERY_KEY.EVENTOS]);
             setOpenNoteModal(false);
-            NProgress.done();
             toast("Note created successfully", {
                 type: "success",
                 position: "top-right",
@@ -68,7 +65,7 @@ const EventoCreate: FC<ICreateNoteProps> = ({ setOpenNoteModal }) => {
         },
         onError(error: Error) {
             setOpenNoteModal(false);
-            NProgress.done();
+
             const resMessage =
                 // error.response.data.message ||
                 //error.response.data.detail ||

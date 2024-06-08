@@ -1,4 +1,8 @@
-export function AlertWarnig({ titleAlert }) {
+type Props = {
+    titleAlert?: string
+}
+
+export function AlertWarnig({ titleAlert }: Props) {
     return (
         <>
             <div className="badge badge-error gap-2 my-1 ">

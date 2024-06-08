@@ -1,18 +1,18 @@
 import { useEffect } from 'react'
+import { SelectFraterno } from '../../../features/Cobros/SelectFraterno'
 import { setPageTitle } from '../../../features/common/headerSlice'
-import { useAppDispatch } from '../../../app/hook'
-import { SelectPago } from '../../../features/Pago/SelectPago'
+import { useAppDispatch } from '../../../stores/hook'
 
 
-function InternalPage(){
+function InternalPage() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-        dispatch(setPageTitle({ title : "Admin. Cobros"}))
+    dispatch(setPageTitle({ title: "Admin. Cobros" }))
   })
-    return(
-        <SelectPago />
-    )
+  return (
+    <SelectFraterno />
+  )
 }
 
 export default InternalPage

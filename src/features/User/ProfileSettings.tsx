@@ -17,7 +17,7 @@ const TopSideButtons = ({ onClickBtn }: PropsSideButton) => {
 }
 
 function ProfileSettings() {
-    const [profileUser, setProfileUser] = useState<UserProfile>(null);
+    const [profileUser, setProfileUser] = useState<UserProfile | null>(null);
     const [editForm, setEditForm] = useState<boolean>(false);
     console.log(profileUser);
     const changeEdit = () => {

@@ -1,13 +1,17 @@
 import { formattedTime } from "../../utils/dateFormat";
 
-export const CalendarEvent = ({ event }) => {
-    const { evento } = event;
-    //const { descripcion } = sa;
+type Props = {
+    descripcion: string;
+    hora_inicio: string;
+    hora_fin: string;
+}
+
+export const CalendarEvent = ({ descripcion, hora_fin, hora_inicio }: Props) => {
     return (
         <>
             <div className="bg-primary p-1 border-spacing-px">
-                <p className="text-xs">{formattedTime(evento.hora_inicio)} - {formattedTime(evento.hora_fin)}</p>
-                <p className="text-xs">{evento.descripcion}</p>
+                <p className="text-xs">{formattedTime(hora_inicio)} - {formattedTime(hora_fin)}</p>
+                <p className="text-xs">{descripcion}</p>
             </div >
         </>
     );

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { setPageTitle } from '../../features/common/headerSlice'
 import PasswordChanged from '../../features/User/PasswordChanged'
-import { useAppDispatch } from '../../app/hook'
+import { useAppDispatch } from '../../stores/hook'
 
 function InternalPage() {
 

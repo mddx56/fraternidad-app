@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { setPageTitle } from '../../features/common/headerSlice'
-import { useAppDispatch } from '../../app/hook'
-import Pago from '../../features/Pago'
+import { useAppDispatch } from '../../stores/hook'
+import Pago from '../../features/Cobros'
 
 function InternalPage() {
     const dispatch = useAppDispatch()

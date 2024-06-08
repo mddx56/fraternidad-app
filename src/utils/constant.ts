@@ -12,6 +12,8 @@ export enum QUERY_KEY {
     TIPOEVENTO = "tipoeventos",
     EVENTOS = "eventos",
     USERS = "users",
+    MEDIA_IMAGE = "images",
+    MEDIA_VIDEO = "vidios",
 }
 
 export enum Estados_Evento {

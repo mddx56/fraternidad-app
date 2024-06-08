@@ -4,10 +4,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LandingIntro from './LandingIntro';
 import { UserInput } from '../../types/UserType';
-import { useMutation } from '@tanstack/react-query';
-import { signUp } from '../../services/userService';
+import { useMutation } from 'react-query';
+import { signUp } from '../../services/user-service';
 import { AlertWarnig } from '../../components/AlertWarning';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function Register() {
 
@@ -44,7 +44,7 @@ function Register() {
         handleSubmit,
         formState: { errors }, // get errors of the form
         reset,
-    } = useForm<UserInput>({
+    } = useForm({
         defaultValues,
         resolver: yupResolver(validationSchema),
     });
@@ -119,7 +119,7 @@ function Register() {
                     </div>
                 </div>
             </div>
-            
+
         </div>
     )
 }

@@ -1,11 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { LoadingInfinity } from "../common/components/LoadingInfinity";
+import { useQuery } from "react-query";
 import { AlertWarnig } from "../../components/AlertWarning";
-import { TipoEventoType } from "../../types/EventoType";
-import { getAllTipoEvento } from "../../services/eventoService";
 import EventCard from "../../components/EventCard";
-import { esFinDeSemana } from "../../utils/dateFormat";
+import { getAllTipoEvento } from "../../services/evento-service";
+import { TipoEventoType } from "../../types/EventoType";
 import { QUERY_KEY } from "../../utils/constant";
+import { esFinDeSemana } from "../../utils/dateFormat";
+import { LoadingInfinity } from "../common/components/LoadingInfinity";
 
 function EventShop() {
 
@@ -13,8 +13,8 @@ function EventShop() {
 
     if (isLoading) {
         return <LoadingInfinity />
-    }else{
-        console.log(data); 
+    } else {
+        console.log(data);
     }
 
     if (isError) {
@@ -25,7 +25,7 @@ function EventShop() {
         <>
             <div className="bg-base-200">
                 <div className="container mx-auto px-4">
-                   {/* <h2 className="text-3xl font-bold mb-8">Tipo de evento</h2>
+                    {/* <h2 className="text-3xl font-bold mb-8">Tipo de evento</h2>
                     <div className="grid grid-cols-1 gap-2 md:grid-cols-3 gap-8">*/}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {

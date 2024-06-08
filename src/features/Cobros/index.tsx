@@ -1,8 +1,7 @@
-import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
-import EyeIcon from "@heroicons/react/24/outline/EyeIcon";
+import { Trash, Eye } from "lucide-react";
 import TitleCard from "../common/components/Cards/TitleCard";
 import { getAllPagos } from "../../services/pagoService";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { PagoType } from "../../types/PagoType";
 
@@ -49,7 +48,7 @@ function Pago() {
                         </thead>
                         <tbody>
                             {
-                                data.map((pago, k) => {
+                                data?.map((pago, k) => {
                                     return (
                                         <tr key={k}>
                                             <td>
@@ -61,8 +60,8 @@ function Pago() {
                                             <td>{pago.deuda}</td>
                                             <td>{pago.evento}</td>
                                             <td>{pago.user}</td>
-                                            <td><Link to="/app/" className="btn btn-ghost btn-xs" onClick={() => { }}><EyeIcon className="w-5" /></Link></td>
-                                            <td><Link to="/app/" className="btn btn-ghost btn-xs" onClick={() => { }}><TrashIcon className="w-5" /></Link></td>
+                                            <td><Link to="/app/" className="btn btn-ghost btn-xs" onClick={() => { }}><Eye className="w-5" /></Link></td>
+                                            <td><Link to="/app/" className="btn btn-ghost btn-xs" onClick={() => { }}><Trash className="w-5" /></Link></td>
                                         </tr>
                                     )
                                 })

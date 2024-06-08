@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit'
-import rightDrawerSlice from '../features/common/rightDrawerSlice'
+import { configureStore } from '@reduxjs/toolkit';
 import headerSlice from '../features/common/headerSlice';
+import rightDrawerSlice from '../features/common/rightDrawerSlice';
 import eventoSlice from '../features/Evento/EventoSlice';
 import userSlice from '../features/User/userSlice';
 

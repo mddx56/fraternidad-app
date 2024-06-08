@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import { RootState } from '../../app/store';
-import { getAllUsers } from '../../services/userService';
+import { RootState } from '../../stores/store';
+import { getAllUsers } from '../../services/user-service';
 import { UserAdminType, UserState } from '../../types/UserType';
 
 export const getUserAll = createAsyncThunk('/users/all', async () => {

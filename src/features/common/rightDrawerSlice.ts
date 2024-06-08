@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { rightDrawerType } from '../../types/rightDrawer'
-import { RootState } from '../../app/store'
+import { RootState } from '../../stores/store'
 
 const initialState: rightDrawerType = {
     header: "",  // current  title state management
