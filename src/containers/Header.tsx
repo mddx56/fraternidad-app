@@ -1,23 +1,24 @@
 import Avvvatars from 'avvvatars-react';
-import { Bell, Menu, Moon, Sun, UserCircle } from 'lucide-react';
+import { Bell, Menu, Moon, Sun, User2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { themeChange } from 'theme-change';
-import { useAppSelector } from '../stores/hook';
 import { headerSelector } from '../features/common/headerSlice';
-import { UserProfile } from '../types/UserType';
-import { clearTokens, getUserInfo } from '../utils/localStorage';
+import { useAuthStore } from '../stores/auth';
+import { useAppSelector } from '../stores/hook';
+import type { AuthCheckType as User } from '../types/UserType';
+import { Avatar } from './Avatar';
 
 
 function Header() {
-
-    const [profileUser, setProfileUser] = useState<UserProfile | null>(getUserInfo());
+    const user = useAuthStore.getState().user;
+    const logOutUser = useAuthStore(state => state.logoutUser);
+    const [profileUser, setProfileUser] = useState<User | undefined>(undefined);
     const header = useAppSelector(headerSelector);
-    //const header = "frater";
-    const [currentTheme, setCurrentTheme] = useState(localStorage.getItem("theme"))
+    const [currentTheme, setCurrentTheme] = useState(localStorage.getItem("theme"));
 
     useEffect(() => {
-        setProfileUser(getUserInfo());
+        setProfileUser(user);
     }, []);
 
     useEffect(() => {
@@ -32,9 +33,8 @@ function Header() {
     }, [currentTheme]);
 
     function logoutUser() {
-        clearTokens();
-
-        window.location.href = '/#/login'
+        logOutUser();
+        return <Navigate to='/login' />
     }
 
     return (
@@ -65,17 +65,11 @@ function Header() {
                             <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                 {
                                     profileUser ?
-                                        <Avvvatars value={profileUser.name} size={34} />
-                                        : <UserCircle className="h-8 w-8" />
+                                        <Avatar name={profileUser.full_name} />
+                                        : <User2 className='w-8 h-8' />
                                 }
                             </div>
-                            {/*                            <div className="w-9 rounded-full">
-                                {
-                                    profileUser ?
-                                        <Avvvatars value={profileUser.name} size={36} />
-                                        : <UserCircleIcon className="h-9 w-9" />
-                                }
-                            </div>*/}
+
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li className="justify-between">

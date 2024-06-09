@@ -1,7 +1,7 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { routes } from '../routes/sidebar';
 //import SidebarSubmenu from './SidebarSubmenu';
-import { Menu, PartyPopper } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Logo } from '../components/Logo';
 //import { useDispatch } from 'react-redux';
 //import { motion } from 'framer-motion'

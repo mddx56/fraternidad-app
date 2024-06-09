@@ -1,20 +1,18 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { AlertWarnig } from "../../components/AlertWarning";
-import { login } from "../../services/user-service";
+import ErrorText from "../../components/Typography/ErrorText";
+import { useAuthStore } from "../../stores/auth";
 import { LoginType } from "../../types/UserType";
-import {
-  getUserInfo,
-  setAccessToken,
-  setRefreshToken,
-} from "../../utils/localStorage";
 import LandingIntro from "./LandingIntro";
 
 function Login() {
   const navigate = useNavigate();
+
+  const loginUser = useAuthStore(state => state.loginUser);
+  const checkAuth = useAuthStore(state => state.checkAuthStatus);
 
   const defaultValues: LoginType = {
     username: "",
@@ -44,14 +42,9 @@ function Login() {
     resolver: yupResolver(validationSchema),
   });
 
-  const mutation = useMutation(login, {
-    onSuccess: (data) => {
-      console.log(data.access);
-
-      setAccessToken(data.access);
-      setRefreshToken(data.refresh);
-      localStorage.setItem("token", data.access);
-      localStorage.setItem("User", JSON.stringify(getUserInfo()));
+  const mutation = useMutation(loginUser, {
+    onSuccess: () => {
+      checkAuth();
       reset();
       navigate("/app");
     },
@@ -95,8 +88,7 @@ function Login() {
                     id="username"
                     type="text"
                   />
-                  {errors.username && (
-                    <AlertWarnig titleAlert={errors.username.message} />
+                  {errors.username && (<ErrorText styleClass="mt-2">{errors.username.message}</ErrorText>
                   )}
                 </div>
                 <div className="form-control w-full mb-4">
@@ -109,24 +101,20 @@ function Login() {
                     type="password"
                   />
                   {errors.password && (
-                    <AlertWarnig titleAlert={errors.password.message} />
+                    <ErrorText styleClass="mt-2">{errors.password.message}</ErrorText>
                   )}
                 </div>
               </div>
 
               <div className="text-right text-primary">
-                <a href="/forgot-password">
+                <Link to="/forgot-password">
                   <span className="text-sm  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">
                     ¿Olvidaste tu contraseña?
                   </span>
-                </a>
+                </Link>
               </div>
               <div className="text-center mt-4">
-                {mutation.isError ? (
-                  <AlertWarnig titleAlert={'algo salio mal...'} />
-                ) : (
-                  ""
-                )}
+                {mutation.isError ? (<ErrorText styleClass="mt-6">{'algo salio mal...'}</ErrorText>) : ("")}
               </div>
               <button
                 type="submit"

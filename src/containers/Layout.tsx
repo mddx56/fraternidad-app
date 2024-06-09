@@ -1,10 +1,6 @@
 import LeftSidebar from "./LeftSidebar";
-import PageContent from "./PageContent"
-
+import PageContent from "./PageContent";
 //import RightSidebar from './RightSidebar'
-
-
-
 //import ModalLayout from "./ModalLayout"
 
 function Layout() {
@@ -21,6 +17,8 @@ function Layout() {
     }
   }, [newNotificationMessage])*/
 
+
+
   return (
     <>
       { /* Left drawer - containing page content and side bar (always open) */}
@@ -32,7 +30,7 @@ function Layout() {
 
       { /* Right drawer - containing secondary content like notifications list etc.. 
       <RightSidebar />*/}
-      
+
 
       {/* Modal layout container 
         <ModalLayout />*/}
@@ -41,4 +39,4 @@ function Layout() {
   )
 }
 
-export default Layout
+export default Layout;

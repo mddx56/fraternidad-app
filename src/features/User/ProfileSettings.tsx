@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import TitleCard from '../common/components/Cards/TitleCard'
-import { UserProfile } from '../../types/UserType';
-import { getUserInfo } from '../../utils/localStorage';
+import { AuthCheckType } from '../../types/UserType';
+import { useAuthStore } from '../../stores/auth';
 
 
 interface PropsSideButton {
@@ -17,15 +17,17 @@ const TopSideButtons = ({ onClickBtn }: PropsSideButton) => {
 }
 
 function ProfileSettings() {
-    const [profileUser, setProfileUser] = useState<UserProfile | null>(null);
+    const user = useAuthStore.getState().user;
+    const [profileUser, setProfileUser] = useState<AuthCheckType | undefined>(undefined);
     const [editForm, setEditForm] = useState<boolean>(false);
-    console.log(profileUser);
+
     const changeEdit = () => {
         setEditForm(!editForm);
     }
 
     useEffect(() => {
-        setProfileUser(getUserInfo());
+        setProfileUser(user);
+        console.log(user)
         setEditForm(false);
     }, []);
 
@@ -33,7 +35,7 @@ function ProfileSettings() {
         <>
             <TitleCard title="Perfil" topMargin="mt-2" TopSideButtons={<TopSideButtons onClickBtn={changeEdit} />}>
                 {profileUser ?
-                    (<div>
+                    (<div className='px-20'>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="form-control w-full">
                                 <label htmlFor="user_id">ID Usuario</label>
@@ -45,7 +47,7 @@ function ProfileSettings() {
                             </div>
                             <div className="form-control w-full">
                                 <label htmlFor="name">Nombre Completo</label>
-                                <input className='input  input-bordered w-full' id="name" disabled={editForm ? false : true} defaultValue={profileUser.name} />
+                                <input className='input  input-bordered w-full' id="name" disabled={editForm ? false : true} defaultValue={profileUser.username} />
                             </div>
                         </div>
                         <div className="divider" ></div>
@@ -55,11 +57,30 @@ function ProfileSettings() {
                                 <label htmlFor="user_id">Correo Electronico</label>
                                 <input className='input input-bordered w-full' id="user_id" disabled={true} defaultValue={profileUser.email} />
                             </div>
-                            <input name="role" disabled={true} defaultValue={profileUser.role} />
-                            <input name="exp" disabled={editForm ? false : true} defaultValue={profileUser.exp} />
-                            <input name="active" disabled={editForm ? false : true} type='checkbox' defaultChecked={profileUser.active} />
-                        </div></div>)
-                    : ("...🥱")}
+                            <div className="form-control w-full">
+                                <label htmlFor="user_id">Rol</label>
+                                <input className='input input-bordered' disabled={true} defaultValue={profileUser.role} />
+                            </div>
+                            <div className="form-control w-full">
+                                <label htmlFor="user_id">Exp</label>
+                                <input className='input input-bordered' disabled={editForm ? false : true} defaultValue={profileUser.claims.exp} />
+                            </div>
+                            <div className="form-control w-full">
+                                <label htmlFor="user_id">Suspendido</label>
+                                <input className='checkbox items-center' disabled={editForm ? false : true} type='checkbox' defaultChecked={profileUser.suspend} />
+                            </div>
+                        </div>
+                    </div>)
+                    : (
+                        <div className='px-20'>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="skeleton h-4 w-full"></div>
+                                <div className="skeleton h-4 w-full"></div>
+                                <div className="skeleton h-4 w-full"></div>
+                            </div>
+                        </div>
+                    )
+                }
                 <div className="mt-16"><button className="btn btn-primary float-right" >Update</button></div>
             </TitleCard>
         </>

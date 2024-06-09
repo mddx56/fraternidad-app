@@ -6,17 +6,17 @@ import { toast } from 'react-toastify';
 import * as yup from "yup";
 import { AlertWarnig } from "../../components/AlertWarning";
 import { changePassword } from "../../services/user-service";
-import { UserPasswordType, UserProfile } from '../../types/UserType';
-import { getUserInfo } from "../../utils/localStorage";
+import { UserPasswordType } from '../../types/UserType';
 import TitleCard from "../common/components/Cards/TitleCard";
+import { useAuthStore } from "../../stores/auth";
 
 function PasswordChanged() {
 
-    const [profileUser, setProfileUser] = useState<UserProfile | null>(getUserInfo());
+    const user = useAuthStore.getState().user?.user_id;
+    const [userId, setUserId] = useState<string | undefined>("");
 
     useEffect(() => {
-        setProfileUser(getUserInfo());
-        //  console.log(profileUser.user_id);
+        setUserId(user);
     }, []);
 
     const defaultValues: UserPasswordType = {
@@ -64,7 +64,7 @@ function PasswordChanged() {
 
     const onSubmitHandler = (values: UserPasswordType) => {
         try {
-            values.user_id = profileUser?.user_id;
+            values.user_id = userId;
             mutation.mutate(values);
         } catch (error) {
             console.log(error);

@@ -1,4 +1,3 @@
-import { Loader } from 'lucide-react';
 import { useQuery } from 'react-query';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { getAllFraters } from '../../services/user-service';
@@ -43,10 +42,6 @@ const handleOnFocus = () => {
 }
 
 const formatResult = (item: Item) => {
-    {/*<>
-        <span style={{ display: 'block', textAlign: 'left' }}>ci: {item.id}</span>
-        <span style={{ display: 'block', textAlign: 'left' }}>n: {item.name}</span>
-    </>*/}
     return (
         <>
             <span className='block text-sm text-left'>
@@ -65,8 +60,6 @@ export function SelectFraterno() {
 
     if (data)
         datos = data.map((user: UserType) => ({ "id": user.id, "ci": user.username, "name": user.full_name }))
-
-    console.log(datos)
 
     return (
         <TitleCard title="Fraterno" topMargin="mt-2">

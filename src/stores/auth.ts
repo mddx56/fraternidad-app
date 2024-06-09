@@ -1,37 +1,62 @@
-import axios from "axios";
+import { StateCreator, create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
+import { login, checkStatus } from '../services/user-service';
+import type { AuthStatus, LoginType, AuthCheckType as User } from '../types/UserType';
 
-const checkAuth = () => {
-    /*  Getting token value stored in localstorage, if token is not present we will open login page 
-        for all internal dashboard routes  */
-    const TOKEN = localStorage.getItem("token")
-    const PUBLIC_ROUTES = ["login", "forgot-password", "signup"]
 
-    const isPublicPage = PUBLIC_ROUTES.some(r => window.location.href.includes(r))
 
-    if (!TOKEN && !isPublicPage) {
-        window.location.href = '/#/login'
-        return;
-    } else {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${TOKEN}`
+export interface AuthState {
 
-        axios.interceptors.request.use(function (config) {
-            // UPDATE: Add this code to show global loading indicator
-            document.body.classList.add('loading-indicator');
-            return config
-        }, function (error) {
-            return Promise.reject(error);
-        });
+    status: AuthStatus;
+    token?: string;
+    refresh?: string;
+    user?: User;
 
-        axios.interceptors.response.use(function (response) {
-            // UPDATE: Add this code to hide global loading indicator
-            document.body.classList.remove('loading-indicator');
-            return response;
-        }, function (error) {
-            document.body.classList.remove('loading-indicator');
-            return Promise.reject(error);
-        });
-        return TOKEN
-    }
+    loginUser: (data: LoginType) => Promise<void>;
+    checkAuthStatus: () => Promise<void>;
+    logoutUser: () => void;
 }
 
-export default checkAuth
+const storeApi: StateCreator<AuthState> = (set) => ({
+
+    status: 'pending',
+    token: undefined,
+    refresh: undefined,
+    user: undefined,
+
+
+    loginUser: async (data: LoginType) => {
+        try {
+            const response = await login(data);
+            //const user = await checkStatus();
+            set({ status: 'authorized', token: response.access, refresh: response.refresh });
+        } catch (error) {
+            set({ status: 'unauthorized', token: undefined, refresh: undefined, user: undefined });
+            throw 'Unauthorized';
+        }
+    },
+
+    checkAuthStatus: async () => {
+        try {
+            const response = await checkStatus();
+            console.log("chek-auth", response)
+            set({ status: 'authorized', user: response });
+        } catch (error) {
+            set({ status: 'unauthorized', token: undefined, refresh: undefined, user: undefined });
+        }
+    },
+
+    logoutUser: () => {
+        set({ status: 'unauthorized', token: undefined, refresh: undefined, user: undefined });
+    }
+});
+
+
+export const useAuthStore = create<AuthState>()(
+    devtools(
+        persist(
+            storeApi,
+            { name: 'auth-storage' }
+        )
+    )
+);

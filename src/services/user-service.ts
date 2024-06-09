@@ -1,4 +1,4 @@
-import { LoginType, UserAdminType, UserInput, UserPasswordType, UserResponseType, UserType } from '../types/UserType';
+import { AuthCheckType, LoginType, UserAdminType, UserInput, UserPasswordType, UserResponseType, UserType } from '../types/UserType';
 import { api } from './api';
 
 export const getAllUsers = async () => {
@@ -11,7 +11,7 @@ export const getAllFraters = async () => {
     return response.data;
 };
 
-export const getUser = async (id: string) => {
+export const getUser = async (id: string): Promise<UserType> => {
     const response = await api.get<UserType>(`auth/users/${id}`);
     return response.data;
 };
@@ -39,10 +39,19 @@ export const deleteUser = async (id: number) => {
     return response.data;
 };
 
-
 export const login = async (data: LoginType) => {
     const response = await api.post<UserResponseType>(`login`, data);
     return response.data;
+};
+
+export const checkStatus = async () => {
+    try {
+        const response = await api.get<AuthCheckType>(`auth/check-status/`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error('UnAuthorized');
+    }
 };
 
 export const signUp = async (data: UserInput) => {

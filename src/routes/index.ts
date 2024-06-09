@@ -9,10 +9,9 @@ const ProfileSettings = lazy(() => import('../pages/protected/ProfileSettings'))
 const Fraternidad = lazy(() => import('../pages/protected/Fraternidad'));
 const PasswordChanged = lazy(() => import('../pages/protected/PasswordChanged'));
 const Page404 = lazy(() => import('../pages/protected/404'))
-// Tesorero pages
 const UserAdmin = lazy(() => import('../pages/protected/admin/UserAdmin'))
 const UserAdminAdd = lazy(() => import('../pages/protected/admin/UserAdminAdd'))
-const SelectPago = lazy(() => import('../pages/protected/adminpago/SelectPago'))
+const SelectPago = lazy(() => import('../pages/protected/cobros/SelectCobro'))
 const Medios = lazy(() => import('../pages/protected/medios'))
 
 const routes = [

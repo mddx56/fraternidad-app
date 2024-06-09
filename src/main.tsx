@@ -5,9 +5,9 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import App from "./App.tsx";
-import { store } from "./stores/store.ts";
 import SuspenseContent from "./containers/SuspenseContent";
 import "./index.css";
+import { store } from "./stores/store.ts";
 
 const queryClient = new QueryClient({
   defaultOptions: {

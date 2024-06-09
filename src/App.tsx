@@ -1,14 +1,14 @@
 import { lazy, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { themeChange } from 'theme-change';
-import checkAuth from './stores/auth';
+import { useAuthStore } from './stores/auth';
 
 const Login = lazy(() => import('./pages/Login'))
+const ForgotPasswod = lazy(() => import('./pages/ForgotPassword'))
 const Layout = lazy(() => import('./containers/Layout'))
 
-const token = checkAuth();
-
 function App() {
+  const authStatus = useAuthStore(state => state.status);
   useEffect(() => {
     themeChange(false)
   }, [])
@@ -18,8 +18,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPasswod />} />
           <Route path="/app/*" element={<Layout />} />
-          <Route path="*" element={<Navigate to={token ? "/app" : "/login"} replace />} />
+          <Route path="*" element={<Navigate to={authStatus == 'authorized' ? "/app" : "/login"} replace />} />
         </Routes>
       </Router>
     </>

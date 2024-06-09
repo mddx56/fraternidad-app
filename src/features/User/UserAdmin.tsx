@@ -1,11 +1,10 @@
 import { Eye, Trash, X } from "lucide-react";
 import TitleCard from "../common/components/Cards/TitleCard";
-//import { getAllUsers } from "../../services/userService";
-//import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../../components/SearchBar";
 import { useGetUsers } from "../../hooks/UseUser";
+import SuspenseContent from "../../containers/SuspenseContent";
 
 
 interface PropsSideButton {
@@ -94,7 +93,7 @@ function UserAdmin() {
     const { isLoading, isError, data, error } = useGetUsers();
 
     if (isLoading) {
-        return <span>Cargando...</span>
+        return <SuspenseContent />;
     }
 
     if (isError) {

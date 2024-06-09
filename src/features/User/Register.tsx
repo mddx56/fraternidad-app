@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import LandingIntro from './LandingIntro';
-import { UserInput } from '../../types/UserType';
+import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { signUp } from '../../services/user-service';
-import { AlertWarnig } from '../../components/AlertWarning';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import * as yup from "yup";
+import { AlertWarnig } from '../../components/AlertWarning';
+import { signUp } from '../../services/user-service';
+import { UserInput } from '../../types/UserType';
+import LandingIntro from './LandingIntro';
 
 function Register() {
 

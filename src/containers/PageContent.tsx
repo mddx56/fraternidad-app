@@ -1,6 +1,7 @@
 import { Suspense, lazy, useRef } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import routes from '../routes'
+import { useAuthStore } from "../stores/auth"
 import Header from "./Header"
 import SuspenseContent from "./SuspenseContent"
 
@@ -9,17 +10,27 @@ const Page404 = lazy(() => import('../pages/protected/404'))
 
 function PageContent() {
     const mainContentRef = useRef(null);
-    //const { pageTitle } = useSelector((state: HeaderType) => ({ pageTitle: state.pageTitle }))//era header ojito
+    //const pageTitle = "hola"// useSelector((state: HeaderType) => ({ pageTitle: state.pageTitle }))//era header ojito
 
 
-    /* Scroll back to top on new page load
+    /*Scroll back to top on new page load
     useEffect(() => {
         mainContentRef.current.scroll({
             top: 0,
             behavior: "smooth"
         });
-    }, [pageTitle])*/
+    }, [pageTitle])
+*/
 
+    const authStatus = useAuthStore(state => state.status);
+
+    if (authStatus === 'pending') {
+        return <>Loading...</>
+    }
+
+    if (authStatus === 'unauthorized') {
+        return <Navigate to='/login' />
+    }
     return (
         <div className="drawer-content flex flex-col ">
             <Header />
@@ -40,7 +51,9 @@ function PageContent() {
                         <Route path="*" element={<Page404 />} />
                     </Routes>
                 </Suspense>
-                <div className="h-16"></div>
+                <div className="h-16">
+
+                </div>
             </main>
         </div>
     )

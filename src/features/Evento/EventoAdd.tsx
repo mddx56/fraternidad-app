@@ -1,28 +1,49 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { AlertWarnig } from "../../components/AlertWarning";
 import { createEvento, getAllTipoEvento } from "../../services/evento-service";
+import { getAllFraters } from "../../services/user-service";
 import { EventoInput, TipoEventoType } from "../../types/EventoType";
-import { UserProfile } from "../../types/UserType";
+import { UserType } from "../../types/UserType";
 import { Estados_Evento, QUERY_KEY } from "../../utils/constant";
 import { esFinDeSemana } from "../../utils/dateFormat";
-import { getUserInfo } from "../../utils/localStorage";
+import TitleCard from "../common/components/Cards/TitleCard";
+import { useState } from "react";
+
+
+type Item = {
+  id: string;
+  ci: string,
+  name: string;
+}
+
+
 
 function EventoAdd() {
+
+  let fraternos: Item[] = []
+  const { data: fraters } = useQuery<UserType[], Error>(
+    [QUERY_KEY.USERS],
+    getAllFraters
+  );
+
+  if (fraters)
+    fraternos = fraters.map((user: UserType) => ({ "id": user.id, "ci": user.username, "name": user.full_name }))
+
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [profileUser, setProfileUser] = useState<UserProfile | null>(
-    getUserInfo()
-  );
+
   const { data } = useQuery<TipoEventoType[], Error>(
     [QUERY_KEY.TIPOEVENTO],
     getAllTipoEvento
   );
+
+  const [userId, setUserId] = useState<string | undefined>(undefined);
 
   const defaultValues: EventoInput = {
     fecha: "",
@@ -68,64 +89,144 @@ function EventoAdd() {
 
   const onSubmitHandler = (values: EventoInput) => {
     try {
-      values.user = profileUser?.user_id;
+      values.user = userId;
       values.estado_reserva = Estados_Evento.PENDIENTE;
+      console.log(values);
       mutation.mutate(values);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    setProfileUser(getUserInfo());
-  }, []);
+  const handleOnSearch = (keyword: string, results: Item[]): void => {
+    console.log(keyword, results)
+  }
+
+  const handleOnHover = (result: Item) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item: Item) => {
+    // the item selected
+    console.log(item)
+    setUserId(item.id);
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
+  const formatResult = (item: Item) => {
+    return (
+      <>
+        <span className='w-full px-4 py-0 block text-sm text-left'>
+          {item.ci}<span className='font-bold'>, </span>{item.name}
+        </span>
+      </>
+    )
+  }
+
 
   return (
-    <div className={"card w-full p-6 bg-base-100 shadow-xl mt-2"}>
+    <TitleCard title="Agregar Evento">
       <form className="px-32" onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className="form-control w-full mb-4">
+        <div className="form-control w-full mb-2">
           <label className="label" htmlFor="fecha">
-            Fecha
+            Fraterno
           </label>
-          <input
-            className="input input-bordered w-full"
-            id="fecha"
-            type="date"
-            {...register("fecha", { required: true })}
-          />
-          {errors.fecha && <AlertWarnig titleAlert={errors.fecha.message} />}
-        </div>
-        <div className="form-control w-full mb-4">
-          <label className="label" htmlFor="hora_inicio">
-            Hora de inicio
-          </label>
-          <input
-            className="input input-bordered w-full"
-            id="hora_inicio"
-            type="time"
-            {...register("hora_inicio", { required: true })}
-          />
-          {errors.hora_inicio && (
-            <AlertWarnig titleAlert={errors.hora_inicio.message} />
-          )}
-        </div>
-        <div className="form-control w-full mb-4">
-          <label className="label" htmlFor="hora_fin">
-            Hora Fin
-          </label>
-          <input
-            className="input input-bordered w-full"
-            id="hora_fin"
-            type="time"
-            {...register("hora_fin", { required: true })}
-          />
-          {errors.hora_fin && (
-            <AlertWarnig titleAlert={errors.hora_fin.message} />
-          )}
-        </div>
-        {/*</div>*/}
+          <ReactSearchAutocomplete
+            items={fraternos}
+            onSearch={handleOnSearch}
+            onHover={handleOnHover}
+            onSelect={handleOnSelect}
+            onFocus={handleOnFocus}
+            autoFocus
+            styling={{
+              backgroundColor: "#f5f5f4",
 
-        <div className="form-control w-full mb-4">
+            }}
+            formatResult={formatResult}
+            placeholder={'Ingrese Ci o Nombre'}
+            showNoResultsText={"No hay resultados 😬"}
+            fuseOptions={{
+              keys: ['ci', 'name'],
+            }}
+          />
+        </div>
+        <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4">
+          <div className="form-control w-full mb-2">
+            <label className="label" htmlFor="fecha">
+              Fecha
+            </label>
+            <input
+              className="input input-bordered w-full"
+              id="fecha"
+              type="date"
+              {...register("fecha", { required: true })}
+            />
+            {errors.fecha && <AlertWarnig titleAlert={errors.fecha.message} />}
+          </div>
+          <div className="form-control w-full mb-2">
+            <label className="label" htmlFor="tipo_evento">
+              Tipo de evento
+            </label>
+            <select
+              className="select select-bordered w-full"
+              id="tipo_evento"
+              {...register("tipo_evento", { required: true })}
+            >
+              <option disabled selected>
+                Elija Tipo de evento
+              </option>
+              {data &&
+                data.map((es: TipoEventoType) => (
+                  <option key={es.id} value={es.id}>
+                    {es.nombre},{" "}
+                    {esFinDeSemana() ? es.costo_finsemana : es.costo_entresemana}{" "}
+                    Bs.
+                  </option>
+                ))}
+            </select>
+            <span className="errors">
+              {errors.tipo_evento && "Elija un Tipo de evento"}
+            </span>
+          </div>
+
+        </div>
+        <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4">
+          <div className="form-control w-full mb-2">
+            <label className="label" htmlFor="hora_inicio">
+              Hora de inicio
+            </label>
+            <input
+              className="input input-bordered w-full"
+              id="hora_inicio"
+              type="time"
+              {...register("hora_inicio", { required: true })}
+            />
+            {errors.hora_inicio && (
+              <AlertWarnig titleAlert={errors.hora_inicio.message} />
+            )}
+          </div>
+          <div className="form-control w-full mb-2">
+            <label className="label" htmlFor="hora_fin">
+              Hora Fin
+            </label>
+            <input
+              className="input input-bordered w-full"
+              id="hora_fin"
+              type="time"
+              {...register("hora_fin", { required: true })}
+            />
+            {errors.hora_fin && (
+              <AlertWarnig titleAlert={errors.hora_fin.message} />
+            )}
+          </div>
+        </div>
+
+
+        <div className="form-control w-full mb-2">
           <label className="label" htmlFor="descripcion">
             Descripcion
           </label>
@@ -141,31 +242,7 @@ function EventoAdd() {
           )}
         </div>
 
-        <div className="form-control w-full mb-4">
-          <label className="label" htmlFor="tipo_evento">
-            Tipo de evento
-          </label>
-          <select
-            className="select select-bordered w-full"
-            id="tipo_evento"
-            {...register("tipo_evento", { required: true })}
-          >
-            <option disabled selected>
-              Elija Tipo de evento
-            </option>
-            {data &&
-              data.map((es: TipoEventoType) => (
-                <option key={es.id} value={es.id}>
-                  {es.nombre},{" "}
-                  {esFinDeSemana() ? es.costo_finsemana : es.costo_entresemana}{" "}
-                  Bs.
-                </option>
-              ))}
-          </select>
-          <span className="errors">
-            {errors.tipo_evento && "Elija un Tipo de evento"}
-          </span>
-        </div>
+
         <div className="flex justify-between mt-8">
           {mutation.isLoading ? (
             "Agregando evento..."
@@ -187,7 +264,7 @@ function EventoAdd() {
           </Link>
         </div>
       </form>
-    </div>
+    </TitleCard>
   );
 }
 

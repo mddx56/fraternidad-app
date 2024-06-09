@@ -7,7 +7,7 @@ function InternalPage() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setPageTitle({ title: "Evento" }))
+    dispatch(setPageTitle({ title: "Eventos" }))
   })
   return (
     <Evento />

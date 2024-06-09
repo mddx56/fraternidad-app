@@ -25,7 +25,7 @@ export interface UserAdminType {
     verified?: boolean;
 }
 
-export type UserAdminInput = Omit<UserAdminType, "id" | "last_login"| "avatar" |"suspend"|"is_active" |"is_staff"|"is_admin"|"is_superuser" | "verified">;
+export type UserAdminInput = Omit<UserAdminType, "id" | "last_login" | "avatar" | "suspend" | "is_active" | "is_staff" | "is_admin" | "is_superuser" | "verified">;
 //export type UserAdminInput = Omit<UserAdminType, "id" | "last_login" | "ci" | "avatar" | "suspend" | "is_staff" | "is_active" | "is_admin" | "is_superuser" | "verified">;
 
 export type UserType = {
@@ -73,16 +73,23 @@ export type UserProfile = {
     suspend: boolean;
 }
 
-/*
-{
-    "token_type": "access",
-    "exp": 1693228517,
-    "iat": 1692623717,
-    "jti": "9f579bd557724d22bf19e4578da86247",
-    "user_id": "0e23ee1d-8b20-43b1-b9bd-143e4573f1ed",
-    "username": "walter",
-    "name": "walter mamani janco",
-    "role": "Fraterno",
-    "active": true
+export type AuthStatus = 'authorized' | 'unauthorized' | 'pending';
+
+export type AuthCheckType = {
+    token: string;
+    claims: Claims;
+    user_id: string;
+    username: string;
+    full_name: string;
+    email: string;
+    role: string;
+    phone: string;
+    suspend: boolean;
 }
-*/
+
+export type Claims = {
+    token_type: string;
+    exp: number;
+    iat: number;
+    jti: string;
+}

@@ -1,20 +1,17 @@
 import TitleCard from "../common/components/Cards/TitleCard";
 import { useEffect, useState } from "react"
 import { UserProfile } from "../../types/UserType";
-import { getUserInfo } from "../../utils/localStorage";
+
 //import { LoadingInfinity } from "../common/components/LoadingInfinity";
 
 
 function DeudaView() {
 
-    const [profileUser, setProfileUser] = useState<UserProfile | null>(getUserInfo());
+    const [profileUser, setProfileUser] = useState<UserProfile | null>();
 
     const [idUser, setIdUser] = useState<string>("");
 
-    useEffect(() => {
-        setProfileUser(getUserInfo());
-        setIdUser(profileUser?.user_id ?? "");
-    }, []);
+
 
     useEffect(() => {
         console.log(idUser);

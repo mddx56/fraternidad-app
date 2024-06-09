@@ -1,13 +1,14 @@
 import { MediaImageType } from "@/types/medios-type";
-import { Eye, Trash, SquareCheckBig, SquareX } from "lucide-react";
+import { Eye, SquareCheckBig, SquareX, Trash } from "lucide-react";
 import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { TopSideButtons } from "../../components/TopSideButtons";
+import SuspenseContent from "../../containers/SuspenseContent";
 import { getAllMediaImages } from "../../services/medios-services";
 import { QUERY_KEY } from "../../utils/constant";
 import { formattedDate } from "../../utils/dateFormat";
 import TitleCard from "../common/components/Cards/TitleCard";
-import { TopSideButtons } from "../../components/TopSideButtons";
 
 function Medios() {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ function Medios() {
     });
 
     if (isLoading) {
-        return <span>Cargando...</span>;
+        return <SuspenseContent />;
     }
 
     if (isError) {

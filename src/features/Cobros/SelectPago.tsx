@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
+import { Banknote, Coins } from "lucide-react";
 import { Link } from "react-router-dom";
 import TitleCard from "../common/components/Cards/TitleCard";
-import { Coins, Banknote } from "lucide-react";
 
 export function Steeps() {
     return (

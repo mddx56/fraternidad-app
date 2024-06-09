@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAccessToken } from '../utils/localStorage';
+import { useAuthStore } from '../stores/auth';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -9,10 +9,9 @@ export const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
     const newConfig = { ...config };
-
-    const jwt = getAccessToken();
-    if (jwt) {
-        newConfig.headers.Authorization = `Bearer ${jwt}`;
+    const token = useAuthStore.getState().token;
+    if (token) {
+        newConfig.headers.Authorization = `Bearer ${token}`;
         newConfig.headers['Content-Type'] = 'application/json';
     }
     console.log(newConfig);

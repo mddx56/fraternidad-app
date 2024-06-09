@@ -2,12 +2,14 @@ import { Eye, Trash } from "lucide-react";
 import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import SuspenseContent from "../../containers/SuspenseContent";
 import { getAllEventos } from "../../services/evento-service";
 import { EventoType } from "../../types/EventoType";
 import { QUERY_KEY } from "../../utils/constant";
 import { formattedDate, formattedTime } from "../../utils/dateFormat";
 import TitleCard from "../common/components/Cards/TitleCard";
 import TipoEvento from "./TipoEvento";
+import Client from "./components/client-view";
 
 interface PropsSideButton {
   onClickBtn: () => void;
@@ -46,7 +48,7 @@ function Evento() {
   });
 
   if (isLoading) {
-    return <span>Cargando...</span>;
+    return <SuspenseContent />;
   }
 
   if (isError) {
@@ -69,13 +71,13 @@ function Evento() {
             <thead>
               <tr className="bg-base-200">
                 <th className="w-2/12">Fecha</th>
-                <th className="w-1/12">Hora Inicio</th>
-                <th className="w-1/12">Hora Fin</th>
-                <th className="w-2/12">Descripcion</th>
+                <th className="w-2/12">Hora</th>
+                <th className="w-2/12">Fraterno</th>
+                <th className="w-3/4">Descripcion</th>
                 <th className="w-1/12">Estado</th>
-                <th className="w-4/12">Tipo evento</th>
+                <th className="w-1/12">Tipo evento</th>
                 <th className="w-1/12"></th>
-                <th className="w-1/12"></th>
+
               </tr>
             </thead>
             <tbody>
@@ -89,9 +91,15 @@ function Evento() {
                         </div>
                       </div>
                     </td>
-                    <td>{formattedTime(evento.hora_inicio)}</td>
-                    <td>{formattedTime(evento.hora_fin)}</td>
-                    <td>{evento.descripcion}</td>
+                    <td>{formattedTime(evento.hora_inicio)}-{formattedTime(evento.hora_fin)}</td>
+                    <td><Client id={evento.user ?? ""} /> </td>
+                    <td >
+                      <div className="w-3/4">
+                        <span className="whitespace-break-spaces">
+                          {evento.descripcion.length > 30 ? evento.descripcion.substring(0, 30) : evento.descripcion}
+                        </span>
+                      </div>
+                    </td>
                     <td>{evento.estado_reserva}</td>
                     <td>
                       <TipoEvento Id={evento.tipo_evento} />
@@ -104,8 +112,7 @@ function Evento() {
                       >
                         <Eye className="w-5" />
                       </Link>
-                    </td>
-                    <td>
+
                       <Link
                         to="/app/"
                         className="btn btn-ghost btn-xs"
