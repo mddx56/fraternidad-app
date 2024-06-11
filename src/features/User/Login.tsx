@@ -4,8 +4,8 @@ import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import ErrorText from "../../components/Typography/ErrorText";
-import { useAuthStore } from "../../stores/auth";
-import { LoginType } from "../../types/UserType";
+import { useAuthStore } from "../../stores/auth-store";
+import { LoginType } from "../../types/user-type";
 import LandingIntro from "./LandingIntro";
 
 function Login() {

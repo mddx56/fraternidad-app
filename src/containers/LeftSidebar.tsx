@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { routes } from '../routes/sidebar';
+import { routes } from '../routes/sidebar-route';
 //import SidebarSubmenu from './SidebarSubmenu';
 import { Menu } from 'lucide-react';
 import { Logo } from '../components/Logo';

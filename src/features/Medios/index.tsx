@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { TopSideButtons } from "../../components/TopSideButtons";
 import SuspenseContent from "../../containers/SuspenseContent";
-import { getAllMediaImages } from "../../services/medios-services";
+import { getAllMediaImages } from "../../services/medios-service";
 import { QUERY_KEY } from "../../utils/constant";
-import { formattedDate } from "../../utils/dateFormat";
+import { formattedDate } from "../../utils/date-format";
 import TitleCard from "../common/components/Cards/TitleCard";
 
 function Medios() {

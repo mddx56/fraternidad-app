@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from '../../stores/store';
 import { getAllEventos } from '../../services/evento-service';
-import { EventoState, EventoType } from '../../types/EventoType';
+import { EventoState, EventoType } from '../../types/evento-type';
 
 
 export const getEventosAll = createAsyncThunk('/eventos/all', async () => {

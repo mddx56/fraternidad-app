@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import TitleCard from '../common/components/Cards/TitleCard'
-import { AuthCheckType } from '../../types/UserType';
-import { useAuthStore } from '../../stores/auth';
+import { AuthCheckType } from '../../types/user-type';
+import { useAuthStore } from '../../stores/auth-store';
 
 
 interface PropsSideButton {

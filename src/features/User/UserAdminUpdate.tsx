@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { AlertWarnig } from "../../components/AlertWarning";
-import { UserAdminType } from "../../types/UserType";
+import { UserAdminType } from "../../types/user-type";
 import { FINANCIAL, ROLE } from "../../utils/constant";
 
 interface UpdateProps {

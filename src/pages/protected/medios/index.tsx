@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../../../stores/hook'
+import { useAppDispatch } from '../../../stores/dispatch'
 import { setPageTitle } from '../../../features/common/headerSlice'
 import Medios from '../../../features/Medios'
 import { useEffect } from 'react'

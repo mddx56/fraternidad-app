@@ -1,4 +1,4 @@
-import { useAuthStore } from "../stores/auth";
+import { useAuthStore } from "../stores/auth-store";
 import Avvvatars from "avvvatars-react"
 import { useEffect } from "react"
 

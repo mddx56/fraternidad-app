@@ -1,5 +1,5 @@
 //import ConfirmationModalBody from '../features/common/components/ConfirmationModalBody'
-import { useModelStore } from '../stores/modal'
+import { useModelStore } from '../stores/modal-store'
 
 
 function ModalLayout() {

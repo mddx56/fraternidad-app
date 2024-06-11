@@ -1,17 +1,16 @@
 import { useEffect } from 'react'
+import { CobroMensualidad } from '../../../features/Cobros/cobro-mensualidad'
 import { setPageTitle } from '../../../features/common/headerSlice'
 import { useAppDispatch } from '../../../stores/dispatch'
-import { UserAdminAdd } from '../../../features/User/UserAdminAdd'
-
 
 function InternalPage() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(setPageTitle({ title: "Agregar Usuario" }))
+        dispatch(setPageTitle({ title: "Realizar Cobro Extraordinaria" }))
     })
     return (
-        <UserAdminAdd />
+        <CobroMensualidad />
     )
 }
 

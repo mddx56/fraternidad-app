@@ -1,4 +1,4 @@
-import { FraternidadType } from "../types/FraternidadType";
+import { FraternidadType } from "../types/fraternidad-type";
 import { api } from './api';
 
 /*

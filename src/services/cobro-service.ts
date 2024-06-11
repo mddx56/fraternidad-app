@@ -1,5 +1,5 @@
+import { PagoInput, PagoType } from '../types/cobros-type';
 import { api } from './api';
-import { PagoType, PagoInput } from '../types/PagoType';
 
 export const getAllPagos = async () => {
     const response = await api.get<PagoType[]>(`agenda/pagos/`);

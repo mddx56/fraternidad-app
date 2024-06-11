@@ -1,16 +1,13 @@
 import { useEffect } from 'react'
-import { setPageTitle } from '../../features/common/headerSlice'
-import Fraternidad from '../../features/Fraternidad'
-import { useAppDispatch } from '../../stores/hook'
+import { setPageTitle } from '../../../features/common/headerSlice'
+import Fraternidad from '../../../features/Fraternidad'
+import { useAppDispatch } from '../../../stores/dispatch'
 
 function InternalPage() {
-
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(setPageTitle({ title: "Informacion de Fraternidad" }))
     })
-
-
     return (
         <Fraternidad />
     )

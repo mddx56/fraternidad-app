@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { rightDrawerType } from '../../types/rightDrawer'
+import { rightDrawerType } from '../../types/right-drawer'
 import { RootState } from '../../stores/store'
 
 const initialState: rightDrawerType = {

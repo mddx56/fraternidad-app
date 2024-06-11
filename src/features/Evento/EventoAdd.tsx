@@ -8,10 +8,10 @@ import * as yup from "yup";
 import { AlertWarnig } from "../../components/AlertWarning";
 import { createEvento, getAllTipoEvento } from "../../services/evento-service";
 import { getAllFraters } from "../../services/user-service";
-import { EventoInput, TipoEventoType } from "../../types/EventoType";
-import { UserType } from "../../types/UserType";
+import { EventoInput, TipoEventoType } from "../../types/evento-type";
+import { UserType } from "../../types/user-type";
 import { Estados_Evento, QUERY_KEY } from "../../utils/constant";
-import { esFinDeSemana } from "../../utils/dateFormat";
+import { esFinDeSemana } from "../../utils/date-format";
 import TitleCard from "../common/components/Cards/TitleCard";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ function EventoAdd() {
 
   let fraternos: Item[] = []
   const { data: fraters } = useQuery<UserType[], Error>(
-    [QUERY_KEY.USERS],
+    [QUERY_KEY.FRATERS],
     getAllFraters
   );
 

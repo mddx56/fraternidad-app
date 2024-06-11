@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { setPageTitle } from '../../features/common/headerSlice'
 import { Skull } from 'lucide-react'
-import { useAppDispatch } from '../../stores/hook'
+import { useAppDispatch } from '../../stores/dispatch'
 
 function InternalPage() {
 

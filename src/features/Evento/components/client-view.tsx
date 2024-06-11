@@ -1,6 +1,6 @@
 import { useQuery } from "react-query"
 import { getUser } from "../../../services/user-service"
-import { UserType } from "../../../types/UserType"
+import { UserType } from "../../../types/user-type"
 
 type Props = {
     id: string

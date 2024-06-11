@@ -8,9 +8,9 @@ import { createEvento, getAllTipoEvento } from '../../services/evento-service';
 //import { useEffect, useState } from 'react';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AlertWarnig } from "../../components/AlertWarning";
-import { EventoInput, TipoEventoType } from '../../types/EventoType';
+import { EventoInput, TipoEventoType } from '../../types/evento-type';
 import { QUERY_KEY } from '../../utils/constant';
-import { esFinDeSemana } from '../../utils/dateFormat';
+import { esFinDeSemana } from '../../utils/date-format';
 
 type ICreateNoteProps = {
     setOpenNoteModal: (open: boolean) => void;

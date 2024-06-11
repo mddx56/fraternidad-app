@@ -1,12 +1,11 @@
-import Avvvatars from 'avvvatars-react';
 import { Bell, Menu, Moon, Sun, User2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { themeChange } from 'theme-change';
 import { headerSelector } from '../features/common/headerSlice';
-import { useAuthStore } from '../stores/auth';
-import { useAppSelector } from '../stores/hook';
-import type { AuthCheckType as User } from '../types/UserType';
+import { useAuthStore } from '../stores/auth-store';
+import { useAppSelector } from '../stores/dispatch';
+import type { AuthCheckType as User } from '../types/user-type';
 import { Avatar } from './Avatar';
 
 

@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
 import { AlertWarnig } from '../../components/AlertWarning';
 import { signUp } from '../../services/user-service';
-import { UserAdminInput } from "../../types/UserType";
+import { UserAdminInput } from "../../types/user-type";
 import { FINANCIAL, ROLE } from '../../utils/constant';
 import TitleCard from "../common/components/Cards/TitleCard";
 

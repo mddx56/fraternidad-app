@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
 import { Banknote, Coins } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useCobroStore } from "../../stores/cobro-store";
+import { COBRO } from "../../utils/constant";
 import TitleCard from "../common/components/Cards/TitleCard";
 
 export function Steeps() {
@@ -16,47 +17,34 @@ export function Steeps() {
 }
 
 export function SelectPago() {
+
+    const setCobro = useCobroStore((state) => state.setTipoCobro);
+    const navigate = useNavigate()
+
+    const mensulidadOnClick = () => {
+        setCobro(COBRO.MENSUALIDAD);
+        navigate('/app/elegirfrater');
+    }
+
+    const extraordinariaOnClick = () => {
+        setCobro(COBRO.EXTRAORD);
+        navigate('/app/elegirfrater');
+    }
+
     return (
         <TitleCard title="Cobros" topMargin="mt-2">
             <Steeps />
             <div className="grid h-56 place-items-center">
                 <div className="grid grid-cols-2 gap-4 content-between">
-                    <motion.button
-                        whileHover={{
-                            scale: 1.04,
-                            transition: {
-                                type: "spring",
-                                damping: 15,
-                                duration: 0.1,
-                            },
-                        }}
-                        whileTap={{ scale: 0.9 }}
-                        type="button"
-                        className="btn btn-primary"
-                    >
+                    <button className="btn btn-primary" onClick={mensulidadOnClick}>
                         <Coins className="h-6 w-6" />
-                        <Link to={"/"}>
-                            Mensualidad
-                        </Link>
-                    </motion.button>
-                    <motion.button
-                        whileHover={{
-                            scale: 1.04,
-                            transition: {
-                                type: "spring",
-                                damping: 15,
-                                duration: 0.1,
-                            },
-                        }}
-                        whileTap={{ scale: 0.9 }}
-                        type="button"
-                        className="btn btn-primary"
-                    >
+                        Mensualidad
+                    </button>
+
+                    <button className="btn btn-primary" onClick={extraordinariaOnClick}>
                         <Banknote className="h-6 w-6" />
-                        <Link className="" to={"/"}>
-                            Extraordinaria
-                        </Link>
-                    </motion.button>
+                        Extraordinaria
+                    </button>
                 </div>
             </div>
         </TitleCard>

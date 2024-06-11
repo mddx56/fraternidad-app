@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useAuthStore } from '../stores/auth';
+import { useAuthStore } from '../stores/auth-store';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -14,6 +14,5 @@ api.interceptors.request.use(async (config) => {
         newConfig.headers.Authorization = `Bearer ${token}`;
         newConfig.headers['Content-Type'] = 'application/json';
     }
-    console.log(newConfig);
     return newConfig;
 });

@@ -1,16 +1,15 @@
 import { useQuery } from "react-query";
 import { AlertWarnig } from "../../components/AlertWarning";
 import { getFraternidad } from "../../services/frater-service";
-import { FraternidadType } from "../../types/FraternidadType";
+import { FraternidadType } from "../../types/fraternidad-type";
 import TitleCard from "../common/components/Cards/TitleCard";
-import { LoadingInfinity } from "../common/components/LoadingInfinity";
+import SuspenseContent from "../../containers/SuspenseContent";
 
 function Fraternidad() {
-
     const { isLoading, isError, data, error } = useQuery<FraternidadType, Error>(['farternidad'], getFraternidad);
 
     if (isLoading) {
-        return <LoadingInfinity />
+        return <SuspenseContent />
     }
 
     if (isError) {
@@ -21,51 +20,45 @@ function Fraternidad() {
         <>
             <TitleCard title="Informacion de fraternidad." topMargin="mt-2">
                 {data && !isLoading ?
-                    <div className="border-t px-4 py-5 sm:p-0">
-                        <dl className="sm:divide-y sm:divide-gray-200">
-                            <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="label text-sm font-medium">
-                                    Nombre
-                                </dt>
-                                <dd className="mt-1 text-sm label-text sm:mt-0 sm:col-span-2">
-                                    {data.nombre}
-                                </dd>
-                            </div>
-                            <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="label text-sm font-medium">
-                                    Direccion
-                                </dt>
-                                <dd className="mt-1 text-smlabel-text sm:mt-0 sm:col-span-2">
-                                    {data.direccion}
-                                </dd>
-                            </div>
-                            <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="label text-sm font-medium">
-                                    Mensualidad
-                                </dt>
-                                <dd className="mt-1 text-sm label-text sm:mt-0 sm:col-span-2">
-                                    {data.mensualidad} Bs
-                                </dd>
-                            </div>
-
-                            <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="label text-sm font-medium">
-                                    Monto de deuda para suspencion
-                                </dt>
-                                <dd className="mt-1 text-sm label-text sm:mt-0 sm:col-span-2">
-                                    {data.monto_suspendido} Bs
-                                </dd>
-                            </div>
-
-                            <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="label text-sm font-medium ">
-                                    Dia de turno
-                                </dt>
-                                <dd className="mt-1 text-sm label-text sm:mt-0 sm:col-span-2">
-                                    {data.turno_semanal}
-                                </dd>
-                            </div>
-                        </dl>
+                    <div className="overflow-x-auto w-3/4 h-96 px-16">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>{data.nombre}</td>
+                                </tr>
+                                <tr>
+                                    <td>Descripcion</td>
+                                    <td>{data.descripcion}</td>
+                                </tr>
+                                <tr>
+                                    <td>Cuenta Banco</td>
+                                    <td>{data.banco}</td>
+                                </tr>
+                                <tr>
+                                    <td>Mensualidad</td>
+                                    <td>{data.mensualidad}</td>
+                                </tr>
+                                <tr>
+                                    <td>Monto de reserva</td>
+                                    <td>{data.monto_no_reserva}</td>
+                                </tr>
+                                <tr>
+                                    <td>Monto de suspencion</td>
+                                    <td>{data.monto_suspendido}</td>
+                                </tr>
+                                <tr>
+                                    <td>Turno</td>
+                                    <td>{data.turno_semanal}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     : "...😵"}
             </TitleCard>

@@ -1,5 +1,5 @@
 import { api } from './api';
-import { EventoType, EventoInput, TipoEventoType, EstadosReservaType } from '../types/EventoType';
+import { EventoType, EventoInput, TipoEventoType, EstadosReservaType } from '../types/evento-type';
 
 export const getAllEventos = async () => {
     const response = await api.get<EventoType[]>(`agenda/agendas/`);

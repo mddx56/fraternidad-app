@@ -1,7 +1,7 @@
 import { lazy, useEffect } from 'react';
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { themeChange } from 'theme-change';
-import { useAuthStore } from './stores/auth';
+import { useAuthStore } from './stores/auth-store';
 
 const Login = lazy(() => import('./pages/Login'))
 const ForgotPasswod = lazy(() => import('./pages/ForgotPassword'))

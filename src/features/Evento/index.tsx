@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SuspenseContent from "../../containers/SuspenseContent";
 import { getAllEventos } from "../../services/evento-service";
-import { EventoType } from "../../types/EventoType";
+import { EventoType } from "../../types/evento-type";
 import { QUERY_KEY } from "../../utils/constant";
-import { formattedDate, formattedTime } from "../../utils/dateFormat";
+import { formattedDate, formattedTime } from "../../utils/date-format";
 import TitleCard from "../common/components/Cards/TitleCard";
-import TipoEvento from "./TipoEvento";
+import TipoEvento from "./components/tipo-evento";
 import Client from "./components/client-view";
 
 interface PropsSideButton {
@@ -17,16 +17,26 @@ interface PropsSideButton {
 
 const TopSideButtons = ({ onClickBtn }: PropsSideButton) => {
   return (
-    <div className="inline-block float-right">
-      <button
-        className="btn px-6 btn-sm normal-case btn-primary"
-        onClick={() => {
-          onClickBtn();
-        }}
-      >
-        Agregar
-      </button>
-    </div>
+    <>
+      <div className="inline-block float-right">
+        <Link to={'/app/calendar'}
+          className="btn px-6 btn-sm normal-case btn-secondary mr-4"
+          onClick={() => {
+            onClickBtn();
+          }}
+        >
+          Calendar
+        </Link>
+        <button
+          className="btn px-6 btn-sm normal-case btn-primary"
+          onClick={() => {
+            onClickBtn();
+          }}
+        >
+          Agregar
+        </button>
+      </div>
+    </>
   );
 };
 

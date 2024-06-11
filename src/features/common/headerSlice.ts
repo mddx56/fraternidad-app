@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../stores/store';
-import { HeaderInputType, HeaderType } from '../../types/Header'
+import { HeaderInputType, HeaderType } from '../../types/header-type'
 
 const initialState: HeaderType = {
     pageTitle: "Home",  // current page title state management

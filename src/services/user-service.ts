@@ -1,4 +1,4 @@
-import { AuthCheckType, LoginType, UserAdminType, UserInput, UserPasswordType, UserResponseType, UserType } from '../types/UserType';
+import { AuthCheckType, LoginType, UserAdminType, UserInput, UserPasswordType, UserResponseType, UserType } from '../types/user-type';
 import { api } from './api';
 
 export const getAllUsers = async () => {

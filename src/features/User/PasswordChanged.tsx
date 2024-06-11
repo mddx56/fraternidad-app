@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 import * as yup from "yup";
 import { AlertWarnig } from "../../components/AlertWarning";
 import { changePassword } from "../../services/user-service";
-import { UserPasswordType } from '../../types/UserType';
+import { UserPasswordType } from '../../types/user-type';
 import TitleCard from "../common/components/Cards/TitleCard";
-import { useAuthStore } from "../../stores/auth";
+import { useAuthStore } from "../../stores/auth-store";
 
 function PasswordChanged() {
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { EventoType } from "../../types/EventoType";
+import { EventoType } from "../../types/evento-type";
 import { getEvento } from "../../services/evento-service";
 
 

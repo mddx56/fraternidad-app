@@ -1,7 +1,7 @@
 import { StateCreator, create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { login, checkStatus } from '../services/user-service';
-import type { AuthStatus, LoginType, AuthCheckType as User } from '../types/UserType';
+import type { AuthStatus, LoginType, AuthCheckType as User } from '../types/user-type';
 
 
 

@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { getTipoEvento } from "../../services/evento-service";
-import { TipoEventoType } from "../../types/EventoType";
+import { getTipoEvento } from "../../../services/evento-service";
+import { TipoEventoType } from "../../../types/evento-type";
 
 type Props = {
     Id: number;
@@ -25,7 +25,7 @@ function TipoEvento({ Id }: Props) {
                     data.nombre.length <= longitudMaxima ?
                         (<div className="rounded-full px-2 bg-primary text-base-100 p-1  leading-none flex items-center "><span>{data.nombre}</span></div>)
                         :
-                        (<div className="tooltip tooltip-left rounded-full px-2 bg-primary text-base-100 p-1 leading-none flex items-center " data-tip={data.nombre}><span> {data.nombre.slice(0, longitudMaxima) + '..'}</span></div>)
+                        (<div className="tooltip tooltip-left tooltip-info rounded-full px-2 bg-primary text-base-100 p-1 leading-none flex items-center " data-tip={data.nombre}><span> {data.nombre.slice(0, longitudMaxima) + '..'}</span></div>)
                     :
                     <span>...</span>
                 }

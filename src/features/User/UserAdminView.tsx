@@ -1,4 +1,4 @@
-import { UserAdminType } from "../../types/UserType";
+import { UserAdminType } from "../../types/user-type";
 
 interface UserProps {
     User?: UserAdminType

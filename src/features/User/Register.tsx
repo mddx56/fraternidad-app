@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import * as yup from "yup";
 import { AlertWarnig } from '../../components/AlertWarning';
 import { signUp } from '../../services/user-service';
-import { UserInput } from '../../types/UserType';
+import { UserInput } from '../../types/user-type';
 import LandingIntro from './LandingIntro';
 
 function Register() {

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 import * as yup from "yup";
 import { updateEvento } from "../../services/evento-service";
-import { EventoInput, EventoType } from '../../types/EventoType';
+import { EventoInput, EventoType } from '../../types/evento-type';
 import { QUERY_KEY } from "../../utils/constant";
 
 

@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
+import { useAppDispatch } from '../../stores/dispatch'
 import { setPageTitle } from '../../features/common/headerSlice'
-import { useAppDispatch } from '../../stores/hook'
-import Pago from '../../features/Cobros'
 
 function InternalPage() {
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(setPageTitle({ title: "Pago" }))
+        dispatch(setPageTitle({ title: "Dashboard" }))
     })
+
     return (
-        <Pago />
+        <div>Home...</div>
     )
 }
 
