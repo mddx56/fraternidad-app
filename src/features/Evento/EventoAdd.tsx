@@ -22,8 +22,6 @@ type Item = {
   name: string;
 }
 
-
-
 function EventoAdd() {
 
   let fraternos: Item[] = []

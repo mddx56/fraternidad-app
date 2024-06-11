@@ -33,7 +33,7 @@ function UserAdmin() {
     }
 
     const onClickAdd = () => {
-        navigate("/app/useraddadmin");
+        navigate("/app/useradd");
     }
 
     return (

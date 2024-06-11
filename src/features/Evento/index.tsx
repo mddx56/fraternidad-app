@@ -19,14 +19,7 @@ const TopSideButtons = ({ onClickBtn }: PropsSideButton) => {
   return (
     <>
       <div className="inline-block float-right">
-        <Link to={'/app/calendar'}
-          className="btn px-6 btn-sm normal-case btn-secondary mr-4"
-          onClick={() => {
-            onClickBtn();
-          }}
-        >
-          Calendar
-        </Link>
+        
         <button
           className="btn px-6 btn-sm normal-case btn-primary"
           onClick={() => {

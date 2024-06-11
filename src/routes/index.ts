@@ -69,7 +69,7 @@ const routes = [
         component: UserAdmin,
     },
     {
-        path: '/useraddadmin',
+        path: '/useradd',
         component: UserAdminAdd,
     },
     {

@@ -12,7 +12,6 @@ import TitleCard from "../common/components/Cards/TitleCard";
 
 export function UserAdminAdd() {
 
-
     const defaultValues: UserAdminInput = {
         username: "",
         password: "",
@@ -83,7 +82,7 @@ export function UserAdminAdd() {
         }
     });
 
-    const onSubmitHandler = (values: UserAdminInput) => {
+    const onSubmitHandler = (values: any) => {
         console.log(values)
         try {
             mutation.mutate(values);
@@ -100,23 +99,23 @@ export function UserAdminAdd() {
                         <form onSubmit={handleSubmit(onSubmitHandler)} >
                             <div className="-mx-3 flex flex-wrap">
                                 <div className="w-full px-3 sm:w-1/2">
-                                    <div className="mb-5">
-                                        <label htmlFor="username" className="label mb-3 block text-base font-medium ">
+                                    <div className="mb-2">
+                                        <label htmlFor="username" className="label mb-1 block text-base font-medium ">
                                             Cédula de Identidad (CI)
                                         </label>
                                         <input
                                             type="text"
                                             id="username"
                                             placeholder="Ingrese su CI"
-                                            className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                            className="input input-bordered w-full  py-3 px-6 text-base"
                                             {...register("username")}
                                         />
                                         {errors.username && (
                                             <AlertWarnig titleAlert={errors.username.message} />
                                         )}
                                     </div>
-                                    <div className="mb-5">
-                                        <label htmlFor="copy_ci" className="label mb-3 block text-base font-medium ">
+                                    <div className="mb-2">
+                                        <label htmlFor="copy_ci" className="label mb-1 block text-base font-medium ">
                                             Copia de CI
                                         </label>
                                         <input
@@ -129,8 +128,8 @@ export function UserAdminAdd() {
                                 </div>
                             </div>
 
-                            <div className="form-control mb-5">
-                                <label htmlFor="email" className="label mb-3 block text-base font-medium">
+                            <div className="form-control mb-2">
+                                <label htmlFor="email" className="label mb-1 block text-base font-medium">
                                     Correo Electrónico
                                 </label>
                                 <input
@@ -138,7 +137,7 @@ export function UserAdminAdd() {
 
                                     id="email"
                                     placeholder="Ingrese su correo electrónico"
-                                    className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                    className="input input-bordered py-3 px-6 text-base font-medium"
                                     {...register("email")}
 
                                 />
@@ -146,8 +145,8 @@ export function UserAdminAdd() {
                                     <AlertWarnig titleAlert={errors.email.message} />
                                 )}
                             </div>
-                            <div className="form-control mb-5">
-                                <label htmlFor="password" className="label mb-3 block text-base font-medium">
+                            <div className="form-control mb-2">
+                                <label htmlFor="password" className="label mb-1 block text-base font-medium">
                                     Contraseña
                                 </label>
                                 <input
@@ -155,7 +154,7 @@ export function UserAdminAdd() {
 
                                     id="password"
                                     placeholder="Ingrese su contraseña"
-                                    className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                    className="input input-bordered py-3 px-6 text-base font-medium"
                                     {...register("password")}
 
                                 />
@@ -163,8 +162,8 @@ export function UserAdminAdd() {
                                     <AlertWarnig titleAlert={errors.password.message} />
                                 )}
                             </div>
-                            <div className="form-control mb-5">
-                                <label htmlFor="phone" className="label mb-3 block text-base font-medium ">
+                            <div className="form-control mb-2">
+                                <label htmlFor="phone" className="label mb-1 block text-base font-medium">
                                     Teléfono
                                 </label>
                                 <input
@@ -172,7 +171,7 @@ export function UserAdminAdd() {
 
                                     id="phone"
                                     placeholder="Ingrese su número de teléfono"
-                                    className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                    className="input input-bordered py-3 px-6 text-base font-medium"
                                     {...register("phone")}
 
                                 />
@@ -180,32 +179,30 @@ export function UserAdminAdd() {
                                     <AlertWarnig titleAlert={errors.phone.message} />
                                 )}
                             </div>
-                            <div className="form-control mb-5">
-                                <label htmlFor="email" className="label mb-3 block text-base font-medium">
+                            <div className="form-control mb-2">
+                                <label htmlFor="email" className="label mb-1 block text-base font-medium">
                                     Nombre Completo
                                 </label>
                                 <input type="text"
-
                                     id="full_name"
                                     placeholder="Ingrese su nombre completo"
-                                    className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                    className="input input-bordered w-full"
                                     {...register("full_name")}
                                 />
                                 {errors.full_name && (
                                     <AlertWarnig titleAlert={errors.full_name.message} />
                                 )}
                             </div>
-
                             <div className="-mx-3 flex flex-wrap">
                                 <div className="w-full px-3 sm:w-1/2">
-                                    <div className="mb-5">
-                                        <label htmlFor="financial_condition" className="label mb-3 block text-base font-medium">
+                                    <div className="mb-2">
+                                        <label htmlFor="financial_condition" className="label mb-1 block text-base font-medium">
                                             Modo de Pago
                                         </label>
                                         <select
 
                                             id="financial_condition"
-                                            className="select w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                            className="select select-bordered w-full "
                                             {...register("financial_condition")}
                                         >
                                             <option disabled selected>Seleccione Modo de pago</option>
@@ -218,14 +215,14 @@ export function UserAdminAdd() {
                                     </div>
                                 </div>
                                 <div className="w-full px-3 sm:w-1/2">
-                                    <div className="mb-5">
-                                        <label htmlFor="role" className="label mb-3 block text-base font-medium">
+                                    <div className="mb-2">
+                                        <label htmlFor="role" className="label mb-1 block text-base font-medium">
                                             Rol de Usuario
                                         </label>
                                         <select
 
                                             id="time"
-                                            className="select w-full rounded-md border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                            className="select select-bordered w-full focus:shadow-md"
                                             {...register("role")}
                                         >
                                             <option selected disabled>Seleccione un rol</option>

@@ -26,6 +26,8 @@ export enum QUERY_KEY {
     FRATERS = "fraters",
     MEDIA_IMAGE = "images",
     MEDIA_VIDEO = "vidios",
+    MENSUALIDAD = "mensualidad",
+    EXTRAORD = "extraord"
 }
 
 export enum Estados_Evento {

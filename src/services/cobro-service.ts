@@ -1,22 +1,23 @@
-import { PagoInput, PagoType } from '../types/cobros-type';
+import { MensualidadType, MensualidadInput, ExtraordinariaType } from '../types/cobros-type';
 import { api } from './api';
 
-export const getAllPagos = async () => {
-    const response = await api.get<PagoType[]>(`agenda/pagos/`);
+export const getAllMensualidades = async () => {
+    const response = await api.get<MensualidadType[]>(`agenda/mensualidads/`);
+    return response.data;
+};
+
+export const getAllExtraords = async () => {
+    const response = await api.get<ExtraordinariaType[]>(`agenda/extraordinarias/`);
     return response.data;
 };
 
 export const getPago = async (id: string) => {
-    const response = await api.get<PagoType>(`agenda/pagos/${id}`);
+    const response = await api.get<MensualidadType>(`agenda/mensualidads/${id}`);
     return response.data;
 };
 
-export const createPago = async (formData: PagoInput) => {
-    const response = await api.post<PagoType>(`agenda/pagos/`, formData, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+export const createPago = async (formData: MensualidadInput) => {
+    const response = await api.post<MensualidadType>(`agenda/mensualidads/`, formData);
     return response.data;
 };
 
@@ -27,15 +28,11 @@ export const updatePago = async ({
     id: number;
     formData: FormData;
 }) => {
-    const response = await api.put<PagoType>(`agenda/pagos/${id}`, formData, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
+    const response = await api.put<MensualidadType>(`agenda/mensualidads/${id}`, formData);
     return response.data;
 };
 
 export const deletePago = async (id: number) => {
-    const response = await api.delete<PagoType>(`agenda/pagos/${id}`);
+    const response = await api.delete<MensualidadType>(`agenda/mensualidads/${id}`);
     return response.data;
 };
