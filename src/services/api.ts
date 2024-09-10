@@ -5,6 +5,8 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const api = axios.create({
     baseURL: BASE_URL,
+    timeout: 5000,
+    headers: { 'Content-Type': 'application/json' }
 });
 
 api.interceptors.request.use(async (config) => {
@@ -16,3 +18,17 @@ api.interceptors.request.use(async (config) => {
     }
     return newConfig;
 });
+
+api.interceptors.response.use(
+    function (response) {
+        return response;
+    },
+    function (error) {
+        let res = error.response;
+        if (res.status == 401) {
+            window.location.href = "/login";
+        }
+        console.error("Looks like there was a problem. Status Code: " + res.status);
+        return Promise.reject(error);
+    }
+);

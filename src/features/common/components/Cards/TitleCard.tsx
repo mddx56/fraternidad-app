@@ -14,10 +14,13 @@ function TitleCard({ title, children, topMargin, TopSideButtons }: TitleCardProp
 
       {/* Title for Card */}
       <Subtitle styleClass={TopSideButtons ? "inline-block" : ""}>
-        {title}
-        {
-          TopSideButtons && <div className="inline-block float-right">{TopSideButtons}</div>
-        }
+        <div>
+          {title}
+          {TopSideButtons ? (
+            <div className="inline-block float-right">
+              {TopSideButtons}
+            </div>) : null}
+        </div>
       </Subtitle>
 
       <div className="divider mt-2"></div>

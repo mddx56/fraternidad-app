@@ -58,9 +58,7 @@ function Login() {
     try {
       mutation.mutate(values);
     } catch (error) {
-      console.log(error);
-      alert("User created failed");
-      alert(error);
+      console.error(error);
     }
   };
 
@@ -114,7 +112,7 @@ function Login() {
                 </Link>
               </div>
               <div className="text-center mt-4">
-                {mutation.isError ? (<ErrorText styleClass="mt-6">{'algo salio mal...'}</ErrorText>) : ("")}
+                {mutation.isError ? (<ErrorText styleClass="mt-6">{'Usuario o contraseña incorrecto'}</ErrorText>) : ("")}
               </div>
               <button
                 type="submit"

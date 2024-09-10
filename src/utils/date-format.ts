@@ -21,7 +21,7 @@ export function formattedMonth(mes: number): string {
     const newFormatDate = new Date(0, mes, 0);
     const formatoDeseado = "MMMM";
     const formattedDate = format(newFormatDate, formatoDeseado, { locale: es });
-    return formattedDate;
+    return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1).toLowerCase();;
 }
 
 export function esFinDeSemana(): boolean {

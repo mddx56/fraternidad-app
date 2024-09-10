@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { CobroExtraord } from '../../../features/Cobros/cobro-extraordinaria'
+import { CobroExtraord } from '../../../features/cobros/CobroExtraord'
 import { setPageTitle } from '../../../features/common/headerSlice'
 import { useAppDispatch } from '../../../stores/dispatch'
 
@@ -10,7 +10,9 @@ function InternalPage() {
         dispatch(setPageTitle({ title: "Realizar Cobro Mensualidad" }))
     })
     return (
-        <CobroExtraord />
+        <>
+            <CobroExtraord />
+        </>
     )
 }
 

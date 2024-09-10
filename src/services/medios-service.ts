@@ -23,17 +23,17 @@ export const createMediaImage = async (formData: MediaImageInput) => {
 };
 
 export const updateMediaImage = async (id: number, formData: MediaImageInput) => {
-    const response = await api.patch<MediaImageType>(`frater/mediaimages/${id}`, formData, {
+    const response = await api.patch<MediaImageType>(`frater/mediaimages/${id}/`, formData, {
         headers: {
             'Content-Type': 'application/json',
         },
     });
-    return response.data;
+    return response;
 };
 
 export const deleteMediaImage = async (id: number) => {
-    const response = await api.delete<MediaImageType>(`frater/mediaimages/${id}`);
-    return response.data;
+    const response = await api.delete<MediaImageType>(`frater/mediaimages/${id}/`);
+    return response;
 };
 
 //--------video----------
@@ -44,7 +44,7 @@ export const getAllMediaVideos = async () => {
 };
 
 export const getMediaVideo = async (id: string) => {
-    const response = await api.get<MediaVideoType>(`frater/mediavideos/${id}`);
+    const response = await api.get<MediaVideoType>(`frater/mediavideos/${id}/`);
     return response.data;
 };
 
@@ -59,7 +59,7 @@ export const createMediaVideo = async (formData: MediaVideoInput) => {
 };
 
 export const updateMediaVideo = async (id: number, formData: MediaVideoInput) => {
-    const response = await api.patch<MediaVideoType>(`frater/mediavideos/${id}`, formData, {
+    const response = await api.patch<MediaVideoType>(`frater/mediavideos/${id}/`, formData, {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -68,6 +68,6 @@ export const updateMediaVideo = async (id: number, formData: MediaVideoInput) =>
 };
 
 export const deleteMediaVideo = async (id: number) => {
-    const response = await api.delete<MediaVideoType>(`frater/mediavideos/${id}`);
+    const response = await api.delete<MediaVideoType>(`frater/mediavideos/${id}/`);
     return response.data;
 };

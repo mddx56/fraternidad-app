@@ -27,7 +27,10 @@ export enum QUERY_KEY {
     MEDIA_IMAGE = "images",
     MEDIA_VIDEO = "vidios",
     MENSUALIDAD = "mensualidad",
-    EXTRAORD = "extraord"
+    EXTRAORD = "extraord",
+    DEUDAMENSUALIDAD = "deuda-mensualidad",
+    DEUDAEXTRAORD = "deuda-extraord",
+    USERS_DASH = "usersdash",
 }
 
 export enum Estados_Evento {

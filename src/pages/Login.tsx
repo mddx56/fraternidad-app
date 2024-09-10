@@ -1,9 +1,9 @@
-import Login from '../features/User/Login';
+import Login from '../features/user/Login';
 
 function ExternalPage() {
     return (
         <div className="">
-            <Login  />
+            <Login />
         </div>
     )
 }

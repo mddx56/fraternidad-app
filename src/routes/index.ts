@@ -10,10 +10,11 @@ const Page404 = lazy(() => import('../pages/protected/404'))
 const UserAdmin = lazy(() => import('../pages/protected/admin/UserAdmin'))
 const UserAdminAdd = lazy(() => import('../pages/protected/admin/UserAdminAdd'))
 const Medios = lazy(() => import('../pages/protected/medios'))
+const Turnos = lazy(() => import('../pages/protected/turnos'))
 const RealizarCobro = lazy(() => import('../pages/protected/cobros'))
 const SelectFrater = lazy(() => import('../pages/protected/cobros/select-frater'))
 const CobroMensualidad = lazy(() => import('../pages/protected/cobros/cobro-mensualidad'))
-const CobroExtraordinaria = lazy(() => import('../pages/protected/cobros/cobro-extraord'))
+const CobroExtraordinaria = lazy(() => import('../pages/protected/cobros/cobro-extraordinaria'))
 
 const routes = [
     {
@@ -35,6 +36,10 @@ const routes = [
     {
         path: '/medios',
         component: Medios,
+    },
+    {
+        path: '/turnos',
+        component: Turnos,
     },
     {
         path: '/elegirfrater', // the url

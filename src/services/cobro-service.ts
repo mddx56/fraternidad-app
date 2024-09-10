@@ -1,4 +1,4 @@
-import { MensualidadType, MensualidadInput, ExtraordinariaType } from '../types/cobros-type';
+import { DeudaExtraordType, DeudaMenType, ExtraordinariaType, MensualidadInput, MensualidadPagosInput, MensualidadType, PagoResponse } from '../types/cobros-type';
 import { api } from './api';
 
 export const getAllMensualidades = async () => {
@@ -11,6 +11,16 @@ export const getAllExtraords = async () => {
     return response.data;
 };
 
+export const getDeudasExtraords = async (ci: string) => {
+    const response = await api.get<DeudaExtraordType[]>(`agenda/deudas/e/${ci}`);
+    return response.data;
+};
+
+export const getDeudasMensualids = async (ci: string) => {
+    const response = await api.get<DeudaMenType>(`agenda/deudas/m/${ci}`);
+    return response.data.deudas;
+};
+
 export const getPago = async (id: string) => {
     const response = await api.get<MensualidadType>(`agenda/mensualidads/${id}`);
     return response.data;
@@ -19,6 +29,12 @@ export const getPago = async (id: string) => {
 export const createPago = async (formData: MensualidadInput) => {
     const response = await api.post<MensualidadType>(`agenda/mensualidads/`, formData);
     return response.data;
+};
+
+export const payMensualidades = async (formData: MensualidadPagosInput) => {
+    console.log(formData)
+    const response = await api.post<PagoResponse>(`agenda/pagar-mensuals/`, formData);
+    return response;
 };
 
 export const updatePago = async ({

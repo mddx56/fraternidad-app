@@ -47,3 +47,52 @@ export type PagoType = {
 
 
 export type PagoInput = Omit<PagoType, "id">;
+
+export type DeudaMensualidadType = {
+    id: number;
+    mes: string;
+    gestion: number;
+    costo: number;
+    fecha: string;
+    mensualidad: number;
+}
+
+export type DeudaExtraordType = {
+    extraordinaria: Extraordinaria;
+    saldo: number;
+    deuda: number;
+}
+
+export type Extraordinaria = {
+    id: number;
+    monto: number;
+    concepto: string;
+    create_date: string;
+}
+
+export type DeudaMenType = {
+    deudas: MensualidadDeuda[];
+    total: number;
+}
+
+export type MensualidadDeuda = {
+    id: number;
+    mes: string;
+    gestion: number;
+    costo: number;
+    fecha: string;
+    mensualidad: number;
+}
+
+export type MensualidadPagosInput = {
+    mensualidades: number[];
+    frater_id: string;
+}
+
+export type PagoResponse = {
+    status: string;
+    pago: PagoType;
+    cantidad: number;
+    total: number;
+}
+

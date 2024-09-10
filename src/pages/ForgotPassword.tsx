@@ -1,4 +1,4 @@
-import ForgotPassword from "../features/User/ForgotPassword"
+import ForgotPassword from "../features/user/ForgotPassword"
 
 function ExternalPage() {
 

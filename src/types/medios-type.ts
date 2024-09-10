@@ -1,12 +1,12 @@
 export type MediaImageType = {
     id: number;
     url: string;
-    descripcion: string;
+    descripcion?: string;
     secuencia: number;
     mostrar: boolean;
-    tag: string;
-    upload_date: string;
-    fraternidad: number;
+    tag?: string;
+    upload_date?: string;
+    fraternidad?: number;
 }
 
 export type MediaImageInput = Omit<MediaImageType, "id">;

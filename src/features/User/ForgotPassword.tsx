@@ -34,10 +34,10 @@ function ForgotPassword() {
         value: string;
     }
 
-    const updateFormValue = ({ updateType, value }: Props) => {
+    /*const updateFormValue = ({ updateType, value }: Props) => {
         setErrorMessage("")
         setUserObj({ ...userObj, [updateType]: value })
-    }
+    }*/
 
     return (
         <div className="min-h-screen bg-base-200 flex items-center">

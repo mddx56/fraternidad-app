@@ -33,8 +33,8 @@ export const routes: SideLink[] = [
         icon: <HandCoins className={iconClasses} />,
         name: 'Cobros en General',
     },
-    {
-        path: '/app/usersadmin',
+   /* {
+        path: '/app/turnos',
         icon: <PersonStanding className={iconClasses} />,
         name: 'Administrar Turnos',
     },
@@ -42,7 +42,7 @@ export const routes: SideLink[] = [
         path: '/app/usersaadsamin',
         icon: <Wallet className={iconClasses} />,
         name: 'Administrar Pagos',
-    },
+    },*/
     {
         path: '/app/medios',
         icon: <BookImage className={iconClasses} />,

@@ -1,4 +1,4 @@
-import { AuthCheckType, LoginType, UserAdminType, UserInput, UserPasswordType, UserResponseType, UserType } from '../types/user-type';
+import { AuthCheckType, LoginType, UserAdminType, UserCounts, UserInput, UserPasswordType, UserResponseType, UserType } from '../types/user-type';
 import { api } from './api';
 
 export const getAllUsers = async () => {
@@ -62,7 +62,23 @@ export const signUp = async (data: UserInput) => {
 export const changePassword = async (data: UserPasswordType) => {
     const user_id = data.user_id;
     delete data.user_id;
-    console.log(data);
+    //console.log(data);
     const response = await api.put(`/change_password/${user_id}/`, data);
     return response.data;
+};
+
+export const suspendUser = async (id: string) => {
+    const response = await api.get(`auth/suspend/${id}`);
+    return response.data;
+};
+
+
+export const getCountUsersStat = async () => {
+    try {
+        const response = await api.get<UserCounts>(`auth/fraternos-count/`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error('UnAuthorized');
+    }
 };

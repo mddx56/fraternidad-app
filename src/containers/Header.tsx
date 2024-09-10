@@ -23,8 +23,8 @@ function Header() {
     useEffect(() => {
         themeChange(false)
         if (currentTheme === null) {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: night)').matches) {
-                setCurrentTheme("night")
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setCurrentTheme("forest")
             } else {
                 setCurrentTheme("light")
             }

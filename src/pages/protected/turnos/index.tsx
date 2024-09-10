@@ -1,16 +1,16 @@
 import { useAppDispatch } from '../../../stores/dispatch'
 import { setPageTitle } from '../../../features/common/headerSlice'
-import Medios from '../../../features/medios'
+import Turnos from '../../../features/turnos'
 import { useEffect } from 'react'
 
 function InternalPage() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(setPageTitle({ title: "Multimedios" }))
+        dispatch(setPageTitle({ title: "Turnos" }))
     })
     return (
-        <Medios />
+        <Turnos />
     )
 }
 

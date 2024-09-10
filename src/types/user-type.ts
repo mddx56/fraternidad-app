@@ -93,3 +93,13 @@ export type Claims = {
     iat: number;
     jti: string;
 }
+
+export type UserCountStats = {
+    title: string;
+    value: string;
+    icon: string;
+    description: string;
+}
+
+
+
