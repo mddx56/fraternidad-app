@@ -22,11 +22,7 @@ const DeleteMedioImageModel = ({ medioImagen, onClose }: Props) => {
     url: yup.string(),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { handleSubmit } = useForm({
     resolver: yupResolver(medioImagenSchema),
     defaultValues: {
       url: medioImagen.url,

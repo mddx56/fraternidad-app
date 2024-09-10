@@ -41,13 +41,13 @@ export function SelectFraterno() {
   const navigation = useNavigate();
 
   const {
-    tipoCobro,
+  
     idfraterno,
-    cifraterno,
+ 
     setFraterno,
     setName,
     setCi,
-    reset,
+ 
   } = useCobroStore(
     useShallow((state) => ({
       tipoCobro: state.tipoCobro,

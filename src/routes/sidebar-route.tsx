@@ -1,4 +1,4 @@
-import { BookImage, Calendar, HandCoins, HomeIcon, PersonStanding, User2, Wallet } from "lucide-react";
+import { BookImage, Calendar, HandCoins, HomeIcon, User2 } from "lucide-react";
 
 export interface NavLink {
     path: string;

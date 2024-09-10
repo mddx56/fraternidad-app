@@ -1,4 +1,4 @@
-import { ArrowLeft, Banknote, Coins } from "lucide-react";
+import { Banknote, Coins } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCobroStore } from "../../stores/cobro-store";
 import { COBRO } from "../../utils/constant";
@@ -51,7 +51,11 @@ export function SelectPago() {
             Mensualidad
           </button>
 
-          <button disabled={true} className="btn btn-primary" onClick={extraordinariaOnClick}>
+          <button
+            disabled={true}
+            className="btn btn-primary"
+            onClick={extraordinariaOnClick}
+          >
             <Banknote className="h-6 w-6" />
             Extraordinaria
           </button>

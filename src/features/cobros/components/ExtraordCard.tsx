@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 import { DeudaExtraordType } from "../../../types/cobros-type";
 
-type Props = {};
+//type Props = {};
 
 export default function ExtraordCard(extra: DeudaExtraordType) {
   return (

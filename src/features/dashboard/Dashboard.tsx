@@ -1,12 +1,5 @@
 import { UserCountStats } from "@/types/user-type";
-import {
-  CircleSlash2,
-  CreditCard,
-  HeartHandshake,
-  Puzzle,
-  Ribbon,
-  UsersRound,
-} from "lucide-react";
+import { HeartHandshake, Puzzle, Ribbon, UsersRound } from "lucide-react";
 import { useQuery } from "react-query";
 import SuspenseContent from "../../containers/SuspenseContent";
 import { getCountUsersStat } from "../../services/user-service";
@@ -16,27 +9,6 @@ import DashboardStats from "./components/dashboard-stats";
 import LineCharts from "./components/line-charts";
 import PageStats from "./components/page-stats";
 import UserChannels from "./components/table-stats";
-
-const statsData = [
-  {
-    title: "Fraternos",
-    value: "0",
-    icon: <UsersRound className="w-8 h-8" />,
-    description: "",
-  },
-  {
-    title: "Total Sales",
-    value: "0",
-    icon: <CreditCard className="w-8 h-8" />,
-    description: "↗︎",
-  },
-  {
-    title: "Pending Leads",
-    value: "0",
-    icon: <CircleSlash2 className="w-8 h-8" />,
-    description: "↙",
-  },
-];
 
 const iconValue = (icon: string) => {
   switch (icon) {

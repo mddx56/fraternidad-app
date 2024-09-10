@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useQueryClient } from "react-query";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { AlertWarnig } from "../../components/AlertWarning";
 import { UserAdminType } from "../../types/user-type";
@@ -13,8 +12,7 @@ interface UpdateProps {
 }
 
 export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
-
-  setOpenNoteModal(false)
+  setOpenNoteModal(false);
 
   const updateUserSchema = yup.object({
     username: yup
@@ -65,7 +63,7 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const queryClient = useQueryClient();
+  //  const queryClient = useQueryClient();
   /*const { mutate: updateNote } = useMutation({
       mutationFn: ({ noteId, note }: { noteId: string; note }) =>
         updateNoteFn(noteId, note),
@@ -94,7 +92,7 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
 
   const onSubmitHandler = async (data: any) => {
     // update({ noteId: data.id, note: data });
-    console.log(data)
+    console.log(data);
   };
 
   return (
@@ -111,7 +109,6 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
               </label>
               <input
                 type="text"
-
                 id="username"
                 placeholder="Ingrese su CI"
                 className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -130,7 +127,6 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
               </label>
               <input
                 type="checkbox"
-
                 id="copy_ci"
                 className="checkbox checkbox-success outline-none"
                 {...register("copy_ci")}
@@ -148,7 +144,6 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
           </label>
           <input
             type="email"
-
             id="email"
             placeholder="Ingrese su correo electrónico"
             className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -165,7 +160,6 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
           </label>
           <input
             type="password"
-
             id="password"
             placeholder="Ingrese su contraseña"
             className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -184,7 +178,6 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
           </label>
           <input
             type="text"
-
             id="phone"
             placeholder="Ingrese su número de teléfono"
             className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -201,7 +194,6 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
           </label>
           <input
             type="text"
-
             id="full_name"
             placeholder="Ingrese su nombre completo"
             className="input w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -222,7 +214,6 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
                 Modo de Pago
               </label>
               <select
-
                 id="financial_condition"
                 className="select w-full rounded-md border border-[#e0e0e0]  py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 {...register("financial_condition")}
@@ -247,7 +238,6 @@ export function UserAdminUpdate({ user, setOpenNoteModal }: UpdateProps) {
                 Rol de Usuario
               </label>
               <select
-
                 id="time"
                 className="select w-full rounded-md border border-[#e0e0e0] py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 {...register("role")}

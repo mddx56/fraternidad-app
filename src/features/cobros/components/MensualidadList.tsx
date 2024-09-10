@@ -1,6 +1,6 @@
+import { Banknote } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 import { MensualidadDeuda } from "../../../types/cobros-type";
-import { CalendarCheck, ListCheck, Banknote } from "lucide-react";
 
 interface Props {
   datos: MensualidadDeuda;

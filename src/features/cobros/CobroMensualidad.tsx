@@ -50,7 +50,7 @@ export function CobroMensualidad() {
     }))
   );
 
-  const { tipoCobro, idfraterno, cifraterno, namefraterno, reset } =
+  const {  idfraterno, cifraterno, namefraterno } =
     useCobroStore(
       useShallow((state) => ({
         tipoCobro: state.tipoCobro,
