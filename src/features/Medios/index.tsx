@@ -9,7 +9,7 @@ import { getAllMediaImages } from "../../services/medios-service";
 import { QUERY_KEY } from "../../utils/constant";
 import { formattedDate } from "../../utils/date-format";
 import TitleCard from "../common/components/Cards/TitleCard";
-import CreateMedioImageModal from "./components/modalCreate";
+import CreateMedioImageModal from "./components/ModalCreate";
 import DeleteMedioImageModel from "./components/ModalDelete";
 import UpadateMedioImageModel from "./components/ModalUpdate";
 function Medios() {

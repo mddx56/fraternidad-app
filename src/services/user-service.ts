@@ -1,4 +1,4 @@
-import { AuthCheckType, LoginType, UserAdminType, UserCounts, UserInput, UserPasswordType, UserResponseType, UserType } from '../types/user-type';
+import { AuthCheckType, LoginType, UserAdminType, UserCountStats, UserInput, UserPasswordType, UserResponseType, UserType } from '../types/user-type';
 import { api } from './api';
 
 export const getAllUsers = async () => {
@@ -75,7 +75,7 @@ export const suspendUser = async (id: string) => {
 
 export const getCountUsersStat = async () => {
     try {
-        const response = await api.get<UserCounts>(`auth/fraternos-count/`);
+        const response = await api.get<UserCountStats[]>(`auth/fraternos-count/`);
         return response.data;
     } catch (error) {
         console.log(error);
