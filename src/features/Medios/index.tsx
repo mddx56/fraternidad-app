@@ -1,4 +1,4 @@
-import { MediaImageType } from "@/types/medios-type";
+import { MediaImageType } from "../../types/medios-type";
 import { Pencil, SquareCheckBig, SquareX, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";

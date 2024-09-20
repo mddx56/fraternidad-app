@@ -1,5 +1,5 @@
 import { api } from './api';
-import { MediaImageInput, MediaImageType, MediaVideoInput, MediaVideoType } from '@/types/medios-type';
+import { MediaImageInput, MediaImageType, MediaVideoInput, MediaVideoType } from '../types/medios-type';
 
 
 export const getAllMediaImages = async () => {

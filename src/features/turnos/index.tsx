@@ -1,4 +1,4 @@
-import { MediaImageType } from "@/types/medios-type";
+import { MediaImageType } from "../../types/medios-type";
 import { Eye, SquareCheckBig, SquareX, Trash } from "lucide-react";
 import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";

@@ -1,4 +1,4 @@
-import { UserCountStats } from "@/types/user-type";
+import { UserCountStats } from "../../types/user-type";
 import { HeartHandshake, Puzzle, Ribbon, UsersRound } from "lucide-react";
 import { useQuery } from "react-query";
 import SuspenseContent from "../../containers/SuspenseContent";
