@@ -1,6 +1,10 @@
 # Frondend Fraternidad Admin
 
-Mas Amigable
+no uses  @Pnpm
+
+    -   npm install
+    -   npm run build
+    -   npm run preview
 
 # Tecnologias
 
