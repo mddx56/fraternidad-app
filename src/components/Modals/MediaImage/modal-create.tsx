@@ -5,9 +5,9 @@ import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 import * as yup from "yup";
-import { ErrorText } from "../../../components/Errortext";
-import { Modal } from "../../../components/Modal";
-import { Title } from "../../../components/Title";
+import { ErrorText } from "../../Errortext";
+import { Modal } from "../../Modal";
+import { Title } from "../../Title";
 import { createMediaImage } from "../../../services/medios-service";
 
 type Props = {

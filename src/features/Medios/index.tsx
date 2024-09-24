@@ -2,6 +2,9 @@ import { Pencil, SquareCheckBig, SquareX, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
+import CreateMedioImageModal from "../../components/Modals/MediaImage/modal-create";
+import DeleteMedioImageModel from "../../components/Modals/MediaImage/modal-delete";
+import UpadateMedioImageModel from "../../components/Modals/MediaImage/modal-update";
 import { TopSideButtons } from "../../components/TopSideButtons";
 import SuspenseContent from "../../containers/SuspenseContent";
 import { getAllMediaImages } from "../../services/medios-service";
@@ -9,9 +12,6 @@ import { MediaImageType } from "../../types/medios-type";
 import { QUERY_KEY } from "../../utils/constant";
 import { formattedDate } from "../../utils/date-format";
 import TitleCard from "../common/components/Cards/TitleCard";
-import CreateMedioImageModal from "./components/modal-create";
-import DeleteMedioImageModel from "./components/modal-delete";
-import UpadateMedioImageModel from "./components/modal-update";
 
 function Medios() {
   const [selectedMedioImage, setSelectedMedioImage] =
