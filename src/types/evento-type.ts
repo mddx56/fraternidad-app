@@ -20,9 +20,9 @@ export type EventoType = {
     descripcion: string;
     es_entresemana: boolean;
     estado_reserva: string;
-    created_date: string;
+    //created_date: string;
     tipo_evento: number;
-    user: string;
+    user?: string;
 }
 
 export type EstadosReservaType = {
