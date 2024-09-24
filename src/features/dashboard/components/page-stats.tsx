@@ -1,28 +1,27 @@
-import { Bolt, Heart } from "lucide-react"
+import { Bolt, Heart } from "lucide-react";
 
-function PageStats({ }) {
-    return (
-        <div className="stats bg-base-100 shadow">
-
-            <div className="stat text-secondary">
-                <div className="stat-figure invisible md:visible">
-                    <Heart className='w-8 h-8' />
-                </div>
-                <div className="stat-title">Total Likes</div>
-                <div className="stat-value">25.6K</div>
-                <div className="stat-desc">21% more than last month</div>
-            </div>
-
-            <div className="stat text-secondary">
-                <div className="stat-figure invisible md:visible">
-                    <Bolt className='w-8 h-8' />
-                </div>
-                <div className="stat-title">Page Views</div>
-                <div className="stat-value">2.6M</div>
-                <div className="stat-desc">14% more than last month</div>
-            </div>
+function PageStats({}) {
+  return (
+    <div className="stats bg-base-100 shadow">
+      <div className="stat text-secondary">
+        <div className="stat-figure invisible md:visible">
+          <Heart className="w-8 h-8" />
         </div>
-    )
+        <div className="stat-title">J</div>
+        <div className="stat-value">2K</div>
+        <div className="stat-desc">21%</div>
+      </div>
+
+      <div className="stat text-secondary">
+        <div className="stat-figure invisible md:visible">
+          <Bolt className="w-8 h-8" />
+        </div>
+        <div className="stat-title">P</div>
+        <div className="stat-value">2M</div>
+        <div className="stat-desc">14%</div>
+      </div>
+    </div>
+  );
 }
 
-export default PageStats
+export default PageStats;

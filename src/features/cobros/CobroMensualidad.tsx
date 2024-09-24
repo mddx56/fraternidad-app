@@ -50,16 +50,15 @@ export function CobroMensualidad() {
     }))
   );
 
-  const {  idfraterno, cifraterno, namefraterno } =
-    useCobroStore(
-      useShallow((state) => ({
-        tipoCobro: state.tipoCobro,
-        idfraterno: state.idfraterno,
-        namefraterno: state.namefraterno,
-        cifraterno: state.cifraterno,
-        reset: state.reset,
-      }))
-    );
+  const { idfraterno, cifraterno, namefraterno } = useCobroStore(
+    useShallow((state) => ({
+      tipoCobro: state.tipoCobro,
+      idfraterno: state.idfraterno,
+      namefraterno: state.namefraterno,
+      cifraterno: state.cifraterno,
+      reset: state.reset,
+    }))
+  );
 
   const { isLoading, isError, data, error } = useQuery<
     MensualidadDeuda[],

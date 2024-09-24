@@ -10,7 +10,8 @@ export function formattedDate(fecha: string): string {
     return formattedDate;
 }
 
-export function formattedTime(hora: string): string {
+export function formattedTime(hora: string | null): string {
+    if (hora === null) return "";
     const horaa = parse(hora, 'HH:mm:ss', new Date());
     const formatoDeseado = "HH:mm";
     const horaFormateada = format(horaa, formatoDeseado);

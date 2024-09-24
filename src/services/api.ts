@@ -24,11 +24,11 @@ api.interceptors.response.use(
         return response;
     },
     function (error) {
-        let res = error.response;
+        const res = error.response;
         if (res.status == 401) {
             window.location.href = "/login";
         }
-        console.error("Looks like there was a problem. Status Code: " + res.status);
+        console.error("Status Code: " + res.status);
         return Promise.reject(error);
     }
 );

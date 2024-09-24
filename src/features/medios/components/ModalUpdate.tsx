@@ -1,14 +1,14 @@
-import { MediaImageType } from "../../../types/medios-type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 import * as yup from "yup";
 import { ErrorText } from "../../../components/Errortext";
 import { Modal } from "../../../components/Modal";
 import { Title } from "../../../components/Title";
 import { updateMediaImage } from "../../../services/medios-service";
-import { toast } from "react-toastify";
+import { MediaImageType } from "../../../types/medios-type";
 
 type Props = {
   medioImagen: MediaImageType;

@@ -39,6 +39,7 @@ function Evento() {
     queryKey: [QUERY_KEY.EVENTOS],
     queryFn: () => getAllEventos(),
     onSuccess() {
+      console.log(data);
       console.log("ok..");
     },
     onError(error: Error) {
