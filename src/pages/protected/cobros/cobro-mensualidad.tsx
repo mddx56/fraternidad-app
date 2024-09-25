@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { CobroMensualidad } from '../../../features/Cobros/CobroMensualidad'
+import { CobroMensualidad } from '../../../features/cobros/CobroMensualidad'
 import { setPageTitle } from '../../../features/common/headerSlice'
 import { useAppDispatch } from '../../../stores/dispatch'
 
