@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { useShallow } from "zustand/react/shallow";
 import { getAllFraters } from "../../services/user-service";
 import { useCobroStore } from "../../stores/cobro-store";
 import { UserType } from "../../types/user-type";
 import { COBRO, QUERY_KEY } from "../../utils/constant";
 import TitleCard from "../common/components/Cards/TitleCard";
-import { useShallow } from "zustand/react/shallow";
 
 function Steeps() {
   return (
@@ -41,13 +41,11 @@ export function SelectFraterno() {
   const navigation = useNavigate();
 
   const {
-  
     idfraterno,
- 
+
     setFraterno,
     setName,
     setCi,
- 
   } = useCobroStore(
     useShallow((state) => ({
       tipoCobro: state.tipoCobro,

@@ -1,9 +1,9 @@
 import { Banknote, Coins } from "lucide-react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCobroStore } from "../../stores/cobro-store";
 import { COBRO } from "../../utils/constant";
 import TitleCard from "../common/components/Cards/TitleCard";
-import { useEffect } from "react";
 
 export function Steeps() {
   return (
