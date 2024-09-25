@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { CobroExtraord } from '../../../features/cobros/CobroExtraord'
+import { CobroExtraord } from '../../../features/Cobros/CobroExtraord'
 import { setPageTitle } from '../../../features/common/headerSlice'
 import { useAppDispatch } from '../../../stores/dispatch'
 
