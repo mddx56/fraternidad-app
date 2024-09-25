@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { setPageTitle } from '../../../features/common/headerSlice'
 import { useAppDispatch } from '../../../stores/dispatch'
-import { UserAdminAdd } from '../../../features/user/UserAdminAdd'
+import { UserAdminAdd } from '../../../features/User/UserAdminAdd'
 
 
 function InternalPage() {

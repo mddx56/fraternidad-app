@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { setPageTitle } from '../../../features/common/headerSlice'
-import Fraternidad from '../../../features/fraternidad'
+import Fraternidad from '../../../features/Fraternidad'
 import { useAppDispatch } from '../../../stores/dispatch'
 
 function InternalPage() {

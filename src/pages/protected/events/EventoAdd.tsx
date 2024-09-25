@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { setPageTitle } from '../../../features/common/headerSlice'
 import { useAppDispatch } from '../../../stores/dispatch'
-import EventoAdd from '../../../features/evento/EventoAdd'
+import EventoAdd from '../../../features/Evento/EventoAdd'
 
 function InternalPage() {
   const dispatch = useAppDispatch()
