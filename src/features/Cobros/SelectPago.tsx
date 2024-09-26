@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCobroStore } from "../../stores/cobro-store";
 import { COBRO } from "../../utils/constant";
 import TitleCard from "../common/components/Cards/TitleCard";
+import { useShallow } from "zustand/react/shallow";
 
 export function Steeps() {
   return (
@@ -23,8 +24,15 @@ export function Steeps() {
 }
 
 export function SelectPago() {
-  const setCobro = useCobroStore((state) => state.setTipoCobro);
-  const reset = useCobroStore((state) => state.reset);
+
+
+  const { setTipoCobro, reset } = useCobroStore(
+    useShallow((state) => ({
+      setTipoCobro: state.setTipoCobro,
+      reset: state.reset,
+    }))
+  )
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,12 +40,12 @@ export function SelectPago() {
   }, []);
 
   const mensulidadOnClick = () => {
-    setCobro(COBRO.MENSUALIDAD);
+    setTipoCobro(COBRO.MENSUALIDAD);
     navigate("/app/elegirfrater");
   };
 
   const extraordinariaOnClick = () => {
-    setCobro(COBRO.EXTRAORD);
+    setTipoCobro(COBRO.EXTRAORD);
     navigate("/app/elegirfrater");
   };
 

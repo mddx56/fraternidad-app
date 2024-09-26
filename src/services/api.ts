@@ -28,7 +28,6 @@ api.interceptors.response.use(
         if (res.status == 401) {
             window.location.href = "/login";
         }
-        console.error("Status Code: " + res.status);
         return Promise.reject(error);
     }
 );

@@ -1,3 +1,5 @@
+import { detailResponse } from "./error-response";
+
 export type EventoState = {
     loading: boolean;
     eventos: Array<EventoType>;
@@ -38,5 +40,18 @@ export type TipoEventoType = {
     costo_entresemana: number;
     costo_finsemana: number;
 }
+
+export type ReservaType = {
+    fecha: string;
+    tipo_evento: number;
+    user: string;
+}
+
+export type PagoReservaType = {
+    evento: string;
+    frater_id: string;
+}
+
+export type eventResponseType = EventoType | detailResponse;
 
 export type EventoInput = Omit<EventoType, "id">;

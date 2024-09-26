@@ -1,10 +1,10 @@
-import { es } from 'date-fns/locale/es';
+import { getDay, parseISO } from 'date-fns';
 import { format } from 'date-fns/format';
+import { es } from 'date-fns/locale/es';
 import { parse } from 'date-fns/parse';
-import { isWeekend, isMonday, isTuesday, isWednesday, isThursday } from 'date-fns';
 
 export function formattedDate(fecha: string): string {
-    const newFormatDate = new Date(fecha);
+    const newFormatDate = parseISO(fecha); 
     const formatoDeseado = "dd MMMM yyyy";
     const formattedDate = format(newFormatDate, formatoDeseado, { locale: es });
     return formattedDate;
@@ -25,13 +25,8 @@ export function formattedMonth(mes: number): string {
     return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1).toLowerCase();;
 }
 
-export function esFinDeSemana(): boolean {
-    const fecha = new Date();
-    if (isWeekend(fecha)) {
-        return true;
-    } else if (isMonday(fecha) || isTuesday(fecha) || isWednesday(fecha) || isThursday(fecha)) {
-        return false;
-    } else {
-        return false;
-    }
+export function esFinDeSemana(datestr: string): boolean {
+    const dates = parseISO(datestr); 
+    const day = getDay(dates);
+    return day === 0 || day === 6;
 }

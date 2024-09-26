@@ -1,5 +1,5 @@
+import { EstadosReservaType, EventoInput, EventoType, PagoReservaType, ReservaType, TipoEventoType, eventResponseType } from '../types/evento-type';
 import { api } from './api';
-import { EventoType, EventoInput, TipoEventoType, EstadosReservaType } from '../types/evento-type';
 
 export const getAllEventos = async () => {
     const response = await api.get<EventoType[]>(`agenda/agendas/`);
@@ -34,6 +34,25 @@ export const createEvento = async (formData: EventoInput) => {
     });
     return response.data;
 };
+
+export const createReserva = async (formData: ReservaType) => {
+    const response = await api.post<eventResponseType>(`agenda/reserva/`, formData, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    return response;
+};
+
+export const createPagoReserva = async (formData: PagoReservaType) => {
+    const response = await api.post<EventoType>(`agenda/pagar-reserva/`, formData, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    return response;
+};
+
 
 export const updateEvento = async (id: number, formData: EventoInput) => {
     const response = await api.patch<EventoType>(`agenda/agendas/${id}`, formData);

@@ -1,6 +1,7 @@
 import { Eye, Trash } from "lucide-react";
-import { useQuery } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import SuspenseContent from "../../containers/SuspenseContent";
 import { getAllEventos } from "../../services/evento-service";
@@ -8,8 +9,9 @@ import { EventoType } from "../../types/evento-type";
 import { QUERY_KEY } from "../../utils/constant";
 import { formattedDate, formattedTime } from "../../utils/date-format";
 import TitleCard from "../common/components/Cards/TitleCard";
-import TipoEvento from "./components/tipo-evento";
-import Client from "./components/client-view";
+import Client from "./components/ClientView";
+import CreateReservaModal from "./components/ModalReserva";
+import TipoEvento from "./components/TipoEvento";
 
 interface PropsSideButton {
   onClickBtn: () => void;
@@ -19,7 +21,7 @@ const TopSideButtons = ({ onClickBtn }: PropsSideButton) => {
   return (
     <>
       <div className="inline-block float-right">
-        
+
         <button
           className="btn px-6 btn-sm normal-case btn-primary"
           onClick={() => {
@@ -34,12 +36,13 @@ const TopSideButtons = ({ onClickBtn }: PropsSideButton) => {
 };
 
 function Evento() {
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [isCreateReservaModalShown, setIsCreateReservaModalShown] = useState(false);
+
   const { isLoading, isError, data, error } = useQuery<EventoType[], Error>({
     queryKey: [QUERY_KEY.EVENTOS],
     queryFn: () => getAllEventos(),
     onSuccess() {
-      console.log(data);
       console.log("ok..");
     },
     onError(error: Error) {
@@ -51,6 +54,13 @@ function Evento() {
     },
   });
 
+  useEffect(() => {
+    if (isCreateReservaModalShown === false) {
+      queryClient.invalidateQueries(QUERY_KEY.EVENTOS);
+    }
+  }, [isCreateReservaModalShown])
+
+
   if (isLoading) {
     return <SuspenseContent />;
   }
@@ -59,17 +69,22 @@ function Evento() {
     return <span>Error: {error.message}</span>;
   }
 
-  const onClickAdd = () => {
-    navigate("/app/addevento");
-  };
-
   return (
     <>
       <TitleCard
         title="Eventos"
         topMargin="mt-2"
-        TopSideButtons={<TopSideButtons onClickBtn={onClickAdd} />}
+        TopSideButtons={<TopSideButtons onClickBtn={
+          () => setIsCreateReservaModalShown(true)
+        } />}
       >
+
+        {isCreateReservaModalShown && (
+          <CreateReservaModal
+            onClose={() => setIsCreateReservaModalShown(false)}
+          />
+        )}
+
         <div className="overflow-x-auto w-full">
           <table className="table table-zebra w-full">
             <thead>

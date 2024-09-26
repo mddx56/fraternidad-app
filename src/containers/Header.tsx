@@ -2,24 +2,24 @@ import { Bell, Menu, Moon, Sun, User2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { themeChange } from "theme-change";
+import { useShallow } from "zustand/react/shallow";
 import { headerSelector } from "../features/common/headerSlice";
 import { useAuthStore } from "../stores/auth-store";
 import { useAppSelector } from "../stores/dispatch";
-import type { AuthCheckType as User } from "../types/user-type";
 import { Avatar } from "./Avatar";
 
 function Header() {
-  const user = useAuthStore.getState().user;
-  const logOutUser = useAuthStore((state) => state.logoutUser);
-  const [profileUser, setProfileUser] = useState<User | undefined>(undefined);
+  const { user, logoutUser } = useAuthStore(
+    useShallow((state) => ({
+      user: state.user,
+      logoutUser: state.logoutUser
+    }))
+  )
+
   const header = useAppSelector(headerSelector);
   const [currentTheme, setCurrentTheme] = useState(
     localStorage.getItem("theme")
   );
-
-  useEffect(() => {
-    setProfileUser(user);
-  }, []);
 
   useEffect(() => {
     themeChange(false);
@@ -35,8 +35,8 @@ function Header() {
     }
   }, [currentTheme]);
 
-  function logoutUser() {
-    logOutUser();
+  function logOutUser() {
+    logoutUser();
     return <Navigate to="/login" />;
   }
 
@@ -74,7 +74,7 @@ function Header() {
             />
           </label>
 
-          <button className="btn btn-ghost ml-4  btn-circle" onClick={() => {}}>
+          <button className="btn btn-ghost ml-4  btn-circle" onClick={() => { }}>
             <div className="indicator">
               <Bell className="h-6 w-6" />
               {/*noOfNotifications > 0 ? <span className="indicator-item badge badge-secondary badge-sm">{noOfNotifications}</span> : null*/}
@@ -87,8 +87,8 @@ function Header() {
               className="btn btn-ghost btn-circle avatar online"
             >
               <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                {profileUser ? (
-                  <Avatar name={profileUser.full_name} />
+                {user ? (
+                  <Avatar name={user.full_name} />
                 ) : (
                   <User2 className="w-8 h-8" />
                 )}
@@ -114,7 +114,7 @@ function Header() {
               <div className="divider mt-0 mb-0"></div>
 
               <li>
-                <a onClick={logoutUser}>Salir</a>
+                <a onClick={logOutUser}>Salir</a>
               </li>
             </ul>
           </div>

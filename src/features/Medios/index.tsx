@@ -1,7 +1,7 @@
 import { Pencil, SquareCheckBig, SquareX, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { toast } from "react-toastify";
+
 import CreateMedioImageModal from "../../components/Modals/MediaImage/modal-create";
 import DeleteMedioImageModel from "../../components/Modals/MediaImage/modal-delete";
 import UpadateMedioImageModel from "../../components/Modals/MediaImage/modal-update";
@@ -23,19 +23,10 @@ function Medios() {
   const queryClient = useQueryClient();
 
   const { isLoading, isError, data, error } = useQuery<MediaImageType[], Error>(
+    QUERY_KEY.MEDIA_IMAGE,
+    () => getAllMediaImages(),
     {
-      queryKey: [QUERY_KEY.MEDIA_IMAGE],
-      queryFn: () => getAllMediaImages(),
-      onSuccess() {
-        console.log("se cargo todos las imagenes");
-      },
-      onError(error: Error) {
-        const resMessage = error.message || error.toString();
-        toast(resMessage, {
-          type: "error",
-          position: "top-right",
-        });
-      },
+      refetchInterval: 500,
     }
   );
 

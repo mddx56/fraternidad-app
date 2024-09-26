@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../../stores/dispatch'
 import { setPageTitle } from '../../../features/common/headerSlice'
-import Turnos from '../../../features/turnos'
+import Turnos from '../../../features/Turnos'
 import { useEffect } from 'react'
 
 function InternalPage() {

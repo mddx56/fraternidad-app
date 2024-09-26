@@ -42,7 +42,6 @@ export function SelectFraterno() {
 
   const {
     idfraterno,
-
     setFraterno,
     setName,
     setCi,
@@ -93,9 +92,9 @@ export function SelectFraterno() {
     return (
       <>
         <span className="block text-sm text-left">
-          {item.ci}
-          <span className="font-bold">, </span>
           {item.name}
+          <span className="font-bold">, </span>
+          {item.ci}
         </span>
       </>
     );

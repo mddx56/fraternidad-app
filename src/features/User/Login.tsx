@@ -1,18 +1,32 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { useShallow } from "zustand/react/shallow";
 import ErrorText from "../../components/Typography/ErrorText";
 import { useAuthStore } from "../../stores/auth-store";
 import { LoginType } from "../../types/user-type";
 import LandingIntro from "./LandingIntro";
+import { useEffect, useState } from "react";
 
 function Login() {
   const navigate = useNavigate();
 
-  const loginUser = useAuthStore(state => state.loginUser);
-  const checkAuth = useAuthStore(state => state.checkAuthStatus);
+  const { loginUser, checkAuthStatus, status } = useAuthStore(
+    useShallow((state) => ({
+      loginUser: state.loginUser,
+      checkAuthStatus: state.checkAuthStatus,
+      status: state.status
+    }))
+  )
+  const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    if (status === 'authorized') navigate("/app");
+    setErrorMsg("")
+  }, [])
+
 
   const defaultValues: LoginType = {
     username: "",
@@ -23,19 +37,19 @@ function Login() {
     username: yup
       .string()
       .required("Nombre de usuario es requerido")
-      .min(5, "minimo 5")
+      .min(5, "Minimo de longitud es 5")
       .max(10, "el nomnre es muy largo"),
     password: yup
       .string()
       .required("Contraseña es requerida")
-      .min(8, "minimo 8 ")
+      .min(8, "Minimo de longitud 8 ")
       .max(32, "Maximo de longitud 32"),
   });
 
   const {
     register,
     handleSubmit,
-    formState: { errors }, // get errors of the form
+    formState: { errors },
     reset,
   } = useForm({
     defaultValues,
@@ -43,22 +57,23 @@ function Login() {
   });
 
   const mutation = useMutation(loginUser, {
-    onSuccess: () => {
-      checkAuth();
+    onSuccess: (data) => {
+      console.error(data);
+      checkAuthStatus();
       reset();
+      setErrorMsg(JSON.stringify(data));
       navigate("/app");
     },
     onError: (data) => {
-      console.log(data);
+      setErrorMsg(JSON.stringify(data));
     },
   });
 
   const onSubmitHandler = (values: LoginType) => {
-    console.log(values);
     try {
       mutation.mutate(values);
     } catch (error) {
-      console.error(error);
+      setErrorMsg(JSON.stringify(error));
     }
   };
 
@@ -105,17 +120,21 @@ function Login() {
               </div>
 
               <div className="text-right text-primary">
-                <Link to="/forgot-password">
+                {/*<Link to="/forgot-password">
                   <span className="text-sm  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">
                     ¿Olvidaste tu contraseña?
                   </span>
-                </Link>
+                </Link>*/}
               </div>
               <div className="text-center mt-4">
                 {mutation.isError ? (<ErrorText styleClass="mt-6">{'Usuario o contraseña incorrecto'}</ErrorText>) : ("")}
               </div>
+              {errorMsg ?
+                <ErrorText styleClass="mt-2">{errorMsg}</ErrorText>
+                : null
+              }
               <button
-                type="submit"
+
                 className="btn mt-2 w-full btn-primary"
                 disabled={mutation.isLoading}
               >

@@ -6,7 +6,7 @@ function Pago() {
 
             <TitleCard title="Pagos" topMargin="mt-2" >
                 <div className="overflow-x-auto w-full">
-                    cobros
+                    Cobros
                 </div>
             </TitleCard>
         </>
