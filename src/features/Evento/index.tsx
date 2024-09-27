@@ -7,7 +7,7 @@ import SuspenseContent from "../../containers/SuspenseContent";
 import { getAllEventos } from "../../services/evento-service";
 import { EventoType } from "../../types/evento-type";
 import { QUERY_KEY } from "../../utils/constant";
-import { formattedDate, formattedTime } from "../../utils/date-format";
+import { formattedDate } from "../../utils/date-format";
 import TitleCard from "../common/components/Cards/TitleCard";
 import Client from "./components/ClientView";
 import CreateReservaModal from "./components/ModalReserva";

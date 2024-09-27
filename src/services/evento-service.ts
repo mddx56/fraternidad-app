@@ -1,5 +1,4 @@
-import { AxiosResponse } from 'axios';
-import { EstadosReservaType, EventoInput, EventoType, PagoReservaType, ReservaType, TipoEventoType, eventResponseType } from '../types/evento-type';
+import { EstadosReservaType, EventoInput, EventoType, PagoReservaType, ReservaType, TipoEventoType } from '../types/evento-type';
 import { api } from './api';
 
 export const getAllEventos = async () => {
