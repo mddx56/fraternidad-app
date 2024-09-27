@@ -6,7 +6,10 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const api = axios.create({
     baseURL: BASE_URL,
     timeout: 5000,
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
+    validateStatus: function (status) {
+        return status >= 200 && status < 500; // default
+    },
 });
 
 api.interceptors.request.use(async (config) => {

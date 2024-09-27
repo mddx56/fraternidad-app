@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { CobroMensualidad } from '../../../features/Cobros/CobroMensualidad'
+import { ImprimirMensualidad } from '../../../features/Cobros/ImprimirMensualidad'
 import { setPageTitle } from '../../../features/common/headerSlice'
 import { useAppDispatch } from '../../../stores/dispatch'
 
@@ -7,10 +7,10 @@ function InternalPage() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(setPageTitle({ title: "Realizar Cobro Mensualidad" }))
+        dispatch(setPageTitle({ title: "Imprimir" }))
     })
     return (
-        <CobroMensualidad />
+        <ImprimirMensualidad />
     )
 }
 

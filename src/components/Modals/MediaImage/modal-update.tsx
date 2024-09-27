@@ -50,7 +50,7 @@ const UpadateMedioImageModel = ({ medioImagen, onClose }: Props) => {
       }
       toast("Imagen Actualizada!", {
         type: "success",
-        position: "top-right",
+        position: "bottom-right",
       });
     } else {
       setError("error");

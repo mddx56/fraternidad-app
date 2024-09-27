@@ -40,7 +40,7 @@ const CreateMedioImageModal = ({ onClose }: Props) => {
       }
       toast("Imagen Creada!", {
         type: "success",
-        position: "top-right",
+        position: "bottom-right",
       });
     },
     onError: (data: Error) => {

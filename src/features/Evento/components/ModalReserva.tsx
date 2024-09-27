@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
@@ -11,7 +11,6 @@ import { Modal } from "../../../components/Modal";
 import { Title } from "../../../components/Title";
 import { createReserva, getAllTipoEvento } from "../../../services/evento-service";
 import { getAllFraters } from "../../../services/user-service";
-import { handleErrorMessage } from "../../../types/error-response";
 import { TipoEventoType } from "../../../types/evento-type";
 import { UserType } from "../../../types/user-type";
 import { QUERY_KEY } from "../../../utils/constant";
@@ -60,27 +59,6 @@ const CreateReservaModal = ({ onClose }: Props) => {
         resolver: yupResolver(reservaSchema),
     });
 
-    const mutation = useMutation(createReserva, {
-        onSuccess: (data) => {
-            console.log(JSON.stringify(data))
-            if (data.status === 400){
-
-                console.log(data.data);
-            }
-            if (onClose) {
-                onClose();
-            }
-            toast("Reserva Creada!", {
-                type: "success",
-                position: "top-right",
-            });
-        },
-        onError: (error:any) => {
-            //console.log(error.response.data.message);
-            const errorMessage = handleErrorMessage(error);
-            setError(errorMessage);
-        },
-    });
 
     const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newDate = event.target.value;
@@ -118,7 +96,28 @@ const CreateReservaModal = ({ onClose }: Props) => {
     const onSubmit = handleSubmit(async (data) => {
         const user = userId;
         const newData = { ...data, user }
-        mutation.mutate(newData);
+        const res = createReserva(newData);
+        res
+            .then(response => {
+                if (response) {
+                    if (response?.status == 201) {
+                        setError("");
+                        if (onClose) {
+                            onClose();
+                        }
+                        toast("Reserva Creada!", {
+                            type: "success",
+                            position: "bottom-right",
+                        });
+                    } else {
+                        if (response?.status == 400)
+                            setError(response?.data.detail)
+                    }
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     });
 
     return (

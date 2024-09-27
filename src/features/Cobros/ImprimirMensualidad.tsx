@@ -1,5 +1,5 @@
 
-export default function ImprimirMensualidad() {
+export function ImprimirMensualidad() {
   return (
     <div>ImprimirMensualidad</div>
   )

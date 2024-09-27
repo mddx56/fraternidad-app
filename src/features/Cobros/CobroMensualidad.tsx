@@ -1,7 +1,7 @@
 import { ArrowLeft, ListCheck, ShoppingCart } from "lucide-react";
 import { useEffect } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useShallow } from "zustand/react/shallow";
 import SuspenseContent from "../../containers/SuspenseContent";
@@ -39,7 +39,7 @@ function Steeps() {
 
 export function CobroMensualidad() {
   const queryClient = useQueryClient();
-
+  const navigation = useNavigate();
   const { items, addItem, removeItem, clearCart, getTotalPrice } = useShopCart(
     useShallow((state) => ({
       items: state.items,
@@ -103,9 +103,10 @@ export function CobroMensualidad() {
     if (response.status == 200 && pago.status === "success") {
       queryClient.invalidateQueries(QUERY_KEY.DEUDAMENSUALIDAD);
       handlerClearCart();
+      navigation("/app/prm")
       toast("Pago Realizado!" + pago.pago.id, {
         type: "success",
-        position: "top-right",
+        position: "bottom-right",
       });
     }
   };

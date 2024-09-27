@@ -54,7 +54,7 @@ function UserAdmin() {
     queryClient.invalidateQueries([QUERY_KEY.USERS]);
     toast("Fraterno suspendido.", {
       type: "success",
-      position: "bottom-left",
+      position: "bottom-right",
     });
   };
 

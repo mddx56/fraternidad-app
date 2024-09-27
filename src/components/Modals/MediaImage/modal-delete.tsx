@@ -39,7 +39,7 @@ const DeleteMedioImageModel = ({ medioImagen, onClose }: Props) => {
       }
       toast("Imagen Eliminada!", {
         type: "success",
-        position: "top-right",
+        position: "bottom-right",
       });
     } else {
       setError("error");

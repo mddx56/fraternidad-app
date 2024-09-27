@@ -49,7 +49,7 @@ function Evento() {
       const resMessage = error.message || error.toString();
       toast(resMessage, {
         type: "error",
-        position: "top-right",
+        position: "bottom-right",
       });
     },
   });
@@ -90,7 +90,7 @@ function Evento() {
             <thead>
               <tr className="bg-base-200">
                 <th className="w-2/12">Fecha</th>
-                <th className="w-2/12">Hora</th>
+                <th className="w-2/12">Findeseman</th>
                 <th className="w-2/12">Fraterno</th>
                 <th className="w-3/4">Descripcion</th>
                 <th className="w-1/12">Estado</th>
@@ -110,7 +110,8 @@ function Evento() {
                         </div>
                       </div>
                     </td>
-                    <td>{formattedTime(evento.hora_inicio)}-{formattedTime(evento.hora_fin)}</td>
+                    {/*<td>{formattedTime(evento.hora_inicio)}-{formattedTime(evento.hora_fin)}</td>*/}
+                    <td>{evento.es_entresemana ? "si" : "no"}</td>
                     <td><Client id={evento.user ?? ""} /> </td>
                     <td >
                       <div className="w-3/4">

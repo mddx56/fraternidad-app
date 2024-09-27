@@ -15,15 +15,16 @@ const RealizarCobro = lazy(() => import('../pages/protected/cobros'))
 const SelectFrater = lazy(() => import('../pages/protected/cobros/select-frater'))
 const CobroMensualidad = lazy(() => import('../pages/protected/cobros/cobro-mensualidad'))
 const CobroExtraordinaria = lazy(() => import('../pages/protected/cobros/cobro-extraordinaria'))
+const printerMensualidad = lazy(() => import('../pages/protected/cobros/printer-mensualidad'))
 
 const routes = [
     {
-        path: '/', // the url
-        component: Dashboard, // view rendered
+        path: '/',
+        component: Dashboard,
     },
     {
-        path: '/events', // the url
-        component: Evento, // view rendered
+        path: '/events',
+        component: Evento,
     },
     {
         path: '/eventos/:id',
@@ -42,20 +43,25 @@ const routes = [
         component: Turnos,
     },
     {
-        path: '/elegirfrater', // the url
+        path: '/elegirfrater',
         component: SelectFrater,
     },
     {
-        path: '/mesualidad', // the url
+        path: '/mesualidad',
         component: CobroMensualidad,
     },
+    
     {
-        path: '/extraord', // the url
+        path: '/prm', 
+        component: printerMensualidad,
+    },
+    {
+        path: '/extraord',
         component: CobroExtraordinaria,
     },
     {
-        path: '/profile', // the url
-        component: ProfileSettings, // view rendered
+        path: '/profile',
+        component: ProfileSettings,
     },
     {
         path: '/404',
@@ -70,7 +76,7 @@ const routes = [
         component: PasswordChanged,
     },
     {
-        path: '/useradmin', // the url
+        path: '/useradmin',
         component: UserAdmin,
     },
     {

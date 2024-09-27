@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { EstadosReservaType, EventoInput, EventoType, PagoReservaType, ReservaType, TipoEventoType, eventResponseType } from '../types/evento-type';
 import { api } from './api';
 
@@ -36,12 +37,14 @@ export const createEvento = async (formData: EventoInput) => {
 };
 
 export const createReserva = async (formData: ReservaType) => {
-    const response = await api.post<eventResponseType>(`agenda/reserva/`, formData, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    return response;
+    try {
+        const response = await api.post(`agenda/reserva/`, formData,
+            
+        );
+        return response;
+    } catch (error) {
+        console.log(JSON.stringify(error))
+    }
 };
 
 export const createPagoReserva = async (formData: PagoReservaType) => {
