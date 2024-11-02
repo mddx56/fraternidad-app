@@ -47,7 +47,7 @@ export const login = async (data: LoginType) => {
 export const checkStatus = async () => {
     try {
         const response = await api.get<AuthCheckType>(`auth/check-status/`);
-        return response.data;
+        return response;
     } catch (error) {
         console.log(error);
         throw new Error('UnAuthorized');

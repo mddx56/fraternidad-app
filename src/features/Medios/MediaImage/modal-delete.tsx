@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
 import * as yup from "yup";
-import { ErrorText } from "../../Errortext";
-import { Modal } from "../../Modal";
-import { Title } from "../../Title";
+import { ErrorText } from "../../../components/Errortext";
+import { Modal } from "../../../components/Modal";
+import { Title } from "../../../components/Title";
 import { deleteMediaImage } from "../../../services/medios-service";
 import { toast } from "react-toastify";
 

@@ -116,7 +116,9 @@ function Evento() {
                     <td >
                       <div className="w-3/4">
                         <span className="whitespace-break-spaces">
-                          {evento.descripcion.length > 30 ? evento.descripcion.substring(0, 30) : evento.descripcion}
+                          {evento.descripcion? 
+                            evento.descripcion.length > 30 ? evento.descripcion.substring(0, 30) : evento.descripcion
+                          :<div></div>}
                         </span>
                       </div>
                     </td>

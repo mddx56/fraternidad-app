@@ -6,9 +6,8 @@ import { getCountUsersStat } from "../../services/user-service";
 import { QUERY_KEY } from "../../utils/constant";
 import AmountStats from "./components/amount-stats";
 import DashboardStats from "./components/dashboard-stats";
-import LineCharts from "./components/line-charts";
 import PageStats from "./components/page-stats";
-import UserChannels from "./components/table-stats";
+
 
 const iconValue = (icon: string) => {
   switch (icon) {
@@ -71,10 +70,10 @@ function Dashboard() {
         <PageStats />
       </div>
 
-      <div className="grid lg:grid-cols-2 mt-4 grid-cols-1 gap-6">
+      {/*<div className="grid lg:grid-cols-2 mt-4 grid-cols-1 gap-6">
         <UserChannels />
         <LineCharts />
-      </div>
+      </div>*/}
     </>
   );
 }

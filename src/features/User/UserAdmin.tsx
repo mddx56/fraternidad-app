@@ -1,9 +1,10 @@
-import { Eye, Trash } from "lucide-react";
-import { useQuery, useQueryClient } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import { Pen, Settings, Trash2 } from "lucide-react";
+import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+//import { toast } from "react-toastify";
 import SuspenseContent from "../../containers/SuspenseContent";
-import { getAllUsers, suspendUser } from "../../services/user-service";
+import { getAllUsers } from "../../services/user-service";
 import { UserAdminType } from "../../types/user-type";
 import { QUERY_KEY, ROLE } from "../../utils/constant";
 import TitleCard from "../common/components/Cards/TitleCard";
@@ -30,11 +31,14 @@ const TopSideButtons = ({ onClickBtn }: PropsSideButton) => {
 function UserAdmin() {
   const navigate = useNavigate();
 
-  const queryClient = useQueryClient();
+  //const queryClient = useQueryClient();
 
   const { isLoading, isError, data, error } = useQuery<UserAdminType[], Error>(
     [QUERY_KEY.USERS],
-    getAllUsers
+    getAllUsers,
+    {
+      refetchInterval: 1500,
+    }
   );
 
   if (isLoading) {
@@ -49,14 +53,16 @@ function UserAdmin() {
     navigate("/app/useradd");
   };
 
-  const updateSuspendUser = (id: string) => {
-    suspendUser(id);
-    queryClient.invalidateQueries([QUERY_KEY.USERS]);
-    toast("Fraterno suspendido.", {
-      type: "success",
-      position: "bottom-right",
+  /*const updateSuspendUser = async (id: string, name: string) => {
+    suspendUser(id).then(() => {
+      toast(`Fraterno suspendido. ${name}`, {
+        type: "success",
+        position: "bottom-right",
+      });
+      queryClient.invalidateQueries([QUERY_KEY.USERS]);
     });
-  };
+
+  };*/
 
   return (
     <TitleCard
@@ -109,29 +115,40 @@ function UserAdmin() {
                     )}
                   </td>
                   <td>
-                    <input
+                    {/*<input
                       type="checkbox"
                       className="toggle toggle-primary"
-                      defaultChecked={!user.suspend}
-                      onClick={() => updateSuspendUser(user.id)}
-                    />
+                      defaultChecked={user.suspend}
+                      onClick={() => updateSuspendUser(user.id, user.full_name)}
+                    />*/}
+
                   </td>
                   <td>
                     <div className="flex justify-center space-x-1">
-                      <Link
-                        to={`/user/${user.id}`}
-                        className="btn btn-ghost btn-xs"
-                        onClick={() => {}}
-                      >
-                        <Eye className="w-5" />
-                      </Link>
-                      <Link
-                        to="/app/"
-                        className="btn btn-ghost btn-xs"
-                        onClick={() => {}}
-                      >
-                        <Trash className="w-5" />
-                      </Link>
+                      <Menu>
+                        <MenuButton className="btn btn-primary btn-sm">
+                          <Settings className="size-4" />
+                        </MenuButton>
+
+                        <MenuItems
+                          transition
+                          anchor="bottom"
+                          className="w-52 origin-top-right rounded-xl border text-sm/6 text-base transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+                        >
+                          <MenuItem>
+                            <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-base/10">
+                              <Pen className="size-4" />
+                              Ver
+                            </button>
+                          </MenuItem>
+                          <MenuItem>
+                            <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-base/10">
+                              <Trash2 className="size-4" />
+                              Update
+                            </button>
+                          </MenuItem>
+                        </MenuItems>
+                      </Menu>
                     </div>
                   </td>
                 </tr>

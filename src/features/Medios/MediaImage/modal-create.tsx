@@ -5,16 +5,37 @@ import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 import * as yup from "yup";
-import { ErrorText } from "../../Errortext";
-import { Modal } from "../../Modal";
-import { Title } from "../../Title";
+import { ErrorText } from "../../../components/Errortext";
+import { Modal } from "../../../components/Modal";
+import { Title } from "../../../components/Title";
 import { createMediaImage } from "../../../services/medios-service";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+import CloudinaryUploadWidget from "../CloudinaryUploadWidget";
 
 type Props = {
   onClose?: () => void;
 };
 
 const CreateMedioImageModal = ({ onClose }: Props) => {
+
+  const [publicId, setPublicId] = useState("");
+  const [cloudName] = useState("hzxyensd5");
+  const [uploadPreset] = useState("aoh4fpwm");
+
+  const [uwConfig] = useState({
+    cloudName,
+    uploadPreset
+  });
+
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName
+    }
+  });
+
+  const myImage = cld.image(publicId);
+
   const [error, setError] = useState("");
 
   const medioImagenSchema = yup.object({
@@ -134,6 +155,14 @@ const CreateMedioImageModal = ({ onClose }: Props) => {
           </div>
         </div>
       </form>
+      <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
+      <div style={{ width: "800px" }}>
+        <AdvancedImage
+          style={{ maxWidth: "100%" }}
+          cldImg={myImage}
+          plugins={[responsive(), placeholder()]}
+        />
+      </div>
     </Modal>
   );
 };

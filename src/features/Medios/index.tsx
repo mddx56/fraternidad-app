@@ -2,9 +2,9 @@ import { Pencil, SquareCheckBig, SquareX, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 
-import CreateMedioImageModal from "../../components/Modals/MediaImage/modal-create";
-import DeleteMedioImageModel from "../../components/Modals/MediaImage/modal-delete";
-import UpadateMedioImageModel from "../../components/Modals/MediaImage/modal-update";
+import CreateMedioImageModal from "./MediaImage/modal-create";
+import DeleteMedioImageModel from "./MediaImage/modal-delete";
+import UpadateMedioImageModel from "./MediaImage/modal-update"
 import { TopSideButtons } from "../../components/TopSideButtons";
 import SuspenseContent from "../../containers/SuspenseContent";
 import { getAllMediaImages } from "../../services/medios-service";
@@ -25,9 +25,7 @@ function Medios() {
   const { isLoading, isError, data, error } = useQuery<MediaImageType[], Error>(
     QUERY_KEY.MEDIA_IMAGE,
     () => getAllMediaImages(),
-    {
-      refetchInterval: 500,
-    }
+    
   );
 
   useEffect(() => {
